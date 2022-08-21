@@ -39,25 +39,27 @@ save_model_tokenizer(DistilBertTokenizer, DistilBertForMaskedLM, "distilbert-bas
 # hyperparameters
 batch_size = 16
 max_length = 128 # max text length
-learning_rate = 1e-4
-epoch_num = 4
+learning_rate = 5e-5
+epoch_num = 10
 linear_probe = False
 
 # diffusion hyperparameter
 beta_min = 0.0001
 beta_max = 0.02
 step_tot = 2000 # total noise adding steps
-sample_size = 3 # number of sample steps in each diffuse sequence
-x_0_prediction = False # if model predicts x_0 or x_{t-1}
+sample_size = 1 # number of sample steps in each diffuse sequence TODO: suspect can only be 1, otherwise mask is wrong
+train_embedding = True # if embedding is trainable or random gaussian initialize
+x_0_prediction = True # if model predicts x_0 or x_{t-1}
 
 class DistilBertModel(nn.Module):
-  def __init__(self, config=None) -> None:
+  def __init__(self, train_embedding=True, config=None) -> None:
     super().__init__()
 
-    self.model = DistilBertForMaskedLM.from_pretrained("./models/distilbert-base-uncased-local", local_files_only=True, config=config).to(device)
+    # self.model = DistilBertForMaskedLM.from_pretrained("./models/distilbert-base-uncased-local", local_files_only=True, config=config).to(device)
+    self.model = DistilBertForMaskedLM(config).to(device)
     
-    self.embedding = copy.deepcopy(self.model.get_input_embeddings().requires_grad_(False))
-    self.projection = copy.deepcopy(self.model.get_output_embeddings().requires_grad_(False))
+    self.embedding = copy.deepcopy(self.model.get_input_embeddings().requires_grad_(train_embedding))
+    self.projection = copy.deepcopy(self.model.get_output_embeddings().requires_grad_(train_embedding))
     self.model.set_input_embeddings(nn.Sequential())
     self.model.set_output_embeddings(nn.Sequential())
 
@@ -129,7 +131,7 @@ class BertModel(nn.Module): # ABANDONED
     return self.model(x, mask)
 
 configuration = DistilBertConfig()
-model = DistilBertModel(config=configuration)
+model = DistilBertModel(train_embedding=train_embedding, config=configuration)
 # model = EncoderModel(train_embedding=train_embedding)
 # model = BertModel(train_embedding=train_embedding)
 
@@ -139,7 +141,9 @@ if linear_probe:
   # trainer = optim.Adam(model.projection.parameters(), lr=learning_rate)
 else:
   # parameter only include model, no embedding layer
-  trainer = optim.Adam(model.parameters(), lr=learning_rate)
+  # trainer = optim.Adam(model.parameters(), lr=learning_rate)
+  trainer = optim.AdamW(model.parameters(), lr=learning_rate)
+
 
 betas = torch.hstack([torch.zeros(1), torch.linspace(beta_min, beta_max, step_tot)]).to(device)
 alphas = 1 - betas
@@ -175,9 +179,15 @@ def generate_diffuse_pair(x_0, repeat_shape, t, t_next=-1):
   # predict x_{t_next}
   return (diffuse_t(x_0, t), diffuse_t(x_0, t_next))
 
-def loss(model, x_input, x_tgt, mask, loss_func):
+def loss(model, x_input, x_1, x_0, mask, loss_func):
   _, x_hat = model(x_input, mask)
-  return loss_func(x_hat, x_tgt)
+
+  probability, x_0_hat = model(x_1, mask)
+
+  seq_probability_loss = -torch.max(nn.functional.softmax(probability, dim=-1), dim=-1)[0].log().mean()
+  
+  return loss_func(x_hat, x_0), loss_func(x_0_hat, x_0), seq_probability_loss
+
 
 # define dataset 
 class DPMDataset(torch.utils.data.Dataset):
@@ -209,6 +219,7 @@ train_dataset = DPMDataset(tokenizer, train_df)
 train_loader = DataLoader(train_dataset, shuffle=True, batch_size=batch_size, collate_fn=train_dataset.collate_fn)
 
 # training
+
 model.train()
 print("start training")
 for epoch in range(epoch_num):
@@ -222,20 +233,25 @@ for epoch in range(epoch_num):
       if x_0_prediction:
         x_input, x_tgt = generate_diffuse_pair(x_0, repeat_shape, t)
       else:
-        x_input, x_tgt = generate_diffuse_pair(x_0, repeat_shape, t, torch.max(t - 30, 0))
+        print("not implemented")
+        # x_input, x_tgt = generate_diffuse_pair(x_0, repeat_shape, t, torch.max(t - 30, 0))
+      x_1_tgt = diffuse_t(x_0, torch.ones(1, dtype=torch.int64, device=device).repeat(repeat_shape))
 
       trainer.zero_grad()
-      l = loss(model, x_input, x_tgt, x["attention_mask"].repeat(repeat_shape), nn.L1Loss())
+      x_t_restore, x_1_restore, prob = loss(model, x_input, x_1_tgt, x_0, x["attention_mask"].repeat(repeat_shape), nn.MSELoss())
+      l = x_t_restore + x_1_restore + prob
       l.backward()
       trainer.step()
 
       acc_loss += l
-      break
 
       # tepoch.set_description(f"Epoch {epoch}")
-      # tepoch.set_postfix(Loss=l)
+      # tepoch.set_postfix(x_t_restore=x_t_restore.item(),
+      #                    x_1_restore=x_1_restore.item(),
+      #                    prob=prob.item(),
+      #                    tot_loss=l.item())
 
-  print(f"epoch {epoch} average loss: {acc_loss / len(train_loader)}")
-  break
+  print(f"epoch {epoch} average loss: {acc_loss / len(train_loader)}, last loss x_t_restore, x_1_restore, prob: {x_t_restore, x_1_restore, prob}")
+
 
 torch.save({"net": model.to(torch.device("cpu"))}, "model.pickle")
