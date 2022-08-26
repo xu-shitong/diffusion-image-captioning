@@ -19,7 +19,7 @@ Research project on image captioning using diffusion language model
     - predict x_{t-30}
       - rounding error 0.1, 3 sample, 1 epoch, model reproduce with poor performance
       - rounding error 0.1, 3 sample, 3 epoch, l1 loss 0.1, only briefly reproduce x_1
-      - rounding error 0.5, 3 sample, 3 epoch, l1 loss 0.5, could restore most info till x_30, increase rounding error does not further improve performance
+      - rounding error 0.3, 3 sample, 3 epoch, l1 loss 0.5, could restore most info till x_30, increase rounding error does not further improve performance
     - try predict x_t not x_0, abandoned, due to predicting z result in generation of only x_t-1, mathematically not capable of generating multi steps later latent
     - try cosine noise scheduling
       - todo experiment
