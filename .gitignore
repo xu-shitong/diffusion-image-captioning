@@ -1,3 +1,6 @@
 */stanford_cars
 lm-trial/models/
 lm-trial/tokenizers/
+models/
+tokenizers/
+flickr8k/

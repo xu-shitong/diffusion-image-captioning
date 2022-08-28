@@ -2,8 +2,7 @@
 
 Research project on image captioning using diffusion language model
 
-1. get distilBERT running
-2. get distilBERT capable of generating sentence by using diffusion model
+1. get distilBERT capable of generating sentence by using diffusion model
   - use single sample trials
     - no training embedding and projection, due to model might collapse
     - x_1 and x_0 are almost same, but even linear layer fail to learn identity
@@ -25,6 +24,8 @@ Research project on image captioning using diffusion language model
       - todo experiment
     - try language use improved model, with resampleing
     - todo: try time embedding to transformer
-3. combining image feature
+2. combining image feature
   - image feature as time embedding add to transformer
-  - 
+    - check how to use same tokenizer as transformer
+    - due to clip has 512 dim, use distilbert with 512 dim and 8 head, like transformer instead of bert
+    - 
