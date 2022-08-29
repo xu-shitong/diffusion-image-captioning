@@ -28,4 +28,10 @@ Research project on image captioning using diffusion language model
   - image feature as time embedding add to transformer
     - check how to use same tokenizer as transformer
     - due to clip has 512 dim, use distilbert with 512 dim and 8 head, like transformer instead of bert
-    - 
+  - model input [x_t ... x_t, image_clip, text_clip], output at position [x_t ... x_t] is model prediction
+    - only diffusion model, 
+      - train use all info to get model regenerate text
+      - train use no image to get model regenerate reasonable text
+      - train use and not use image clip to get un classification guided model, 
+        - changing func is linear for each position
+        - changign func is transformer to [x_t, x_t] part
