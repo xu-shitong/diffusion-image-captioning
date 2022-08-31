@@ -189,7 +189,7 @@ class Flickr8kCLIPDataset(torch.utils.data.Dataset):
     self.caption = pd.read_csv("captions.txt")
     self.tokenizer = clip_processor
 
-    self.train_dataset = torch.utils.data.TensorDataset(torch.load("image_all_final.pickle"), torch.load("text_all_final.pickle"))
+    self.train_dataset = torch.utils.data.TensorDataset(torch.load("image_all_final.pickle").to(device), torch.load("text_all_final.pickle").to(device))
 
   def __len__(self):
     return len(self.caption)
