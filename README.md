@@ -31,6 +31,8 @@ Research project on image captioning using diffusion language model
   - model input [x_t ... x_t, image_clip, text_clip], output at position [x_t ... x_t] is model prediction
     - only diffusion model, 
       - train use all info to get model regenerate text
+        - again produce reproducing tokens with 10e5 rounding weight.
+      - try reproduce with new tokenizer and embeddings
       - train use no image to get model regenerate reasonable text
       - train use and not use image clip to get un classification guided model, 
         - changing func is linear for each position
