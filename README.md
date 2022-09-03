@@ -5,6 +5,7 @@ Research project on image captioning using diffusion language model
 1. get distilBERT capable of generating sentence by using diffusion model
   - use single sample trials
     - no training embedding and projection, due to model might collapse
+      - TODO: reconsider training embedding layer, due to using clip embedding result in poor reproduce
     - x_1 and x_0 are almost same, but even linear layer fail to learn identity
     - pretrained projection layer with no bias is better, since input used no bias
     - adding embedding loss greatly improve performance, first model manage to predict without repeat word
@@ -33,6 +34,7 @@ Research project on image captioning using diffusion language model
       - train use all info to get model regenerate text
         - again produce reproducing tokens with 10e5 rounding weight.
       - try reproduce with new tokenizer and embeddings
+        - todo: mask wrongly unchanged, change and retrain
       - train use no image to get model regenerate reasonable text
       - train use and not use image clip to get un classification guided model, 
         - changing func is linear for each position
