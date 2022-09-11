@@ -4,6 +4,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=sx119
 #export PATH=/vol/bitbucket/${USER}/myvenv/bin/:$PATH
+#SBATCH --partition gpgpuB
 if [ -z "$1"]; then 
   echo "no provided file for submittion"
 else 
