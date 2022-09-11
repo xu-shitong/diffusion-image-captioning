@@ -24,17 +24,31 @@ Research project on image captioning using diffusion language model
       - todo experiment
     - try language use improved model, with resampleing
     - todo: try time embedding to transformer
+  - Try use 16-256 dimention embedding, 
+    - diffusion lm used 800-16 dim embedding and linear project 16 to 768 for bert dim
+    - run 200 diffusion on college gpu
+      - performance significantly better than 3 sample
+    - Running 100 diffusion with both clip and text sample
+      - performance ok, to be compared with 200 way
+    - TODO: self defined tokenizer not working
+      - abandon for now, TODO in later in abliviation
+    - use kl loss instead of mse loss/check how diffusion lm use mse
 2. combining image feature
   - image feature as time embedding add to transformer
     - check how to use same tokenizer as transformer
     - due to clip has 512 dim, use distilbert with 512 dim and 8 head, like transformer instead of bert
+    - todo: add linear layer and add feature elementwise
   - model input [x_t ... x_t, image_clip, text_clip], output at position [x_t ... x_t] is model prediction
     - only diffusion model, 
       - train use all info to get model regenerate text
         - again produce reproducing tokens with 10e5 rounding weight.
+        - should not change embedding and head number, otherwise only capable of reproduce in low x_t
       - try reproduce with new tokenizer and embeddings
         - todo: mask wrongly unchanged, change and retrain
-      - train use no image to get model regenerate reasonable text
+        - abandoned, should not change dim
       - train use and not use image clip to get un classification guided model, 
-        - changing func is linear for each position
-        - changign func is transformer to [x_t, x_t] part
+        - not use classification guided, by mask image clip sometime
+        - use classification guided method:
+          - changing func is linear for each position
+          - changign func is transformer to [x_t, x_t] part
+  - todo: clip as additional feature vector to sequence, add segment 
