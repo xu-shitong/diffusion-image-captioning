@@ -54,16 +54,19 @@ def series_sum_batch_average(x_hat, x):
   return (x_hat - x).abs().sum(dim=1).mean()
 
 # hyperparameters
+DEBUG = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
-EPOCH_NUM = 12
+TRAIN_SET_RATIO = 0.95
+EARLY_STOP_RATIO = 1.1
+EPOCH_NUM = 30
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
 # LOSS_FUNC = nn.functional.l1_loss
 LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
-CLIP_MASK = torch.tensor([1, 1], device=device) # mask indicating if [image, text] clip feature is used 
+CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used 
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
@@ -146,7 +149,10 @@ else:
   VOCAB_SIZE = tokenizer.vocab_size
 
 train_dataset = Flickr8kCLIPDataset(pd.read_csv("captions.txt")["caption"], tokenizer)
-train_loader = DataLoader(train_dataset, shuffle=True, batch_size=BATCH_SIZE, drop_last=True)
+train_len = int(len(train_dataset) * TRAIN_SET_RATIO)
+train_set, val_set = torch.utils.data.random_split(train_dataset, [train_len, len(train_dataset) - train_len])
+train_loader = DataLoader(train_set, shuffle=False, batch_size=BATCH_SIZE, drop_last=True)
+val_loader = DataLoader(val_set, shuffle=False, batch_size=BATCH_SIZE, drop_last=True)
 
 mem_report()
 
@@ -336,50 +342,75 @@ mem_report()
 
 """# Training"""
 
-# training 
-# model = torch.load("batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100.pickle").to(device)
-# model.model.add_module("activation", activations.GELUActivation())
-# trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
-summary = open("summary.txt", "a")
+def train_func(model, trainer, x, train=True):
+  x_0 = model.embedding(x["input_ids"])
+  repeat_shape = (SAMPLE_SIZE, *(1, ) * (len(x_0.shape) - 1))
+  t = torch.randint(0, STEP_TOT, repeat_shape, device=device)
+  
+  if X_0_PREDICTION:
+    x_t = diffuse_t(x_0, t)
+    x_tgt = None
+  else:
+    x_t, x_tgt = generate_diffuse_pair(x_0, t, torch.max(t - 30, torch.zeros(t.shape, device=device, dtype=torch.int64)))
+  x_1 = diffuse_t(x_0, torch.ones(1, dtype=torch.int64, device=device))
 
+  if train:
+    trainer.zero_grad()
+  x_t_loss, x_1_loss, prob_loss = loss(
+    model, 
+    x_t, x_1, x_tgt, x_0, 
+    x["image_clip"], x["text_clip"], 
+    x["attention_mask"], 
+    x["input_ids"], 
+    LOSS_FUNC
+  )
+  
+  l = x_t_loss + x_1_loss + prob_loss
+  if train:
+    l.backward()
+    trainer.step()
+
+  return l, x_t_loss, x_1_loss, prob_loss
+
+def validate(model):
+  val_acc_x_t = 0
+  val_acc_x_1 = 0
+  val_acc_prob = 0
+  model.eval()
+  with torch.no_grad():
+    for batch_num, x in enumerate(val_loader):
+      _, x_t_loss, x_1_loss, prob_loss = train_func(model, trainer, x, train=False)
+      val_acc_x_t += x_t_loss
+      val_acc_x_1 += x_1_loss
+      val_acc_prob += prob_loss
+  model.train()
+
+  return val_acc_x_t / len(val_loader), val_acc_x_1 / len(val_loader), val_acc_prob / len(val_loader),
+
+# training 
+model = torch.load(f"{MODEL_NAME}.pickle").to(device)
+# model.model.add_module("activation", activations.GELUActivation())
+trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
+summary = open(f"{MODEL_NAME}.txt", "a")
+
+early_stopped = False
 model.train()
 print("start training")
 for epoch in range(EPOCH_NUM):
   acc_x_t = 0
   acc_x_1 = 0
   acc_prob = 0
+  acc_l = 0
   # with tqdm.tqdm(train_loader, unit="batch") as tepoch: 
   #   for batch_num, x in enumerate(tepoch):
   for batch_num, x in enumerate(train_loader):
 
-      x_0 = model.embedding(x["input_ids"])
-      repeat_shape = (SAMPLE_SIZE, *(1, ) * (len(x_0.shape) - 1))
-      t = torch.randint(0, STEP_TOT, repeat_shape, device=device)
+      l, x_t_loss, x_1_loss, prob_loss = train_func(model, trainer, x)
       
-      if X_0_PREDICTION:
-        x_t = diffuse_t(x_0, t)
-        x_tgt = None
-      else:
-        x_t, x_tgt = generate_diffuse_pair(x_0, t, torch.max(t - 30, torch.zeros(t.shape, device=device, dtype=torch.int64)))
-      x_1 = diffuse_t(x_0, torch.ones(1, dtype=torch.int64, device=device))
-
-      trainer.zero_grad()
-      x_t_loss, x_1_loss, prob_loss = loss(
-        model, 
-        x_t, x_1, x_tgt, x_0, 
-        x["image_clip"], x["text_clip"], 
-        x["attention_mask"], 
-        x["input_ids"], 
-        LOSS_FUNC
-      )
-      
-      l = x_t_loss + x_1_loss + prob_loss
-      l.backward()
-      trainer.step()
-      
-      acc_x_t += x_t_loss 
-      acc_x_1 += x_1_loss 
+      acc_x_t += x_t_loss
+      acc_x_1 += x_1_loss
       acc_prob += prob_loss
+      acc_l += l
 
       # tepoch.set_description(f"batch {batch_num}")
       # tepoch.set_postfix(
@@ -388,21 +419,33 @@ for epoch in range(EPOCH_NUM):
       #                    prob_loss=prob_loss.item(),
       #                    tot_loss=l.item())
 
-      if batch_num % 25 == 0:
-        summary.write(f"batch {batch_num} avg x_t_loss, x_1_loss, prob_loss: {acc_x_t / (batch_num + 1)}, {acc_x_1 / (batch_num + 1)}, {acc_prob / (batch_num + 1)}\n")
+      if batch_num % 25 == 0 and batch_num != 0:
+        # eval on validation set
+        
+        summary.write(f"batch {batch_num} x_t_loss, x_1_loss, prob_loss: {x_t_loss}, {x_1_loss}, {prob_loss}\n")
+      if DEBUG:
+        break
 
-  print(f"epoch {epoch} average x_t_loss, x_1_loss, prob_loss: {acc_x_t / len(train_loader)}, {acc_x_1 / len(train_loader)}, {acc_prob / len(train_loader)}")
+  val_x_t, val_x_1, val_prob = validate(model)
+  if val_x_t + val_x_1 + val_prob > EARLY_STOP_RATIO * acc_l / len(train_loader):
+    if not early_stopped:
+      print("early stop! ")
+      torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
+    early_stopped = True
+    # break
+    
+  print(f"epoch {epoch} average x_t_loss, x_1_loss, prob_loss, val losses: {acc_x_t / len(train_loader)}, {acc_x_1 / len(train_loader)}, {acc_prob / len(train_loader)}, {val_x_t}, {val_x_1}, {val_prob}")
+  if DEBUG:
+    break
 summary.close()
-
-mem_report()
 
 """# Evaluate"""
 
 # trial on inference
-# model = torch.load("model-200-sample-pretrain-embedding.pickle").to(device)
+# model = torch.load("batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100.pickle").to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
-idx = 11
+idx = 0
 origin_text = train_dataset.caption.loc[idx]
 print("origin text: ", origin_text)
 
@@ -410,9 +453,10 @@ sample = train_dataset[idx]
 image_clip = sample["image_clip"][None, None, :]
 text_clip = sample["text_clip"][None, None, :]
 x_0 = model.embedding(sample["input_ids"].unsqueeze(0))
-t = 500
+t = 999
 print(f"t = {t}")
-x_t = diffuse_t(x_0, torch.tensor([t], dtype=torch.int64, device=device))
+# x_t = diffuse_t(x_0, torch.tensor([t], dtype=torch.int64, device=device))
+x_t = torch.rand_like(x_0, device=device)
 mask = sample["attention_mask"].unsqueeze(0)
 
 # multi-step inference
@@ -429,4 +473,5 @@ for i in range(1, STEP_TOT, 100):
 
   print("t: ", i, "restore: ", train_dataset.tokenizer.decode(out.argmax(dim=-1)[0])[:len(origin_text) + 20])
 
-torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
+if not early_stopped:
+  torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
