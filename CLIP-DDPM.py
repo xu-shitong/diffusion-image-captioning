@@ -85,13 +85,17 @@ MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
 TRAIN_SET_RATIO = 0.95
 EARLY_STOP_RATIO = 1.1
+<<<<<<< HEAD
 EPOCH_NUM = 5
+=======
+EPOCH_NUM = 25
+>>>>>>> e476617d3b966190d4c310930146d6102432e11f
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
 # LOSS_FUNC = nn.functional.l1_loss
 LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
-CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used 
+CLIP_MASK = torch.tensor([1, 1], device=device) # mask indicating if [image, text] clip feature is used 
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
@@ -104,10 +108,13 @@ BETA_MAX = 0.02
 STEP_TOT = 1000 # total noise adding steps
 COSIN_SCHEDULE = True # if alpha sequence is scheduled in cosin instead of linear patten
 SAMPLE_SIZE = 100 # number of sample steps in each diffuse sequence
-X_0_PREDICTION = True # if model predicts x_0 or x_{t-1}
+X_0_PREDICTION = False # if model predicts x_0 or x_{t-1}
 
 MODEL_NAME = f"batch{BATCH_SIZE}_maxlen{MAX_LENGTH}_round{'%.0E' % ROUNDING_WEIGHT}_loss{LOSS_FUNC.__name__}_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}"
+<<<<<<< HEAD
 print(f"trial name: {MODEL_NAME}")
+=======
+>>>>>>> e476617d3b966190d4c310930146d6102432e11f
 
 """# Define Dataset"""
 
@@ -421,11 +428,10 @@ def validate(model):
   return val_acc_x_t / len(val_loader), val_acc_x_1 / len(val_loader), val_acc_prob / len(val_loader),
 
 # training 
-model = torch.load(f"{MODEL_NAME}.pickle").to(device)
-model.model.add_module("activation", activations.GELUActivation())
-trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
-summary = open("summary.txt", "a")
-summary.write(f"trial name: {MODEL_NAME}\n")
+# model = torch.load(f"{MODEL_NAME}.pickle").to(device)
+# model.model.add_module("activation", activations.GELUActivation())
+# trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
+summary = open(f"{MODEL_NAME}.txt", "a")
 
 early_stopped = False
 model.train()
@@ -469,7 +475,6 @@ for epoch in range(EPOCH_NUM):
         acc_l = 0
       if DEBUG:
         break
-    # break
     
   if DEBUG:
     break
@@ -588,8 +593,11 @@ plt.show()
 
 if not early_stopped:
   torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
+<<<<<<< HEAD
 
 from google.colab import drive
 drive.mount('/gdrive')
 
 !cp -av {MODEL_NAME} f'/gdrive/MyDrive/{MODEL_NAME}.pickle'
+=======
+>>>>>>> e476617d3b966190d4c310930146d6102432e11f
