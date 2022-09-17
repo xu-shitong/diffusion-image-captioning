@@ -4,8 +4,8 @@ lm-trial/tokenizers/
 models/
 tokenizers/
 flickr8k/
+flickr30k/
 building/
-captions.txt
 *.pickle
 summary.txt
 summary2.txt
@@ -13,3 +13,5 @@ summary2.txt
 *.jpg
 *.jpeg
 *.zip.*
+train2014.zip
+stashed_output
