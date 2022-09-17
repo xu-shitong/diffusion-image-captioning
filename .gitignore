@@ -5,11 +5,11 @@ models/
 tokenizers/
 flickr8k/
 building/
-image_all_final.pickle
-text_all_final.pickle
-image_all_final.pickle.zip
-text_all_final.pickle.zip
 captions.txt
 *.pickle
 summary.txt
 summary2.txt
+*.png
+*.jpg
+*.jpeg
+*.zip.*

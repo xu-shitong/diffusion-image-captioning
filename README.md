@@ -52,3 +52,7 @@ Research project on image captioning using diffusion language model
           - changing func is linear for each position
           - changign func is transformer to [x_t, x_t] part
   - todo: clip as additional feature vector to sequence, add segment 
+what will happen if no clip is given
+3. use coco dataset, todo
+4. use validation dataset, training
+5. use clip supervised method, left over work
