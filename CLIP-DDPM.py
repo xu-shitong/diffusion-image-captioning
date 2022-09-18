@@ -79,7 +79,7 @@ BETA_MAX = 0.02
 STEP_TOT = 1000 # total noise adding steps
 COSIN_SCHEDULE = True # if alpha sequence is scheduled in cosin instead of linear patten
 SAMPLE_SIZE = 100 # number of sample steps in each diffuse sequence
-X_0_PREDICTION = False # if model predicts x_0 or x_{t-1}
+X_0_PREDICTION = True # if model predicts x_0 or x_{t-1}
 
 MODEL_NAME = f"batch{BATCH_SIZE}_maxlen{MAX_LENGTH}_round{'%.0E' % ROUNDING_WEIGHT}_loss{LOSS_FUNC.__name__}_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}"
 print(f"trial name: {MODEL_NAME}")
@@ -396,9 +396,9 @@ def validate(model):
   return val_acc_x_t / len(val_loader), val_acc_x_1 / len(val_loader), val_acc_prob / len(val_loader),
 
 # training 
-# model = torch.load(f"{MODEL_NAME}.pickle").to(device)
+model = torch.load(f"{MODEL_NAME}.pickle").to(device)
 # model.model.add_module("activation", activations.GELUActivation())
-# trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
+trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
 summary = open(f"{MODEL_NAME}.txt", "a")
 
 early_stopped = False
