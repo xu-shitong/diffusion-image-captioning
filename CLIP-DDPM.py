@@ -59,7 +59,7 @@ DEBUG = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
-TRAIN_SET_RATIO = 0.95
+TRAIN_SET_RATIO = 0.9
 EARLY_STOP_RATIO = 1.05
 EPOCH_NUM = 15
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
@@ -67,8 +67,8 @@ ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated
 LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
-CLIP_MASK = torch.tensor([1, 1], device=device) # mask indicating if [image, text] clip feature is used 
-TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
+CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used 
+TRAIN_EMBEDDING = True # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
 else:
@@ -85,7 +85,7 @@ X_T_STEP_INTERVAL = 100
 USE_X_1_LOSS = True # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}\
+MODEL_NAME = f"lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}\
 _samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
@@ -102,7 +102,7 @@ from spacy.lang.en import English
 from collections import Counter
 import itertools
 
-captions = pd.read_csv("captions.txt")["caption"]
+captions = pd.read_csv("./flickr8k/captions.txt")["caption"]
 nlp = English()
 
 sentence_lst = []
@@ -122,6 +122,16 @@ vocab_dict = {'START': 0, 'END': 1, 'UNK':2, 'PAD':3}
 for k, v in counter.items():
     if v > 10:
       vocab_dict[k] = len(vocab_dict)
+
+class DictTokenizer():
+  def __init__(self, dictionary) -> None:
+    self.dictionary = dictionary
+
+  def __getitem__(self, i):
+    return self.dictionary[i]
+
+  def decode(self, index):
+    return " ".join([list(self.dictionary.keys())[list(self.dictionary.values()).index(i.item())] for i in index])
 
 class FlickrCLIPDataset(torch.utils.data.Dataset):
   def __init__(self, captions, tokenizer) -> None:
@@ -155,7 +165,7 @@ class FlickrCLIPDataset(torch.utils.data.Dataset):
 # TODO: COCO dataset
 
 if TRAIN_EMBEDDING:
-  tokenizer = vocab_dict
+  tokenizer = DictTokenizer(vocab_dict)
   VOCAB_SIZE = len(vocab_dict)
 else:
   tokenizer = DistilBertTokenizer.from_pretrained("./tokenizers/distilbert-base-uncased-local/", local_files_only=True)
@@ -413,9 +423,9 @@ def validate(model):
   return val_acc_x_t / len(val_loader), val_acc_x_1 / len(val_loader), val_acc_prob / len(val_loader),
 
 # training 
-model = torch.load(f"{MODEL_NAME}.pickle").to(device)
+# model = torch.load(f"{MODEL_NAME}.pickle").to(device)
 # model.model.add_module("activation", activations.GELUActivation())
-trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
+# trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
 summary = open(f"{MODEL_NAME}.txt", "a")
 
 early_stopped = False
