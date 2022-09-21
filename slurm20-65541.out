@@ -1,0 +1,54 @@
+/var/spool/slurm/d/job65541/slurm_script: line 8: [: missing `]'
+This is a test
+Today is Sat 17 Sep 19:45:50 BST 2022
+This is cloud-vm-41-120.doc.ic.ac.uk
+running python program
+/vol/cuda/10.2.89-cudnn7.6.4.38/bin:/vol/bitbucket/sx119/conda/bin:/vol/bitbucket/sx119/conda/condabin:/homes/sx119/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+using device:  cuda:0
+CPU RAM Free: 74.4 GB
+GPU 0 ... Mem Free: 24255MB / 24258MB | Utilization   0%
+trial name: batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictTrue
+CPU RAM Free: 70.4 GB
+GPU 0 ... Mem Free: 21488MB / 24258MB | Utilization  11%
+CPU RAM Free: 70.0 GB
+GPU 0 ... Mem Free: 20748MB / 24258MB | Utilization  14%
+start training
+origin text:  A child in a pink dress is climbing up a set of stairs in an entry way .
+t = 999
+inferred:  [CLS] a woman dressed in pink boots and across a looking pastsel with a [SEP]
+inferred:  [CLS] a little girl in pink dress is climbing a a on wall on a [SEP]
+inferred:  [CLS] a young girl in pink dress is climbing a a on wall wall a [SEP]
+inferred:  [CLS] a young girl in pink dress is standing on a on a wall. [SEP]
+inferred:  [CLS] a young girl in pink dress is standing on climbing on a wall. [SEP]
+text t effectiveness
+t:  1 restore:  [CLS] a child in a pink dress is climbing up a set of stairs in [SEP]
+t:  101 restore:  [CLS] a child in a pink dress is climbing up a set of stairs in [SEP]
+t:  201 restore:  [CLS] a child in a pink dress is climbing with a walk of climbing in [SEP]
+t:  301 restore:  [CLS] a girl in a pink dress is is down a a a stairs in [SEP]
+t:  401 restore:  [CLS] a little girl girl in a pink climbing up a climbing a stairs. [SEP]
+t:  501 restore:  [CLS] a little in a pink a is climbing on a climbing down a wall [SEP]
+t:  601 restore:  [CLS] a little girl a pink a is climbing a climbing a a a. [SEP]
+t:  701 restore:  [CLS] a little girl in a pink a is a a a a a. [SEP]
+t:  801 restore:  [CLS] a little girl in a pink a is a a a a a. [SEP]
+t:  901 restore:  [CLS] a little girl in a pink dress is is a a a a. [SEP]
+Sun Sep 18 09:12:31 2022       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.129.06   Driver Version: 470.129.06   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A30          On   | 00000000:01:00.0 Off |                    0 |
+| N/A   37C    P0    36W / 165W |      0MiB / 24258MiB |     15%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 09:12:31 up 18 days, 21:32,  2 users,  load average: 3.30, 3.27, 3.38

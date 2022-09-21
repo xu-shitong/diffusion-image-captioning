@@ -1,3 +1,5 @@
+only used flickr8k dataset
+
 /var/spool/slurm/d/job65473/slurm_script: line 8: [: missing `]'
 This is a test
 Today is Thu 15 Sep 02:18:56 BST 2022

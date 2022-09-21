@@ -1,0 +1,6 @@
+/var/spool/slurm/d/job65553/slurm_script: line 8: [: missing `]'
+This is a test
+Today is Sun 18 Sep 11:13:34 BST 2022
+This is cloud-vm-42-122.doc.ic.ac.uk
+running python program
+/vol/cuda/10.2.89-cudnn7.6.4.38/bin:/vol/bitbucket/sx119/conda/bin:/vol/bitbucket/sx119/conda/condabin:/homes/sx119/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin

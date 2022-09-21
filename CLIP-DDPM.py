@@ -388,9 +388,9 @@ def validate(model):
   return val_acc_x_t / len(val_loader), val_acc_x_1 / len(val_loader), val_acc_prob / len(val_loader),
 
 # training 
-# model = torch.load(f"{MODEL_NAME}.pickle").to(device)
+model = torch.load(f"{MODEL_NAME}.pickle").to(device)
 # model.model.add_module("activation", activations.GELUActivation())
-# trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
+trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
 summary = open(f"{MODEL_NAME}.txt", "a")
 
 early_stopped = False
