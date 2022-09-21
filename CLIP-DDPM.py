@@ -14,6 +14,7 @@ import torch
 from torch.utils.data import DataLoader
 from torch import nn, optim
 import tqdm
+import matplotlib.pyplot as plt
 import math
 
 if torch.cuda.is_available():
@@ -59,8 +60,8 @@ BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
 TRAIN_SET_RATIO = 0.95
-EARLY_STOP_RATIO = 1.1
-EPOCH_NUM = 5
+EARLY_STOP_RATIO = 1.05
+EPOCH_NUM = 16
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
 # LOSS_FUNC = nn.functional.l1_loss
 LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
@@ -80,42 +81,20 @@ STEP_TOT = 1000 # total noise adding steps
 COSIN_SCHEDULE = True # if alpha sequence is scheduled in cosin instead of linear patten
 SAMPLE_SIZE = 100 # number of sample steps in each diffuse sequence
 X_0_PREDICTION = False # if model predicts x_0 or x_{t-1}
+USE_X_1_LOSS = False # if using x_1 loss
+USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"batch{BATCH_SIZE}_maxlen{MAX_LENGTH}_round{'%.0E' % ROUNDING_WEIGHT}_loss{LOSS_FUNC.__name__}_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}"
+MODEL_NAME = f"batch{BATCH_SIZE}_maxlen{MAX_LENGTH}_round{'%.0E' % ROUNDING_WEIGHT}_loss{LOSS_FUNC.__name__}\
+_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}\
+_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
 """# Define Dataset"""
 
-# # TODO: use self defined tokenizer
-# from spacy.lang.en import English
-# from collections import Counter
-# import itertools
-
-# captions = pd.read_csv("captions.txt")["caption"]
-# nlp = English()
-
-# sentence_lst = []
-
-# for sentences in captions:
-#   word_lst = [x.text.lower() for x in nlp.tokenizer(sentences)]
-#   spl = [[]]
-#   for x, y in itertools.groupby(word_lst, lambda z: z == '.'):
-#       spl[-1].extend(y)
-#       if x: spl.append([])
-#   sentence_lst.extend(spl[:-1])
-
-# counter = Counter()
-# for input_ids in sentence_lst:
-#     counter.update(input_ids)
-# vocab_dict = {'START': 0, 'END': 1, 'UNK':2, 'PAD':3}
-# for k, v in counter.items():
-#     if v > 10:
-      # vocab_dict[k] = len(vocab_dict)
-
-flickr8k_image = torch.load("image_all_final.pickle").to(device)
-flickr8k_text = torch.load("text_all_final.pickle").to(device)
-flickr30k_image = torch.load("./flickr30k/flickr30k_clip_image.pickle").to(device)
-flickr30k_text = torch.load("./flickr30k/flickr30k_clip_text.pickle").to(device)
+flickr8k_image = torch.load("./flickr8k/image_all_final.pickle").to(device).detach()
+flickr8k_text = torch.load("./flickr8k/text_all_final.pickle").to(device).detach()
+flickr30k_image = torch.load("./flickr30k/flickr30k_clip_image.pickle").to(device).detach()
+flickr30k_text = torch.load("./flickr30k/flickr30k_clip_text.pickle").to(device).detach()
 image_set = torch.vstack([flickr8k_image, flickr30k_image])
 text_set = torch.vstack([flickr8k_text, flickr30k_text])
 
@@ -144,7 +123,8 @@ class FlickrCLIPDataset(torch.utils.data.Dataset):
       "image_clip": image_clip, 
       "text_clip": text_clip, 
       "input_ids": tokens["input_ids"].squeeze().to(device), 
-      "attention_mask": tokens["attention_mask"].squeeze().to(device)
+      "attention_mask": tokens["attention_mask"].squeeze().to(device),
+      "text": self.caption.loc[idx]
     }
 
 # TODO: COCO dataset
@@ -156,10 +136,12 @@ else:
   tokenizer = DistilBertTokenizer.from_pretrained("./tokenizers/distilbert-base-uncased-local/", local_files_only=True)
   VOCAB_SIZE = tokenizer.vocab_size
 
-train_dataset = FlickrCLIPDataset(pd.concat([pd.read_csv("./captions.txt")["caption"], pd.read_csv("./flickr30k/captions.csv", sep='|')["caption"]], ignore_index=True), tokenizer)
-train_len = int(len(train_dataset) * TRAIN_SET_RATIO)
-train_set, val_set = torch.utils.data.random_split(train_dataset, [train_len, len(train_dataset) - train_len])
-train_loader = DataLoader(train_set, shuffle=False, batch_size=BATCH_SIZE, drop_last=True)
+dataset = FlickrCLIPDataset(
+  pd.concat([pd.read_csv("./flickr8k/captions.txt")["caption"], pd.read_csv("./flickr30k/captions.csv", sep='|')["caption"]], ignore_index=True),
+  tokenizer)
+train_len = int(len(dataset) * TRAIN_SET_RATIO)
+train_set, val_set = torch.utils.data.random_split(dataset, [train_len, len(dataset) - train_len])
+train_loader = DataLoader(train_set, shuffle=True, batch_size=BATCH_SIZE, drop_last=True)
 val_loader = DataLoader(val_set, shuffle=False, batch_size=BATCH_SIZE, drop_last=True)
 
 mem_report()
@@ -336,13 +318,23 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
     x_t_loss = loss_func(x_t_hidden[:, :MAX_LENGTH, :], x_tgt)
 
   # x_1 restore loss
-  x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask)
-  x_1_loss = loss_func(x_1_hidden[:, :MAX_LENGTH, :], x_0)
+  if USE_X_1_LOSS:
+    x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask)
+    x_1_loss = loss_func(x_1_hidden[:, :MAX_LENGTH, :], x_0)
+  else:
+    x_1_loss = 0
 
-  # output sequence probability loss, applied to both x_1 and x_t restore
-  idx = idx.unsqueeze(dim=-1)
-  x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum(dim=1).mean()
-  x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum(dim=1).mean()
+  if USE_PROB_LOSS:
+    # output sequence probability loss, applied to both x_1 and x_t restore
+    idx = idx.unsqueeze(dim=-1)
+    x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum(dim=1).mean()
+    if USE_X_1_LOSS:
+      x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum(dim=1).mean()
+    else:
+      x_1_prob_loss = 0
+  else:
+    x_t_prob_loss = 0
+    x_1_prob_loss = 0
   
   return x_t_loss, x_1_loss, ROUNDING_WEIGHT * (x_t_prob_loss + x_1_prob_loss)
 
@@ -426,41 +418,43 @@ for epoch in range(EPOCH_NUM):
       #                    x_1_loss=x_1_loss.item(),
       #                    prob_loss=prob_loss.item(),
       #                    tot_loss=l.item())
-
-      if batch_num % 5000 == 0 and batch_num != 0:
-      # if batch_num % 5000 == 0:
-        # eval on validation set
-        val_x_t, val_x_1, val_prob = validate(model)
-        if val_x_t + val_x_1 + val_prob > EARLY_STOP_RATIO * acc_l / 5000:
-          if not early_stopped:
-            summary.write("early stop! \n")
-            torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
-            model = model.to(device)
-          early_stopped = True
-        summary.write(f"epoch {epoch} average x_t_loss, x_1_loss, prob_loss, val losses: {acc_x_t / 5000}, {acc_x_1 / 5000}, {acc_prob / 5000}, {val_x_t}, {val_x_1}, {val_prob}\n")
-        acc_x_t = 0
-        acc_x_1 = 0
-        acc_prob = 0
-        acc_l = 0
       if DEBUG:
         break
-    # break
+
+  # if batch_num % 5000 == 0 and batch_num != 0:
+  # if batch_num % 5000 == 0:
+  # eval on validation set
+  val_x_t, val_x_1, val_prob = validate(model)
+  if val_x_t + val_x_1 + val_prob > EARLY_STOP_RATIO * acc_l / len(train_loader):
+    if not early_stopped:
+      summary.write("early stop! \n")
+      torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
+      model = model.to(device)
+    early_stopped = True
+  summary.write(f"epoch {epoch} average x_t_loss, x_1_loss, prob_loss, val losses: {acc_x_t / len(train_loader)}, {acc_x_1 / len(train_loader)}, {acc_prob / len(train_loader)}, {val_x_t}, {val_x_1}, {val_prob}\n")
+  # acc_x_t = 0
+  # acc_x_1 = 0
+  # acc_prob = 0
+  # acc_l = 0
     
   if DEBUG:
     break
 summary.close()
 
+if not early_stopped:
+  torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
+  model = model.to(device)
+
 """# Evaluate"""
 
 # trial on inference
-# model = torch.load("batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100.pickle").to(device)
+# model = torch.load("./batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictFalse.pickle").to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
 idx = 0
-origin_text = train_dataset.caption.loc[idx]
-print("origin text: ", origin_text)
+print("origin text: ", val_set[idx]["text"])
 
-sample = train_dataset[idx]
+sample = val_set[idx]
 image_clip = sample["image_clip"][None, None, :]
 text_clip = sample["text_clip"][None, None, :]
 x_0 = model.embedding(sample["input_ids"].unsqueeze(0))
@@ -474,7 +468,7 @@ mask = sample["attention_mask"].unsqueeze(0)
 restored = x_t
 for i in range(5):
   out, restored = model(restored[:, :MAX_LENGTH, :], image_clip, text_clip, mask)
-  print("inferred: ", train_dataset.tokenizer.decode(out.argmax(dim=-1)[0])[:len(origin_text) + 10])
+  print("inferred: ", dataset.tokenizer.decode(out.argmax(dim=-1)[0]))
 
 # effectiveness of model on large t
 print("text t effectiveness")
@@ -482,7 +476,4 @@ for i in range(1, STEP_TOT, 100):
   x_t = diffuse_t(x_0, torch.tensor([i], dtype=torch.int64, device=device))
   out, _ = model(x_t, image_clip, text_clip, mask) 
 
-  print("t: ", i, "restore: ", train_dataset.tokenizer.decode(out.argmax(dim=-1)[0])[:len(origin_text) + 20])
-
-if not early_stopped:
-  torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
+  print("t: ", i, "restore: ", dataset.tokenizer.decode(out.argmax(dim=-1)[0]))
