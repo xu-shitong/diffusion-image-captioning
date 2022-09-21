@@ -61,13 +61,13 @@ MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
 TRAIN_SET_RATIO = 0.95
 EARLY_STOP_RATIO = 1.05
-EPOCH_NUM = 16
+EPOCH_NUM = 15
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
 # LOSS_FUNC = nn.functional.l1_loss
 LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
-CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used 
+CLIP_MASK = torch.tensor([1, 1], device=device) # mask indicating if [image, text] clip feature is used 
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
@@ -80,13 +80,13 @@ BETA_MAX = 0.02
 STEP_TOT = 1000 # total noise adding steps
 COSIN_SCHEDULE = True # if alpha sequence is scheduled in cosin instead of linear patten
 SAMPLE_SIZE = 100 # number of sample steps in each diffuse sequence
-X_0_PREDICTION = False # if model predicts x_0 or x_{t-1}
-USE_X_1_LOSS = False # if using x_1 loss
+X_0_PREDICTION = True # if model predicts x_0 or x_{t-1}
+X_T_STEP_INTERVAL = 100
+USE_X_1_LOSS = True # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"batch{BATCH_SIZE}_maxlen{MAX_LENGTH}_round{'%.0E' % ROUNDING_WEIGHT}_loss{LOSS_FUNC.__name__}\
-_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}\
-_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
+MODEL_NAME = f"round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}\
+_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
 """# Define Dataset"""
@@ -97,6 +97,31 @@ flickr30k_image = torch.load("./flickr30k/flickr30k_clip_image.pickle").to(devic
 flickr30k_text = torch.load("./flickr30k/flickr30k_clip_text.pickle").to(device).detach()
 image_set = torch.vstack([flickr8k_image, flickr30k_image])
 text_set = torch.vstack([flickr8k_text, flickr30k_text])
+
+from spacy.lang.en import English
+from collections import Counter
+import itertools
+
+captions = pd.read_csv("captions.txt")["caption"]
+nlp = English()
+
+sentence_lst = []
+
+for sentences in captions:
+  word_lst = [x.text.lower() for x in nlp.tokenizer(sentences)]
+  spl = [[]]
+  for x, y in itertools.groupby(word_lst, lambda z: z == '.'):
+      spl[-1].extend(y)
+      if x: spl.append([])
+  sentence_lst.extend(spl[:-1])
+
+counter = Counter()
+for input_ids in sentence_lst:
+    counter.update(input_ids)
+vocab_dict = {'START': 0, 'END': 1, 'UNK':2, 'PAD':3}
+for k, v in counter.items():
+    if v > 10:
+      vocab_dict[k] = len(vocab_dict)
 
 class FlickrCLIPDataset(torch.utils.data.Dataset):
   def __init__(self, captions, tokenizer) -> None:
@@ -351,7 +376,7 @@ def train_func(model, trainer, x, train=True):
     x_t = diffuse_t(x_0, t)
     x_tgt = None
   else:
-    x_t, x_tgt = generate_diffuse_pair(x_0, t, torch.max(t - 30, torch.zeros(t.shape, device=device, dtype=torch.int64)))
+    x_t, x_tgt = generate_diffuse_pair(x_0, t, torch.max(t - X_T_STEP_INTERVAL, torch.zeros(t.shape, device=device, dtype=torch.int64)))
   x_1 = diffuse_t(x_0, torch.ones(1, dtype=torch.int64, device=device))
 
   if train:
