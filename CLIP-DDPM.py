@@ -55,11 +55,11 @@ def series_sum_batch_average(x_hat, x):
   return (x_hat - x).abs().sum(dim=1).mean()
 
 # hyperparameters
-DEBUG = False
+DEBUG = True
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
-TRAIN_SET_RATIO = 0.9
+TRAIN_SET_RATIO = 0.95
 EARLY_STOP_RATIO = 1.05
 EPOCH_NUM = 15
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
@@ -67,8 +67,9 @@ ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated
 LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
-CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used 
-TRAIN_EMBEDDING = True # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
+CLIP_MASK = None
+# CLIP_MASK = torch.tensor([0, 1], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
+TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
 else:
@@ -85,7 +86,7 @@ X_T_STEP_INTERVAL = 100
 USE_X_1_LOSS = True # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{CLIP_MASK[0].item()}{CLIP_MASK[1].item()}_train-embed{TRAIN_EMBEDDING}\
+MODEL_NAME = f"lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
 _samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
@@ -227,7 +228,7 @@ class DistilBertModel(nn.Module):
     else:
       raise NotImplementedError(CLIP_ADDING_METHOD)
 
-  def forward(self, x, image_clip, text_clip, mask):
+  def forward(self, x, image_clip, text_clip, mask, concat_mask):
     '''
     input:
       x: [x_t ... x_t], shape: [sample_size * batch_size, seq_len, IN_CHANNEL]
@@ -243,12 +244,13 @@ class DistilBertModel(nn.Module):
     assert x.shape == (sample_batch_multi, MAX_LENGTH, IN_CHANNEL)
     assert image_clip.shape == text_clip.shape == (sample_batch_multi, 1, 512)
     assert mask.shape == (sample_batch_multi, MAX_LENGTH)
+    assert concat_mask.shape == (sample_batch_multi, 2)
 
     if TRAIN_EMBEDDING:
       x = self.input_projection(x)
     
     if CLIP_ADDING_METHOD == "concat":
-      mask = torch.hstack([mask, CLIP_MASK.repeat((mask.shape[0], 1))])
+      mask = torch.hstack([mask, concat_mask])
       x = torch.hstack([x, self.image_linear(image_clip), self.text_linear(text_clip)])
       x = x + self.segment_embedding(torch.tensor([0] * MAX_LENGTH + [1] * 2, device=device))
     elif CLIP_ADDING_METHOD == "add":
@@ -344,8 +346,13 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
   image_clip = image_clip.unsqueeze(1) # shape [ batch_size, 1, clip_dim]
   text_clip = text_clip.unsqueeze(1) # shape same as above
 
+  if CLIP_MASK is None:
+    concat_mask = torch.vstack([torch.ones((BATCH_SIZE, 1)), torch.randint(0,2, (BATCH_SIZE, 1))])
+  else:
+    concat_mask = CLIP_MASK.repeat((BATCH_SIZE, 1))
+
   # x_t restore loss
-  x_t_prob, x_t_hidden = model(x_t, image_clip.repeat(repeat_shape), text_clip.repeat(repeat_shape), mask.repeat((SAMPLE_SIZE, 1)))
+  x_t_prob, x_t_hidden = model(x_t, image_clip.repeat(repeat_shape), text_clip.repeat(repeat_shape), mask.repeat((SAMPLE_SIZE, 1)), concat_mask.repeat((SAMPLE_SIZE, 1)))
   if X_0_PREDICTION:
     x_t_loss = loss_func(x_t_hidden[:, :MAX_LENGTH, :], x_0.repeat(repeat_shape))
   else:
@@ -354,7 +361,7 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
 
   # x_1 restore loss
   if USE_X_1_LOSS:
-    x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask)
+    x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask, concat_mask)
     x_1_loss = loss_func(x_1_hidden[:, :MAX_LENGTH, :], x_0)
   else:
     x_1_loss = 0
@@ -456,9 +463,6 @@ for epoch in range(EPOCH_NUM):
       if DEBUG:
         break
 
-  # if batch_num % 5000 == 0 and batch_num != 0:
-  # if batch_num % 5000 == 0:
-  # eval on validation set
   val_x_t, val_x_1, val_prob = validate(model)
   if val_x_t + val_x_1 + val_prob > EARLY_STOP_RATIO * acc_l / len(train_loader):
     if not early_stopped:
@@ -467,10 +471,6 @@ for epoch in range(EPOCH_NUM):
       model = model.to(device)
     early_stopped = True
   summary.write(f"epoch {epoch} average x_t_loss, x_1_loss, prob_loss, val losses: {acc_x_t / len(train_loader)}, {acc_x_1 / len(train_loader)}, {acc_prob / len(train_loader)}, {val_x_t}, {val_x_1}, {val_prob}\n")
-  # acc_x_t = 0
-  # acc_x_1 = 0
-  # acc_prob = 0
-  # acc_l = 0
     
   if DEBUG:
     break
@@ -483,7 +483,7 @@ if not early_stopped:
 """# Evaluate"""
 
 # trial on inference
-# model = torch.load("./batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictFalse.pickle").to(device)
+# model = torch.load("./batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask11_train-embedFalse_samplesize100_x_0_predictTrue_use_x_1True_use_probTrue.pickle").to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
 idx = 0
