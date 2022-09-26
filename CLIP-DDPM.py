@@ -51,24 +51,24 @@ mem_report()
 
 """# Hyperparameters"""
 
-def series_sum_batch_average(x_hat, x):
-  return (x_hat - x).abs().sum(dim=1).mean()
+def series_sum(x_hat, x):
+  return (x_hat - x).abs().sum()
 
 # hyperparameters
-DEBUG = False
+DEBUG = True
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
-LEARNING_RATE = 1e-4
+LEARNING_RATE = 5e-5
 TRAIN_SET_RATIO = 0.95
-EARLY_STOP_RATIO = 1.02
-EPOCH_NUM = 14
+EARLY_STOP_RATIO = 1.05
+EPOCH_NUM = 15
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
 # LOSS_FUNC = nn.functional.l1_loss
-LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
+LOSS_FUNC = series_sum # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
 CLIP_MASK = None
-# CLIP_MASK = torch.tensor([0, 1], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
+# CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
@@ -481,8 +481,12 @@ if not early_stopped:
 
 """# Evaluate"""
 
+# summary = sys.stdout
+
 # trial on inference
-# model = torch.load("./batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask11_train-embedFalse_samplesize100_x_0_predictTrue_use_x_1True_use_probTrue.pickle").to(device)
+model = torch.load(
+  "./lossl1_loss_lr5E-05_round3E-01_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictTrue_X_INTERVAL100_use_x_1True_use_probTrue.pickle",
+  ).to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
 idx = 0
@@ -500,7 +504,7 @@ mask = sample["attention_mask"].unsqueeze(0)
 
 # multi-step inference
 restored = x_t
-for i in range(5):
+for i in range(10):
   out, restored = model(restored[:, :MAX_LENGTH, :], image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1))
   summary.write(f"inferred: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
 
@@ -512,4 +516,5 @@ for i in range(1, STEP_TOT, 100):
 
   summary.write(f"t: {i} restore: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
 
-summary.close()
+if not summary == sys.stdout:
+  summary.close()
