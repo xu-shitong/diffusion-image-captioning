@@ -55,13 +55,13 @@ def series_sum_batch_average(x_hat, x):
   return (x_hat - x).abs().sum(dim=1).mean()
 
 # hyperparameters
-DEBUG = True
+DEBUG = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
-LEARNING_RATE = 5e-5
+LEARNING_RATE = 1e-4
 TRAIN_SET_RATIO = 0.95
-EARLY_STOP_RATIO = 1.05
-EPOCH_NUM = 15
+EARLY_STOP_RATIO = 1.02
+EPOCH_NUM = 14
 ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
 # LOSS_FUNC = nn.functional.l1_loss
 LOSS_FUNC = series_sum_batch_average # loss function used between embedding 
@@ -86,7 +86,7 @@ X_T_STEP_INTERVAL = 100
 USE_X_1_LOSS = True # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
+MODEL_NAME = f"loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
 _samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
@@ -347,7 +347,7 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
   text_clip = text_clip.unsqueeze(1) # shape same as above
 
   if CLIP_MASK is None:
-    concat_mask = torch.vstack([torch.ones((BATCH_SIZE, 1)), torch.randint(0,2, (BATCH_SIZE, 1))])
+    concat_mask = torch.hstack([torch.ones((BATCH_SIZE, 1), device=device), torch.randint(0,2, (BATCH_SIZE, 1), device=device)])
   else:
     concat_mask = CLIP_MASK.repeat((BATCH_SIZE, 1))
 
@@ -474,7 +474,6 @@ for epoch in range(EPOCH_NUM):
     
   if DEBUG:
     break
-summary.close()
 
 if not early_stopped:
   torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
@@ -487,14 +486,14 @@ if not early_stopped:
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
 idx = 0
-print("origin text: ", val_set[idx]["text"])
+summary.write(f"origin text: {val_set[idx]['text']}\n")
 
 sample = val_set[idx]
 image_clip = sample["image_clip"][None, None, :]
 text_clip = sample["text_clip"][None, None, :]
 x_0 = model.embedding(sample["input_ids"].unsqueeze(0))
 t = 999
-print(f"t = {t}")
+summary.write(f"t = {t}\n")
 # x_t = diffuse_t(x_0, torch.tensor([t], dtype=torch.int64, device=device))
 x_t = torch.rand_like(x_0, device=device)
 mask = sample["attention_mask"].unsqueeze(0)
@@ -502,13 +501,15 @@ mask = sample["attention_mask"].unsqueeze(0)
 # multi-step inference
 restored = x_t
 for i in range(5):
-  out, restored = model(restored[:, :MAX_LENGTH, :], image_clip, text_clip, mask)
-  print("inferred: ", dataset.tokenizer.decode(out.argmax(dim=-1)[0]))
+  out, restored = model(restored[:, :MAX_LENGTH, :], image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1))
+  summary.write(f"inferred: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
 
 # effectiveness of model on large t
-print("text t effectiveness")
+summary.write("text t effectiveness\n")
 for i in range(1, STEP_TOT, 100):
   x_t = diffuse_t(x_0, torch.tensor([i], dtype=torch.int64, device=device))
-  out, _ = model(x_t, image_clip, text_clip, mask) 
+  out, _ = model(x_t, image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1)) 
 
-  print("t: ", i, "restore: ", dataset.tokenizer.decode(out.argmax(dim=-1)[0]))
+  summary.write(f"t: {i} restore: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
+
+summary.close()
