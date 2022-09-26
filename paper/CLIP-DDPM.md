@@ -1,8 +1,38 @@
 # Abstract
 In this work, we applied denoising diffusion probabilistic models to text generation in image captioning tasks. We show that our CLIP-diffusion-LM *** On the flickr8k dataset, the model showed. By combining samples from flickr8k and flickr30k dataset, our model showed ... performance. In addition, the model achieved ... zero shot performance in COCO 2015 image caption task. Our code is available at ...
 
+
+contribution: experiment on learning rate, optimizer, adding mechanism, cosine schedule, using classifier free or not. using model to predict image feature or not, scale up to larger dataset
+
 # Introduction
 (image captioning papers from paper with code)
+Image captioning has being a focus of research over the recent years. Previous text encoder used could be split to 2 general classes, which are autoregressive and non-autoregressive. Most of the sota models falls in the autoregressive class. 2015 deep caption with multimodal rnn[] proposed the mRNN model, which used CNN for image extraction and RNN for text generation. 2016 show attend tell[] employed the LSTM for text generation and exerimented on soft and hard attention for early fusion of image feature and text feature. Based on this, 2016 knowing where to look[] experimented the late fusion of image and text features, allowing model to attend on either image or text modality. 2017 cascade recurrent nn[] experimented on reversing the generated caption, allowing its backend model to refine the former tokens based on later caption tokens. 2018 gla[] used attention model to combine local and global feature from images, so that captions can more accurately identify occluded objects. Similarly, 2019 stack vs[] also used image features from both high and low generaliaty, and combined them using cross attention. Their work also involves multi step refining of the generated text caption. Caption in each step the caption is autoregressively generated. 2019 unsupervised image caption[] trained image caption in a GAN style, with LSTM discriminator reproducing the original image feature. 
+
+
+
+In contrast, non-autoregressive models benefits from the attention models' ability to pass textural information in both direction during generation. The text generated in former timesteps could adjust based on text in later timesteps, thus is expected to achieve better performance. 2019 Masked Non-Autoregressive Image Captioning[] used BERT[] as text decoder and employed a 2 step generation method. Based on this work, Partially Non-Autoregressive Image Captioning [] and semi Non-Autoregressive Image Captioning[] partitioned the generated text in subgroups, words in the same group are generated non-autoregressively and different groups are generated in autoregressive way. Our method falls in this catogory and most close to the 2019 Masked Non-Autoregressive Image Captioning[]. The difference is we chose to use diffusion model as the non-autoregressive generation model. 
+
+Many of the previous methods focused on using an encoder-decoder structure, encoder extracts visual features from an image and decoder generate the textural caption based on the feature. 
+
+
+2015 deep caption with multimodal rnn
+2016 show attend tell
+2016 knowing where to look
+2017 cascade recurrent nn
+2018 gla
+2019 stack vs
+// 2019 image caption generation with pos
+2019 unsupervised image caption
+// 2019 mscap
+2019 Variational Autoencoder-Based Multiple ImageCaptioning Using a Caption Attention Map: 基于knowing where to look，生成attention graph，attention graph通过全连接层得到vae mean var，生成文本特征 scale up 传入rnn
+2021 CLIP cap
+2022 GRIT
+2022 mplug
+
+2019 Masked Non-Autoregressive Image Captioning decoder使用bert，mask掉所有词逐步生成原文，仅2步即可
+2021 Partially Non-Autoregressive Image Captioning
+2021 semi Non-Autoregressive Image Captioning 将词组为group，组间auto regressive，组内non autoregressive transformer生成词序
+
 
 
 In recent years, CLIP encoders are widely as feature extractors for various tasks[]. Most recently, the DALL-E 2 model has shown significant performance in text-to-image generation tasks. The application of diffusion model in generation step allows higher variation and novelty in generated images. 
@@ -51,8 +81,11 @@ Due to the large generation step number (1000 as proposed in []), and the genera
 # Experiments
 Our model is based on Distilbert model, 
 
-# Conclusion
+## Experiments on x_0 prediction instead of x_t prediction
 
+
+# Conclusion
+need trial on data argumentation, due to model showed tendency to output based on colour of object, like recognize pink background as flower bed
 
 
 
@@ -70,3 +103,14 @@ diffusion model beats gan
 flickr8k 
 flickr30k
 COCO
+2015 deep caption with multimodal rnn
+2016 knowing where to look
+2016 show attend tell
+2017 cascade recurrent nn
+2018 gla
+2019 stack vs
+2019 image caption generation with pos
+2019 unsupervised image caption
+2021 CLIP cap
+2022 GRIT
+2022 mplug
