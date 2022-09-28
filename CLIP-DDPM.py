@@ -51,18 +51,21 @@ mem_report()
 
 """# Hyperparameters"""
 
-def series_sum(x_hat, x):
-  return (x_hat - x).abs().sum()
-
 # hyperparameters
-DEBUG = True
+DEBUG = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
 TRAIN_SET_RATIO = 0.95
 EARLY_STOP_RATIO = 1.05
-EPOCH_NUM = 15
-ROUNDING_WEIGHT = 3e-1 # weight of rounding term, the probability of regenerated sequence 
+EPOCH_NUM = 5
+DYNAMIC_ROUNDING_WEIGHT = 2 # weight of rounding term with respect to x_t loss, <0 means not using 
+ROUNDING_WEIGHT = 1 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
+
+def series_sum(x_hat, x):
+  # return (x_hat - x).abs().sum(dim=1).mean()
+  return (x_hat - x).abs().sum() / BATCH_SIZE / 768
+
 # LOSS_FUNC = nn.functional.l1_loss
 LOSS_FUNC = series_sum # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
@@ -86,7 +89,7 @@ X_T_STEP_INTERVAL = 100
 USE_X_1_LOSS = True # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
+MODEL_NAME = f"epoch{EPOCH_NUM}_loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_dynamic{DYNAMIC_ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
 _samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
@@ -94,10 +97,12 @@ print(f"trial name: {MODEL_NAME}")
 
 flickr8k_image = torch.load("./flickr8k/image_all_final.pickle").to(device).detach()
 flickr8k_text = torch.load("./flickr8k/text_all_final.pickle").to(device).detach()
-flickr30k_image = torch.load("./flickr30k/flickr30k_clip_image.pickle").to(device).detach()
-flickr30k_text = torch.load("./flickr30k/flickr30k_clip_text.pickle").to(device).detach()
-image_set = torch.vstack([flickr8k_image, flickr30k_image])
-text_set = torch.vstack([flickr8k_text, flickr30k_text])
+# flickr30k_image = torch.load("./flickr30k/flickr30k_clip_image.pickle").to(device).detach()
+# flickr30k_text = torch.load("./flickr30k/flickr30k_clip_text.pickle").to(device).detach()
+# image_set = torch.vstack([flickr8k_image, flickr30k_image])
+# text_set = torch.vstack([flickr8k_text, flickr30k_text])
+image_set = flickr8k_image
+text_set = flickr8k_text
 
 from spacy.lang.en import English
 from collections import Counter
@@ -173,7 +178,8 @@ else:
   VOCAB_SIZE = tokenizer.vocab_size
 
 dataset = FlickrCLIPDataset(
-  pd.concat([pd.read_csv("./flickr8k/captions.txt")["caption"], pd.read_csv("./flickr30k/captions.csv", sep='|')["caption"]], ignore_index=True),
+  # pd.concat([pd.read_csv("./flickr8k/captions.txt")["caption"], pd.read_csv("./flickr30k/captions.csv", sep='|')["caption"]], ignore_index=True),
+  pd.read_csv("./flickr8k/captions.txt")["caption"],
   tokenizer)
 train_len = int(len(dataset) * TRAIN_SET_RATIO)
 train_set, val_set = torch.utils.data.random_split(dataset, [train_len, len(dataset) - train_len])
@@ -369,9 +375,11 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
   if USE_PROB_LOSS:
     # output sequence probability loss, applied to both x_1 and x_t restore
     idx = idx.unsqueeze(dim=-1)
-    x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum(dim=1).mean()
+    x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum() / BATCH_SIZE
+    # x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum(dim=1).mean()
     if USE_X_1_LOSS:
-      x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum(dim=1).mean()
+      x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum() / BATCH_SIZE
+      # x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum(dim=1).mean()
     else:
       x_1_prob_loss = 0
   else:
@@ -454,6 +462,9 @@ for epoch in range(EPOCH_NUM):
       acc_prob += prob_loss
       acc_l += l
 
+      if DYNAMIC_ROUNDING_WEIGHT > 0:
+        ROUNDING_WEIGHT = ((acc_x_t + acc_x_1) / acc_prob).detach() * DYNAMIC_ROUNDING_WEIGHT
+
       # tepoch.set_description(f"batch {batch_num}")
       # tepoch.set_postfix(
       #                    x_t_hidden=x_t_loss.item(),
@@ -479,14 +490,16 @@ if not early_stopped:
   torch.save(model.cpu(), f"{MODEL_NAME}.pickle")
   model = model.to(device)
 
+mem_report()
+
 """# Evaluate"""
 
 # summary = sys.stdout
 
 # trial on inference
-model = torch.load(
-  "./lossl1_loss_lr5E-05_round3E-01_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictTrue_X_INTERVAL100_use_x_1True_use_probTrue.pickle",
-  ).to(device)
+# model = torch.load(
+#   "./lossl1_loss_lr5E-05_round3E-01_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictTrue_X_INTERVAL100_use_x_1True_use_probTrue.pickle",
+#   ).to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
 idx = 0
