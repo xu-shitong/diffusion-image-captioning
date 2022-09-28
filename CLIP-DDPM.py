@@ -70,8 +70,8 @@ def series_sum(x_hat, x):
 LOSS_FUNC = series_sum # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
-CLIP_MASK = None
-# CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
+# CLIP_MASK = None
+CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
@@ -89,7 +89,7 @@ X_T_STEP_INTERVAL = 100
 USE_X_1_LOSS = True # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"epoch{EPOCH_NUM}_loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_dynamic{DYNAMIC_ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
+MODEL_NAME = f"loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
 _samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
@@ -442,6 +442,7 @@ def validate(model):
 # model.model.add_module("activation", activations.GELUActivation())
 # trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
 summary = open(f"{MODEL_NAME}.txt", "a")
+# summary = sys.stdout
 
 early_stopped = False
 model.train()
@@ -502,32 +503,34 @@ mem_report()
 #   ).to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
-idx = 0
-summary.write(f"origin text: {val_set[idx]['text']}\n")
+with torch.no_grad():
 
-sample = val_set[idx]
-image_clip = sample["image_clip"][None, None, :]
-text_clip = sample["text_clip"][None, None, :]
-x_0 = model.embedding(sample["input_ids"].unsqueeze(0))
-t = 999
-summary.write(f"t = {t}\n")
-# x_t = diffuse_t(x_0, torch.tensor([t], dtype=torch.int64, device=device))
-x_t = torch.rand_like(x_0, device=device)
-mask = sample["attention_mask"].unsqueeze(0)
+  idx = 0
+  summary.write(f"origin text: {val_set[idx]['text']}\n")
 
-# multi-step inference
-restored = x_t
-for i in range(10):
-  out, restored = model(restored[:, :MAX_LENGTH, :], image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1))
-  summary.write(f"inferred: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
+  sample = val_set[idx]
+  image_clip = sample["image_clip"][None, None, :]
+  text_clip = sample["text_clip"][None, None, :]
 
-# effectiveness of model on large t
-summary.write("text t effectiveness\n")
-for i in range(1, STEP_TOT, 100):
-  x_t = diffuse_t(x_0, torch.tensor([i], dtype=torch.int64, device=device))
-  out, _ = model(x_t, image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1)) 
+  x_0 = model.embedding(sample["input_ids"].unsqueeze(0))
+  t = 999
+  summary.write(f"t = {t}\n")
+  x_t = diffuse_t(x_0, torch.tensor([t], dtype=torch.int64, device=device))
+  mask = sample["attention_mask"].unsqueeze(0)
 
-  summary.write(f"t: {i} restore: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
+  # multi-step inference
+  restored = x_t
+  for i in range(10):
+    out, restored = model(restored[:, :MAX_LENGTH, :], image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1))
+    summary.write(f"inferred: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
+
+  # effectiveness of model on large t
+  summary.write("text t effectiveness\n")
+  for i in range(1, STEP_TOT, 100):
+    x_t = diffuse_t(x_0, torch.tensor([i], dtype=torch.int64, device=device))
+    out, _ = model(x_t, image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1)) 
+
+    summary.write(f"t: {i} restore: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
 
 if not summary == sys.stdout:
   summary.close()
