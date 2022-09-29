@@ -56,18 +56,28 @@ DEBUG = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
+END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
+# END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
+# SCHEDULER = torch.logspace
+SCHEDULER = torch.linspace # scheduler of learning rate
 TRAIN_SET_RATIO = 0.95
 EARLY_STOP_RATIO = 1.05
 EPOCH_NUM = 5
 DYNAMIC_ROUNDING_WEIGHT = 2 # weight of rounding term with respect to x_t loss, <0 means not using 
 ROUNDING_WEIGHT = 1 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
 
+def series_sum_sample_mean(x_hat, x):
+  return (x_hat - x).abs().sum(dim=1).mean()
+
 def series_sum(x_hat, x):
-  # return (x_hat - x).abs().sum(dim=1).mean()
   return (x_hat - x).abs().sum() / BATCH_SIZE / 768
 
-# LOSS_FUNC = nn.functional.l1_loss
-LOSS_FUNC = series_sum # loss function used between embedding 
+def mse_series_sum(x_hat, x):
+  return ((x_hat - x) ** 2).sum(dim=[-2, -1]).sqrt().sum() / BATCH_SIZE
+
+# LOSS_FUNC = series_sum_sample_mean
+LOSS_FUNC = series_sum
+# LOSS_FUNC = mse_series_sum # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding, use together with CLIP_MASK
 # CLIP_MASK = None
@@ -86,11 +96,12 @@ COSIN_SCHEDULE = True # if alpha sequence is scheduled in cosin instead of linea
 SAMPLE_SIZE = 100 # number of sample steps in each diffuse sequence
 X_0_PREDICTION = True # if model predicts x_0 or x_{t-1}
 X_T_STEP_INTERVAL = 100
-USE_X_1_LOSS = True # if using x_1 loss
+USE_X_T_LOSS = False
+USE_X_1_LOSS = False # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}_round{'%.0E' % ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
-_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
+MODEL_NAME = f"epoch{EPOCH_NUM}_loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}-{'%.0E' % END_LEARNING_RATE}_scheduler{SCHEDULER.__name__}_round{'%.0E' % ROUNDING_WEIGHT}_dynamic{DYNAMIC_ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
+_samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_t{USE_X_T_LOSS}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
 """# Define Dataset"""
@@ -359,15 +370,18 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
 
   # x_t restore loss
   x_t_prob, x_t_hidden = model(x_t, image_clip.repeat(repeat_shape), text_clip.repeat(repeat_shape), mask.repeat((SAMPLE_SIZE, 1)), concat_mask.repeat((SAMPLE_SIZE, 1)))
-  if X_0_PREDICTION:
-    x_t_loss = loss_func(x_t_hidden[:, :MAX_LENGTH, :], x_0.repeat(repeat_shape))
+  if USE_X_T_LOSS:
+    if X_0_PREDICTION:
+      x_t_loss = loss_func(x_t_hidden[:, :MAX_LENGTH, :], x_0.repeat(repeat_shape))
+    else:
+      assert x_tgt.shape == x_t.shape
+      x_t_loss = loss_func(x_t_hidden[:, :MAX_LENGTH, :], x_tgt)
   else:
-    assert x_tgt.shape == x_t.shape
-    x_t_loss = loss_func(x_t_hidden[:, :MAX_LENGTH, :], x_tgt)
+    x_t_loss = 0
 
   # x_1 restore loss
+  x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask, concat_mask)
   if USE_X_1_LOSS:
-    x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask, concat_mask)
     x_1_loss = loss_func(x_1_hidden[:, :MAX_LENGTH, :], x_0)
   else:
     x_1_loss = 0
@@ -375,13 +389,12 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
   if USE_PROB_LOSS:
     # output sequence probability loss, applied to both x_1 and x_t restore
     idx = idx.unsqueeze(dim=-1)
-    x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum() / BATCH_SIZE
-    # x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum(dim=1).mean()
-    if USE_X_1_LOSS:
-      x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum() / BATCH_SIZE
-      # x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum(dim=1).mean()
+    if LOSS_FUNC == series_sum_sample_mean:
+      x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum(dim=1).mean()
+      x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum(dim=1).mean()
     else:
-      x_1_prob_loss = 0
+      x_t_prob_loss = -(nn.functional.softmax(x_t_prob, dim=-1)).gather(-1, idx.repeat(repeat_shape)).log().sum() / BATCH_SIZE
+      x_1_prob_loss = -(nn.functional.softmax(x_1_prob, dim=-1)).gather(-1, idx).log().sum() / BATCH_SIZE
   else:
     x_t_prob_loss = 0
     x_1_prob_loss = 0
@@ -391,6 +404,11 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
 mem_report()
 
 """# Training"""
+
+if SCHEDULER == torch.linspace:
+  lrs = SCHEDULER(LEARNING_RATE, END_LEARNING_RATE, EPOCH_NUM)
+elif SCHEDULER == torch.logspace:
+  lrs = SCHEDULER(torch.tensor([LEARNING_RATE]).log10().item(), torch.tensor([END_LEARNING_RATE]).log10().item(), EPOCH_NUM)
 
 def train_func(model, trainer, x, train=True):
   x_0 = model.embedding(x["input_ids"])
@@ -452,6 +470,10 @@ for epoch in range(EPOCH_NUM):
   acc_x_1 = 0
   acc_prob = 0
   acc_l = 0
+  if not END_LEARNING_RATE == LEARNING_RATE:
+    for g in trainer.param_groups:
+      g['lr'] = lrs[epoch]
+
   # with tqdm.tqdm(train_loader, unit="batch") as tepoch: 
   #   for batch_num, x in enumerate(tepoch):
   for batch_num, x in enumerate(train_loader):
@@ -499,7 +521,7 @@ mem_report()
 
 # trial on inference
 # model = torch.load(
-#   "./lossl1_loss_lr5E-05_round3E-01_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictTrue_X_INTERVAL100_use_x_1True_use_probTrue.pickle",
+#   "batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictTrue_use_x_1True_use_probTrue.pickle",
 #   ).to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
