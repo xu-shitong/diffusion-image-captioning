@@ -155,21 +155,23 @@ class DictTokenizer():
     return " ".join([list(self.dictionary.keys())[list(self.dictionary.values()).index(i.item())] for i in index])
 
 class FlickrCLIPDataset(torch.utils.data.Dataset):
-  def __init__(self, captions, tokenizer) -> None:
-    self.caption = captions
+  def __init__(self, captions, images, tokenizer) -> None:
+    images.name = "image"
+    captions.name = "caption"
+    self.data = pd.concat([images, captions], axis=1)
     self.tokenizer = tokenizer
 
     self.train_dataset = torch.utils.data.TensorDataset(image_set.to(device), text_set.to(device))
 
   def __len__(self):
-    return len(self.caption)
+    return len(self.data)
 
   def __getitem__(self, idx):
     image_clip, text_clip = self.train_dataset[idx]
     if isinstance(self.tokenizer, PreTrainedTokenizer):
-      tokens = self.tokenizer(text=self.caption.loc[idx], return_tensors="pt", padding='max_length', truncation=True, max_length=MAX_LENGTH)
+      tokens = self.tokenizer(text=self.data.loc[idx]["caption"], return_tensors="pt", padding='max_length', truncation=True, max_length=MAX_LENGTH)
     else:
-      ids = [0] + [vocab_dict.get(x, vocab_dict['UNK']) for x in self.caption.loc[idx][:MAX_LENGTH-2]] + [1] 
+      ids = [0] + [vocab_dict.get(x, vocab_dict['UNK']) for x in self.data.loc[idx]["caption"][:MAX_LENGTH-2]] + [1] 
       pad_length = max(0, MAX_LENGTH - len(ids))
       tokens = dict()
       tokens["input_ids"] = torch.tensor(ids + [vocab_dict['UNK']] * pad_length)
@@ -180,7 +182,8 @@ class FlickrCLIPDataset(torch.utils.data.Dataset):
       "text_clip": text_clip, 
       "input_ids": tokens["input_ids"].squeeze().to(device), 
       "attention_mask": tokens["attention_mask"].squeeze().to(device),
-      "text": self.caption.loc[idx]
+      "text": self.data.loc[idx]["caption"],
+      "image": self.data.loc[idx]["image"]
     }
 
 # TODO: COCO dataset
@@ -194,7 +197,9 @@ else:
 
 dataset = FlickrCLIPDataset(
   # pd.concat([pd.read_csv("./flickr8k/captions.txt")["caption"], pd.read_csv("./flickr30k/captions.csv", sep='|')["caption"]], ignore_index=True),
+  # pd.concat([pd.read_csv("./flickr8k/captions.txt")["image"], pd.read_csv("./flickr30k/captions.csv", sep='|')["image_name"]], ignore_index=True),
   pd.read_csv("./flickr8k/captions.txt")["caption"],
+  pd.read_csv("./flickr8k/captions.txt")["image"],
   tokenizer)
 train_len = int(len(dataset) * TRAIN_SET_RATIO)
 train_set, val_set = torch.utils.data.random_split(dataset, [train_len, len(dataset) - train_len])
