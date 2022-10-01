@@ -52,7 +52,7 @@ mem_report()
 """# Hyperparameters"""
 
 # hyperparameters
-DEBUG = False
+DEBUG = True
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
@@ -86,6 +86,7 @@ LOSS_FUNC = series_sum_sample_mean
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding
 # # CLIP_MASK = None
 # CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
+# CLASSIFIER_FREE_WEIGHT = 0
 CLASSIFIER_FREE_WEIGHT = 0.3 # classifier guidance, 0 means no guidance
 CLASSIFIER_FREE_PROB = 0.2
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
@@ -299,7 +300,7 @@ class DistilBertModel(nn.Module):
 
     # no classifier guidance part
     x_out = self.model(non_classifier_x, non_classifier_mask)[0]
-    if CLASSIFIER_FREE_WEIGHT > 0:
+    if CLASSIFIER_FREE_WEIGHT > 0 and not guidance_sample_index.sum() == 0:
       # classifier guided
       x_out[guidance_sample_index] = \
         (1 + CLASSIFIER_FREE_WEIGHT) * self.model(classifier_guided_x[guidance_sample_index], classifier_guided_mask[guidance_sample_index])[0] \
@@ -393,13 +394,15 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
   text_clip = text_clip.unsqueeze(1) # shape same as above
 
   if CLASSIFIER_FREE_WEIGHT > 0:
-    classifier_mask = (torch.rand((BATCH_SIZE, 1)) > CLASSIFIER_FREE_PROB).type(torch.float32).to(device)
-    concat_mask = torch.hstack([torch.ones((BATCH_SIZE, 1), device=device), classifier_mask])
+    classifier_mask = (torch.rand((SAMPLE_SIZE * BATCH_SIZE, 1)) > CLASSIFIER_FREE_PROB).type(torch.float32).to(device)
+    classifier_mask[0] = 0
+    classifier_mask[1] = 1 # prevent no sample or all sample use classifier
+    concat_mask = torch.hstack([torch.ones((SAMPLE_SIZE * BATCH_SIZE, 1), device=device), classifier_mask])
   else:
-    concat_mask = torch.tensor([1, 0], device=device).repeat((BATCH_SIZE, 1))
+    concat_mask = torch.tensor([1, 0], device=device).repeat((SAMPLE_SIZE * BATCH_SIZE, 1))
 
   # x_t restore loss
-  x_t_prob, x_t_hidden = model(x_t, image_clip.repeat(repeat_shape), text_clip.repeat(repeat_shape), mask.repeat((SAMPLE_SIZE, 1)), concat_mask.repeat((SAMPLE_SIZE, 1)))
+  x_t_prob, x_t_hidden = model(x_t, image_clip.repeat(repeat_shape), text_clip.repeat(repeat_shape), mask.repeat((SAMPLE_SIZE, 1)), concat_mask)
   if USE_X_T_LOSS:
     if X_0_PREDICTION:
       x_t_loss = loss_func(x_t_hidden[:, :MAX_LENGTH, :], x_0.repeat(repeat_shape))
@@ -410,7 +413,7 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
     x_t_loss = 0
 
   # x_1 restore loss
-  x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask, concat_mask)
+  x_1_prob, x_1_hidden = model(x_1, image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat((BATCH_SIZE, 1)))
   if USE_X_1_LOSS:
     x_1_loss = loss_func(x_1_hidden[:, :MAX_LENGTH, :], x_0)
   else:
