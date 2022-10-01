@@ -56,8 +56,8 @@ DEBUG = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
-# END_LEARNING_RATE = 5e-6 # learning rate is linearly reduced to end_learning_rate
-END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
+END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
+# END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
 # SCHEDULER = torch.logspace
 SCHEDULER = torch.linspace # scheduler of learning rate
 TRAIN_SET_RATIO = 0.95
@@ -87,6 +87,7 @@ CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word em
 # # CLIP_MASK = None
 # CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
 CLASSIFIER_FREE_WEIGHT = 0.3 # classifier guidance, 0 means no guidance
+CLASSIFIER_FREE_PROB = 0.2
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
   IN_CHANNEL = 16
@@ -105,7 +106,8 @@ USE_X_T_LOSS = True
 USE_X_1_LOSS = True # if using x_1 loss
 USE_PROB_LOSS = True # if using prob loss
 
-MODEL_NAME = f"epoch{EPOCH_NUM}_loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}-{'%.0E' % END_LEARNING_RATE}_scheduler{SCHEDULER.__name__}_round{'%.0E' % ROUNDING_WEIGHT}_dynamic{DYNAMIC_ROUNDING_WEIGHT}_clip{CLIP_ADDING_METHOD}_clipmask{'None' if CLIP_MASK is None else str(CLIP_MASK[0].item()) + str(CLIP_MASK[1].item())}_train-embed{TRAIN_EMBEDDING}\
+MODEL_NAME = f"epoch{EPOCH_NUM}_loss{LOSS_FUNC.__name__}_lr{'%.0E' % LEARNING_RATE}-{'%.0E' % END_LEARNING_RATE}_scheduler{SCHEDULER.__name__}_round{'%.0E' % ROUNDING_WEIGHT}_dynamic{DYNAMIC_ROUNDING_WEIGHT}\
+_clip{CLIP_ADDING_METHOD}_class_weight{'%.0E' % CLASSIFIER_FREE_WEIGHT}_class_prob{'%.0E' % CLASSIFIER_FREE_PROB}_train-embed{TRAIN_EMBEDDING}\
 _samplesize{SAMPLE_SIZE}_x_0_predict{X_0_PREDICTION}_X_INTERVAL{X_T_STEP_INTERVAL}_use_x_t{USE_X_T_LOSS}_use_x_1{USE_X_1_LOSS}_use_prob{USE_PROB_LOSS}"
 print(f"trial name: {MODEL_NAME}")
 
@@ -280,27 +282,33 @@ class DistilBertModel(nn.Module):
       x = self.input_projection(x)
     
     if CLIP_ADDING_METHOD == "concat":
-      mask = torch.hstack([mask, concat_mask])
+      classifier_guided_mask = torch.hstack([mask, torch.tensor([1, 1], device=device).repeat(sample_batch_multi, 1)])
+      non_classifier_mask = torch.hstack([mask, torch.tensor([1, 0], device=device).repeat(sample_batch_multi, 1)])
+
       x = torch.hstack([x, self.image_linear(image_clip), self.text_linear(text_clip)])
       x = x + self.segment_embedding(torch.tensor([0] * MAX_LENGTH + [1] * 2, device=device))
+
+      classifier_guided_x = non_classifier_x = x
     elif CLIP_ADDING_METHOD == "add":
-      x = x + self.image_linear(image_clip) + self.text_linear(text_clip)
+      classifier_guided_mask = non_classifier_mask = mask
+
+      non_classifier_x = x + self.image_linear(image_clip)
+      classifier_guided_x = non_classifier_x + self.text_linear(text_clip)
     else:
       raise NotImplementedError(CLIP_ADDING_METHOD)
 
+    # no classifier guidance part
+    x_out = self.model(non_classifier_x, non_classifier_mask)[0]
     if CLASSIFIER_FREE_WEIGHT > 0:
       # classifier guided
-      x_out = torch.zeros_like(x)
-      x_out[guidance_sample_index] = (1 + CLASSIFIER_FREE_WEIGHT) * self.model(x[guidance_sample_index], mask)[0]
-      x_out[guidance_sample_index == False] -= CLASSIFIER_FREE_WEIGHT * self.model(x[guidance_sample_index == False], mask)[0]
-    else:
-      # no classifier guidance
-      x_out = self.model(x, mask)[0]
+      x_out[guidance_sample_index] = \
+        (1 + CLASSIFIER_FREE_WEIGHT) * self.model(classifier_guided_x[guidance_sample_index], classifier_guided_mask[guidance_sample_index])[0] \
+        - CLASSIFIER_FREE_WEIGHT * x_out[guidance_sample_index]
     
     if TRAIN_EMBEDDING:
       x_out = self.output_projection(x_out)
 
-    assert x_out.shape == (sample_batch_multi, mask.shape[-1], IN_CHANNEL)
+    assert x_out.shape == (sample_batch_multi, non_classifier_mask.shape[-1], IN_CHANNEL)
     return self.lm_head(x_out[:, :MAX_LENGTH, :]), x_out
     
 if TRAIN_EMBEDDING:
@@ -385,7 +393,8 @@ def loss(model, x_t, x_1, x_tgt, x_0, image_clip, text_clip, mask, idx, loss_fun
   text_clip = text_clip.unsqueeze(1) # shape same as above
 
   if CLASSIFIER_FREE_WEIGHT > 0:
-    concat_mask = torch.hstack([torch.ones((BATCH_SIZE, 1), device=device), torch.randint(0,2, (BATCH_SIZE, 1), device=device)])
+    classifier_mask = (torch.rand((BATCH_SIZE, 1)) > CLASSIFIER_FREE_PROB).type(torch.float32).to(device)
+    concat_mask = torch.hstack([torch.ones((BATCH_SIZE, 1), device=device), classifier_mask])
   else:
     concat_mask = torch.tensor([1, 0], device=device).repeat((BATCH_SIZE, 1))
 
