@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 3.6439578533172607, 4.228994846343994, 30.61221694946289, 3.6088035106658936, 4.618790149688721, 22.817670822143555
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 3.5519919395446777, 4.935117721557617, 20.425134658813477, 3.644226551055908, 4.647039890289307, 17.043983459472656
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 3.5668489933013916, 4.716460704803467, 16.408174514770508, 3.54341459274292, 4.2921342849731445, 15.005454063415527
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 3.5984864234924316, 4.34079647064209, 14.69054889678955, 3.6787936687469482, 4.016148567199707, 13.724634170532227
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 3.6579344272613525, 4.132318019866943, 13.622659683227539, 3.7056851387023926, 3.9142990112304688, 12.86133098602295
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 3.7386155128479004, 4.030481338500977, 12.804291725158691, 3.9088547229766846, 3.898369073867798, 11.96929931640625
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 3.7951250076293945, 3.9654219150543213, 12.16103744506836, 3.8033101558685303, 3.8437492847442627, 11.589317321777344
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 3.832587718963623, 3.9195334911346436, 11.642765045166016, 3.795332670211792, 3.780592441558838, 11.125314712524414
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 3.856940984725952, 3.881545305252075, 11.244903564453125, 3.8665339946746826, 3.7597434520721436, 10.788240432739258
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 3.871774196624756, 3.8476505279541016, 10.93078899383545, 3.9080893993377686, 3.75024151802063, 10.445663452148438
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 3.8848695755004883, 3.8184101581573486, 10.649331092834473, 3.899127721786499, 3.7302660942077637, 10.286312103271484
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 3.9001100063323975, 3.7984442710876465, 10.40497875213623, 3.8950159549713135, 3.6859960556030273, 10.050971984863281
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 3.9149110317230225, 3.777963399887085, 10.173534393310547, 3.8731181621551514, 3.717665433883667, 9.881888389587402
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 3.9224884510040283, 3.7563729286193848, 9.966693878173828, 3.949239492416382, 3.6663312911987305, 9.690305709838867
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 3.934109687805176, 3.7438666820526123, 9.788536071777344, 4.003569602966309, 3.6859934329986572, 9.44663143157959
+origin text: A beautiful brown and white St Bernard running in the snow
+t = 999
+inferred: [CLS] a tan and white dog dog is through through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a tan and white dog dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white dog dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white dog dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white dog dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white dog dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white white dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white white dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white white dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a brown and white white dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a beautiful brown and white st bernard running in the snow [SEP] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a large brown and white digiba running in the snow [SEP] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a white white and white dogs running in the snow [SEP] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a white and and white dog dog is in the snow [SEP] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a and brown and white dog is running through the snow [SEP] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a white and white white white is running in the snow [SEP] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a white and and white dog in in through the snow [SEP] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a white and white white dog is in in the snow [SEP] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a white and and white white dog through through the snow [SEP] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a white and white white dog is through in the snow [SEP] [PAD] [PAD] [PAD]

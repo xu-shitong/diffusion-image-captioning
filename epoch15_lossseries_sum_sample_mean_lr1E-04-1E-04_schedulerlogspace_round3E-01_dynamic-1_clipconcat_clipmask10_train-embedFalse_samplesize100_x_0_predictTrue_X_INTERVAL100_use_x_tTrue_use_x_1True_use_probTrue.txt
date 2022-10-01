@@ -1,0 +1,40 @@
+base line of 1e-4 learning rate
+
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.937227249145508, 5.733733177185059, 37.703636169433594, 4.691684246063232, 5.451073169708252, 25.06784439086914
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9193010330200195, 5.474014759063721, 22.347232818603516, 4.858013153076172, 4.915793418884277, 19.20395851135254
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.900721549987793, 4.902134895324707, 18.66025733947754, 4.79957914352417, 4.5248870849609375, 17.136667251586914
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.864553451538086, 4.640178680419922, 17.35271453857422, 4.670165538787842, 4.33500862121582, 16.13327980041504
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.787930488586426, 4.420453071594238, 16.046842575073242, 4.70959997177124, 4.189239978790283, 15.248830795288086
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.750479698181152, 4.2895355224609375, 15.314861297607422, 4.661197662353516, 4.099882125854492, 14.649505615234375
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.727007865905762, 4.19757080078125, 14.7118558883667, 4.7738471031188965, 4.026489734649658, 14.085980415344238
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.729979991912842, 4.171420574188232, 14.230507850646973, 4.699889183044434, 3.9772305488586426, 13.724929809570312
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.723344326019287, 4.102301597595215, 13.72383975982666, 4.681629180908203, 3.98807692527771, 13.355401039123535
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.714511394500732, 4.072575092315674, 13.366650581359863, 4.683836460113525, 3.9467008113861084, 13.054146766662598
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.708453178405762, 4.045647144317627, 12.988602638244629, 4.696713447570801, 3.9003725051879883, 12.790886878967285
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.703037738800049, 4.021426677703857, 12.624886512756348, 4.598395347595215, 3.8853728771209717, 12.668617248535156
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.696791648864746, 4.002944469451904, 12.289142608642578, 4.617311000823975, 3.870272159576416, 12.504810333251953
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.691237926483154, 3.9856057167053223, 11.951616287231445, 4.6291422843933105, 3.851353406906128, 12.290520668029785
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.689332962036133, 3.97542405128479, 11.607404708862305, 4.674169063568115, 3.8609671592712402, 12.16372013092041
+origin text: A man in a suit is surrounded by photographers .
+t = 999
+inferred: [CLS] a man in a a a in a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a a looking for a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking for a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a costume looking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a man in a suit is surrounded by photographers. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a man in a suit is surrounded by pictures. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a man in a suit looking surrounded by photo. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a man in a crowd is wearing a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a man in a costume with a a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a man in in a a in a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a man in a a a in a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a man in a a a in a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a man in a a a in a camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a man in a a a in a camera. [SEP] [PAD] [PAD] [PAD] [PAD]

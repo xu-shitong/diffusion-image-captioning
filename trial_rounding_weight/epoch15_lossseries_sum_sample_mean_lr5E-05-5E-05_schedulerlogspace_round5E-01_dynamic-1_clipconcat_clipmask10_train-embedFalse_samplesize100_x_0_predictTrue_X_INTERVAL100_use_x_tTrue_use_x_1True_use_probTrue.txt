@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 7.277650833129883, 8.019347190856934, 61.03506851196289, 6.700172424316406, 7.15283203125, 41.919368743896484
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 6.674055099487305, 7.257923603057861, 38.922306060791016, 6.576404571533203, 6.40570592880249, 33.87838363647461
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 6.723374366760254, 6.56170654296875, 32.7046012878418, 6.606174945831299, 5.989988803863525, 29.967533111572266
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 6.786562442779541, 6.160067081451416, 29.317283630371094, 6.665231704711914, 5.638323783874512, 27.456396102905273
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 6.767816543579102, 5.886309623718262, 27.08181381225586, 6.668048858642578, 5.50430965423584, 25.558486938476562
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 6.701692581176758, 5.659234523773193, 25.493852615356445, 6.636466026306152, 5.340222358703613, 24.10466957092285
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 6.619635581970215, 5.473163604736328, 24.29887580871582, 6.487440586090088, 5.130579948425293, 23.275449752807617
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 6.534578800201416, 5.30997371673584, 23.383777618408203, 6.434764862060547, 4.991955757141113, 22.459049224853516
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 6.462096214294434, 5.164281368255615, 22.62064552307129, 6.412652015686035, 4.902893543243408, 21.952871322631836
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 6.405676364898682, 5.047956466674805, 21.93050765991211, 6.445485591888428, 4.808354377746582, 21.256244659423828
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 6.360098838806152, 4.949411392211914, 21.28407859802246, 6.323981761932373, 4.730564117431641, 20.702299118041992
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 6.325222015380859, 4.870345115661621, 20.6949520111084, 6.149643898010254, 4.619446754455566, 20.348081588745117
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 6.2939958572387695, 4.79844331741333, 20.171335220336914, 6.098465919494629, 4.5701003074646, 19.936391830444336
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 6.270483493804932, 4.745243072509766, 19.6331844329834, 6.231715679168701, 4.562221050262451, 19.665000915527344
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 6.254772186279297, 4.699416637420654, 19.14626693725586, 6.208475112915039, 4.508192539215088, 19.311870574951172
+origin text: Kids playing on a lawn with a flag and parking lot nearby .
+t = 999
+inferred: [CLS] children playing on a a field a a a a the background. [SEP] [PAD]
+inferred: [CLS] children playing on a in field in front front of the field. [SEP] [PAD]
+inferred: [CLS] children playing on a field field in front front of the field. [SEP] [PAD]
+inferred: [CLS] children playing on a field field in front front of the field. [SEP] [PAD]
+inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
+inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
+inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
+inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
+inferred: [CLS] kids playing on a field front in a front of the field. [SEP] [PAD]
+inferred: [CLS] kids playing on a field front of a front of the field. [SEP] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] kids playing on a lawn with a flag and parking lot nearby. [SEP] [PAD]
+t: 101 restore: [CLS] kids play on a lawn with a flag and parking building nearby. [SEP] [PAD]
+t: 201 restore: [CLS] kids playing on a field with a grass and covered air building. [SEP] [PAD]
+t: 301 restore: [CLS] kids playing on a grass with in a of a of house. [SEP] [PAD]
+t: 401 restore: [CLS] kids playing on a field with a a a the in background. [SEP] [PAD]
+t: 501 restore: [CLS] kids playing in a in the a with a a the field. [SEP] [PAD]
+t: 601 restore: [CLS] kids playing on a grass in a with a a the background. [SEP] [PAD]
+t: 701 restore: [CLS] kids playing playing in a in a a a a the background. [SEP] [PAD]
+t: 801 restore: [CLS] kids playing playing a a field in a a a the field. [SEP] [PAD]
+t: 901 restore: [CLS] children playing in a a a a a a a the field. [SEP] [PAD]

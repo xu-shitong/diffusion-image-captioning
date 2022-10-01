@@ -100,9 +100,9 @@ COCO
 2017 cascade recurrent nn
 2018 gla
 2019 stack vs
-// 2019 image caption generation with pos
+2019 image caption generation with pos
 2019 unsupervised image caption
-// 2019 mscap
+2019 mscap
 2019 Variational Autoencoder-Based Multiple ImageCaptioning Using a Caption Attention Map: 基于knowing where to look，生成attention graph，attention graph通过全连接层得到vae mean var，生成文本特征 scale up 传入rnn
 2021 CLIP cap
 2022 GRIT

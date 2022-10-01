@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.516345024108887, 5.673242568969727, 53.17280960083008, 4.865223407745361, 5.4774980545043945, 45.03246307373047
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.874695301055908, 5.635805130004883, 43.20199966430664, 4.8652496337890625, 6.301848411560059, 38.000396728515625
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.840804576873779, 6.279830455780029, 37.22751235961914, 5.0713934898376465, 7.046088695526123, 32.807044982910156
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.833482265472412, 6.636394023895264, 32.96074295043945, 5.027584075927734, 6.6492228507995605, 30.578638076782227
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.848759174346924, 6.684329986572266, 29.867279052734375, 4.909389972686768, 6.438885688781738, 27.51036262512207
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.828131675720215, 6.552639961242676, 27.616722106933594, 4.827107906341553, 6.015288352966309, 26.048383712768555
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.797834873199463, 6.3628764152526855, 25.943769454956055, 4.792887210845947, 5.836164474487305, 24.514568328857422
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.776247501373291, 6.17043399810791, 24.65847396850586, 4.7707929611206055, 5.623080253601074, 23.793352127075195
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.766571521759033, 5.9855241775512695, 23.64274787902832, 4.713590145111084, 5.437915325164795, 22.780942916870117
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.765727996826172, 5.8151960372924805, 22.82967758178711, 4.630492687225342, 5.311990737915039, 22.172374725341797
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.76925802230835, 5.663468360900879, 22.150535583496094, 4.651037693023682, 5.198484897613525, 21.54632568359375
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.772455215454102, 5.531254768371582, 21.56816864013672, 4.591619491577148, 5.140639305114746, 21.023605346679688
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.772412300109863, 5.413812637329102, 21.073328018188477, 4.734854698181152, 5.089315891265869, 20.414613723754883
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.7762346267700195, 5.314619541168213, 20.624849319458008, 4.662470817565918, 4.893009185791016, 20.1376895904541
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.7842488288879395, 5.2292985916137695, 20.210285186767578, 4.752884387969971, 4.897802829742432, 19.592880249023438
+origin text: A boy is blowing bubble underwater .
+t = 999
+inferred: [CLS] a boy boy in a in. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a a. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a a. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a a. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a grass. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a grass. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a grass. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a grass. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a grass. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a boy boy a a grass. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a boy is blowing bubble underwater. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a boy is playing bubble swimming. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a boy is down water water. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a girls playing a soccer. a [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a boy is a grass [SEP]. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a boy is a. water. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a boy is a a. a [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a boy boy a a a. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a boy is a. [SEP] [SEP] [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a boy in a. a [SEP] [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]

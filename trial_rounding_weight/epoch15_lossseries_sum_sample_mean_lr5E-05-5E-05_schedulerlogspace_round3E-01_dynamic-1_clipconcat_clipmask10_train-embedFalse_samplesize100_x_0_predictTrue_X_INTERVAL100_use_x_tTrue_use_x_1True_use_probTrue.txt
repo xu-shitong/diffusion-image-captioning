@@ -1,0 +1,40 @@
+baseline of 0.3 training on flickr8k
+
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.158470630645752, 6.001072883605957, 41.177223205566406, 4.9107513427734375, 6.105139255523682, 28.75945472717285
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.927945613861084, 6.1304707527160645, 25.98888397216797, 4.9774298667907715, 5.468112945556641, 22.332191467285156
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9198737144470215, 5.5333709716796875, 21.73468589782715, 4.956902027130127, 5.084970951080322, 19.77215576171875
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.937225341796875, 5.143161773681641, 19.604490280151367, 5.031527042388916, 4.765140533447266, 18.080991744995117
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.954411029815674, 4.890806198120117, 18.171533584594727, 5.0168585777282715, 4.618363857269287, 16.95560073852539
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.948364734649658, 4.700043678283691, 17.107053756713867, 4.866819858551025, 4.474240303039551, 16.32778549194336
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.935892581939697, 4.562234401702881, 16.285005569458008, 5.046720027923584, 4.398294448852539, 15.436812400817871
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.917342662811279, 4.4560627937316895, 15.615026473999023, 4.9110636711120605, 4.320146560668945, 14.918512344360352
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.900781631469727, 4.375039577484131, 15.085538864135742, 4.868162155151367, 4.234945297241211, 14.478311538696289
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.889108657836914, 4.313437461853027, 14.6375150680542, 4.831794738769531, 4.172787666320801, 14.101513862609863
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.88065242767334, 4.264451503753662, 14.244159698486328, 4.8420796394348145, 4.160377502441406, 13.78637981414795
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.881021976470947, 4.220132350921631, 13.8788423538208, 4.806838035583496, 4.097352504730225, 13.620469093322754
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.875375270843506, 4.183345317840576, 13.545393943786621, 4.890483856201172, 4.096050262451172, 13.110132217407227
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.878687858581543, 4.161151885986328, 13.238489151000977, 4.92126989364624, 4.071796894073486, 13.005911827087402
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.878031253814697, 4.134366989135742, 12.945502281188965, 4.8465704917907715, 4.040097713470459, 12.87182331085205
+origin text: A girl with dreadlocks standing in a pool
+t = 999
+inferred: [CLS] a girl in a a standing in a a water [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a dress standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a girl in a bathing standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a girl with dreadlocks standing in a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a girl in swim nets standing in a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a girl with bathingsuit standing standing in a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a girl in a suit suit standing in a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a girl with a bathing standing standing in a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a girl in a standing in a in a water [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a girl girl in a a standing in a water [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a girl in in a a standing in a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a girl in a a standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a girl in a a a a a a water [SEP] [PAD] [PAD] [PAD] [PAD]

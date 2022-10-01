@@ -1,0 +1,61 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 8.154474258422852, 8.531736373901367, 74.1561508178711, 7.930688381195068, 8.015626907348633, 55.788299560546875
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 8.295421600341797, 8.340533256530762, 59.90764236450195, 8.528207778930664, 7.6276774406433105, 52.54256820678711
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 8.671493530273438, 7.804673671722412, 54.388370513916016, 8.982013702392578, 7.200864791870117, 49.853843688964844
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 8.979323387145996, 7.471905708312988, 51.29758834838867, 9.126192092895508, 7.015369415283203, 47.39086151123047
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 9.123438835144043, 7.249493598937988, 49.21537399291992, 9.092940330505371, 6.81486177444458, 45.53067398071289
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 9.110061645507812, 7.002920627593994, 47.37171173095703, 9.031350135803223, 6.633842468261719, 44.247161865234375
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 9.030975341796875, 6.770612716674805, 45.93821334838867, 8.674816131591797, 6.372377395629883, 42.97159957885742
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 8.95099925994873, 6.574981689453125, 44.59612274169922, 8.77401065826416, 6.230509281158447, 41.69041442871094
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 8.885711669921875, 6.379979133605957, 43.44542694091797, 8.893386840820312, 6.129083633422852, 40.65709686279297
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 8.836817741394043, 6.248339653015137, 42.49690246582031, 8.691939353942871, 6.008889675140381, 39.97122573852539
+origin text: Two red dogs running in green grass by a fence .
+t = 999
+inferred: [CLS] two dogs are running a a grass a a grass. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs are running through a grass in a area. [SEP] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] two red dogs running in green grass by a fence. [SEP] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] two red dogs running in green grass by a fence. [SEP] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] two brown dogs running in the grass in a garden. [SEP] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] two dogs are running the grass grass in a fence. [SEP] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] two dogs dogs running in green tree near a area. [SEP] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] two dogs run running in a grass in a trees. [SEP] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] two dogs run running through a grass near a tree. [SEP] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] two dogs are running through a grass a a area. [SEP] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] two dogs are running through a grass in a trees. [SEP] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] two dogs are through through a grass near a area. [SEP] [PAD] [PAD] [PAD]
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 8.8043212890625, 6.125579357147217, 41.519248962402344, 8.52072811126709, 5.774919033050537, 40.29010772705078
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 8.791282653808594, 6.021280765533447, 40.66244125366211, 8.55777359008789, 5.753039360046387, 39.94331359863281
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 8.799098014831543, 5.9462480545043945, 39.955013275146484, 8.654214859008789, 5.639285087585449, 39.53207778930664
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 8.827563285827637, 5.888193130493164, 39.364524841308594, 8.68762493133545, 5.632296085357666, 39.836856842041016
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 8.875080108642578, 5.8353986740112305, 38.720516204833984, 8.583438873291016, 5.532253265380859, 39.8226432800293
+origin text: A group of Indian men are just standing around with their arms crossed .
+t = 999
+inferred: [CLS] a girl in a white shirt and and a is is is standing a [SEP]
+inferred: [CLS] a girl in a pink shirt and and and is is standing standing a [SEP]
+inferred: [CLS] a girl in a white shirt and and and is is standing standing a [SEP]
+inferred: [CLS] a girl in a white shirt and and and is is standing standing on [SEP]
+inferred: [CLS] a girl in a white shirt and and jeans is is standing standing on [SEP]
+inferred: [CLS] a girl in a white shirt and and jeans is is standing standing on [SEP]
+inferred: [CLS] a girl in a white shirt and and jeans is is standing standing on [SEP]
+inferred: [CLS] a girl in a white shirt and and jeans jeans is standing standing on [SEP]
+inferred: [CLS] a girl in a white shirt and and jeans jeans is standing on on [SEP]
+inferred: [CLS] a girl in a white shirt and and jeans jeans is standing on on [SEP]
+text t effectiveness
+t: 1 restore: [CLS] a group of indian men are just standing around with their arms crossed. [SEP]
+t: 101 restore: [CLS] a group of indian men are just standing around with their arms crossed. [SEP]
+t: 201 restore: [CLS] a girl of a white and is standing in a arms red skirt in [SEP]
+t: 301 restore: [CLS] a girl in white striped shorts in the jeans standing a standing on a [SEP]
+t: 401 restore: [CLS] a girl in people in a striped and a red is a shirt a [SEP]
+t: 501 restore: [CLS] a girl in a a shirt and blue is is is standing her a [SEP]
+t: 601 restore: [CLS] a girl in a a and white and shirt is is on a a [SEP]
+t: 701 restore: [CLS] a girl in a white shirt shirt a and jeans is is standing a [SEP]
+t: 801 restore: [CLS] a girl in a white shirt and and and is is is is. [SEP]
+t: 901 restore: [CLS] a girl in a white shirt and a jeans is is is is a [SEP]
