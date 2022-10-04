@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.352801322937012, 5.405667304992676, 25.925098419189453, 5.056077003479004, 4.525003910064697, 21.355060577392578
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 5.069390296936035, 4.681449890136719, 20.188161849975586, 5.004721641540527, 4.467388153076172, 18.35700035095215
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 5.0020833015441895, 4.531902313232422, 17.82823944091797, 4.83643913269043, 4.28877067565918, 16.831279754638672
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.923117160797119, 4.377980709075928, 16.535322189331055, 4.645254611968994, 4.154663562774658, 16.003128051757812
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.852909564971924, 4.25750207901001, 15.718326568603516, 4.664000988006592, 4.045557498931885, 15.198593139648438
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.806872367858887, 4.177238464355469, 15.10585880279541, 4.746852397918701, 4.0035481452941895, 14.643913269042969
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.772656440734863, 4.128988742828369, 14.665517807006836, 4.671586513519287, 3.966024875640869, 14.1720552444458
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.7506327629089355, 4.082451820373535, 14.298961639404297, 4.598487377166748, 3.957723379135132, 13.994210243225098
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.737253189086914, 4.054463863372803, 13.99393367767334, 4.667975902557373, 3.9318296909332275, 13.666102409362793
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.727049827575684, 4.027201175689697, 13.72675609588623, 4.540736198425293, 3.9075489044189453, 13.493813514709473
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.716094017028809, 4.006594181060791, 13.510225296020508, 4.6592020988464355, 3.884476900100708, 13.368311882019043
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.706357479095459, 3.9883124828338623, 13.312749862670898, 4.558983325958252, 3.8820230960845947, 13.217819213867188
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.698702812194824, 3.9720094203948975, 13.111865997314453, 4.640115737915039, 3.884222984313965, 13.00196361541748
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.688568592071533, 3.95658802986145, 12.90694808959961, 4.472304344177246, 3.8263797760009766, 13.048372268676758
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.678874969482422, 3.94115948677063, 12.723280906677246, 4.54569673538208, 3.8416640758514404, 12.766546249389648
+origin text: A man , woman and little boy pose for a picture in front of an outside door .
+t = 999
+inferred: [CLS] a man poses a a a a a a a a a a. [SEP]
+inferred: [CLS] a man and a woman pose pose a a man a a a. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man a a picture. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man for a picture. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man for a picture. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man for a dog. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man with a dog. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man with a dog. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man with a dog. [SEP]
+inferred: [CLS] a man and a woman pose pose for a man and a dog. [SEP]
+text t effectiveness
+t: 1 restore: [CLS] a man, woman and little boy pose for a picture in front of [SEP]
+t: 101 restore: [CLS] a man, woman and little boy pose for a picture in front of [SEP]
+t: 201 restore: [CLS] a man in woman and white boy poses for a picture in front of [SEP]
+t: 301 restore: [CLS] a boy, two and two girl pose for a picture dressed outside. [SEP]
+t: 401 restore: [CLS] a man and a woman and pose pose for a picture in a window [SEP]
+t: 501 restore: [CLS] a man and a woman stand in outside a a, standing outside. [SEP]
+t: 601 restore: [CLS] a man stands a woman and two a a in and of a. [SEP]
+t: 701 restore: [CLS] a man and a a pose a a pose in a a a. [SEP]
+t: 801 restore: [CLS] a man and a woman stand a a a a a a a. [SEP]
+t: 901 restore: [CLS] a man and a woman pose a a a a a a a. [SEP]

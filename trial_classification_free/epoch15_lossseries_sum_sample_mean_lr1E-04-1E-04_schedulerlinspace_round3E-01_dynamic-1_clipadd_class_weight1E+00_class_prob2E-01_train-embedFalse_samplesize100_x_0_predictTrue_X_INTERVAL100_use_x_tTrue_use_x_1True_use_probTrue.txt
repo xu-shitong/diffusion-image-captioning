@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.636659145355225, 5.296300411224365, 25.662460327148438, 4.986043930053711, 4.448822021484375, 21.202667236328125
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 5.105351448059082, 4.566876411437988, 20.083065032958984, 4.799224376678467, 4.3822503089904785, 18.505294799804688
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.93549108505249, 4.451390743255615, 18.03177261352539, 4.591655254364014, 4.226686000823975, 17.165241241455078
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.8839898109436035, 4.342951774597168, 16.84027862548828, 4.665795803070068, 4.139753341674805, 16.046689987182617
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.847432613372803, 4.229283809661865, 16.01828956604004, 4.623295307159424, 4.043249607086182, 15.411397933959961
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.826859951019287, 4.15693998336792, 15.416716575622559, 4.561426162719727, 3.994847536087036, 14.95077133178711
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.80825662612915, 4.1015191078186035, 14.9700927734375, 4.561038017272949, 3.932746171951294, 14.578742027282715
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.792976379394531, 4.065802574157715, 14.61875057220459, 4.624386310577393, 3.9199461936950684, 14.203280448913574
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.783642768859863, 4.037006855010986, 14.338990211486816, 4.565083980560303, 3.875370740890503, 14.01929759979248
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: nan, nan, nan, nan, nan, nan
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: nan, nan, nan, nan, nan, nan
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: nan, nan, nan, nan, nan, nan
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: nan, nan, nan, nan, nan, nan
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: nan, nan, nan, nan, nan, nan
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: nan, nan, nan, nan, nan, nan
+origin text: A man walking 3 dalmatians along a sunny street .
+t = 999
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]

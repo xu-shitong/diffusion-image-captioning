@@ -135,6 +135,8 @@ epoch5 round 0.3 使用或不使用guidance, 5e-5 lr
 
 1e-4 lr
 - 实验效果好于baseline
+- 新baseline
+- **计算bleu**
 
 1e-5 lr
 - 15epoch 后仍有下降趋势，预计效果不如1e-4
@@ -152,16 +154,60 @@ dynamic weight 5e-5 0.3
 (添加新classification free 代码
 
 尝试15 epoch 无guidance lr linear 降低1e-4 - 1e-5
-- 
+- 第10 epoch后x_t代价上升，尝试1e-4 - 5e-5  1e-5单个训练本身效果就不好
 
-尝试5 epoch guidance free
-- 能够converge，效果暂时差于1e-4最佳结果
-- 额外增加5epoch
+尝试15 epoch 1e-4 - 5e-5
+- 代价略微上升，差于1e-4
+
+尝试15 epoch guidance free
+- 代价略微上升，接近1e-4结果，能够converge 
+- 是否有代码实现bug？
+- 文本效果不如固定1e-4，尝试计算bleu
+- **计算bleu**
 
 尝试embedding
+- collapse
 
 尝试add 而不是concat
+- 好于1e-4 concat baseline
+- 代价值更低 下降更平滑 文本效果更好
+- 新baseline
+- **计算BLEU值**
 
+尝试cosine schedule 1e-4 5e-5，仍使用concat 由于add没有预先schedule经历
+- loss较低，但不如1e-4 add baseline 好，验证效果很好
+- 需要调整超参数使得输出匹配训练输出，效果较好
+- **计算BLEU值**
+
+尝试1e-4 5e-4 1 dynamic weight
+- 代价从4增长到6，放弃
+
+基于 add 1e-4 无 跑大数据集
+- 代价值很低，细节不如concat 大数据集baseline
+- 没有完全converge 继续5 epoch训练
+- 增加到25 epoch训练
+- 
+
+基于 add 1e-4 使用guidance 
+- 代价值接近baseline 相比于concat代价较低
+- 文本生成效果差，尝试改变w
+- 放弃classification free，由于concat和add都出现代价值略微更高的问题
+
+
+基于 add cos schedule
+- 代价值类似add 1e-4baseline 效果不如cos concat的有细节
+- **计算bleu**
+
+基于 add 1e-4 使用guidance w = 1
+- 第9 epoch后出现nan 报错，文本全部输出pad
+
+concat 1e-4 大数据集训练
+- 
+
+add 1e-4 大数据集训练
+- 
+
+尝试coco zero shot
 
 基于5e-5的前两epoch结果尝试下一lr应取的值
 

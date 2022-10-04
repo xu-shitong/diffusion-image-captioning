@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.003520965576172, 5.78342342376709, 37.33250427246094, 4.970107555389404, 5.565976619720459, 24.09006690979004
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.980300426483154, 5.505054950714111, 22.112810134887695, 5.022037982940674, 4.975403785705566, 19.131711959838867
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.970465183258057, 4.973387241363525, 18.618680953979492, 5.0854291915893555, 4.620298385620117, 16.879106521606445
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9501237869262695, 4.681232452392578, 17.0360107421875, 4.894806861877441, 4.373802661895752, 15.7061767578125
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.90424919128418, 4.467164993286133, 15.819692611694336, 4.811174392700195, 4.25418758392334, 14.847179412841797
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.867722034454346, 4.356587886810303, 15.113398551940918, 4.722193241119385, 4.127763271331787, 14.306589126586914
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.840573310852051, 4.243609428405762, 14.455611228942871, 4.792890548706055, 4.116456508636475, 13.953277587890625
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.827867031097412, 4.18165397644043, 13.977876663208008, 4.736438751220703, 4.028022289276123, 13.42464542388916
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.823603630065918, 4.1363043785095215, 13.504602432250977, 4.721434116363525, 4.01605224609375, 13.26136589050293
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.821070671081543, 4.099125385284424, 13.079832077026367, 4.8189697265625, 3.9912543296813965, 12.827190399169922
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.814435958862305, 4.0659966468811035, 12.692061424255371, 4.80004358291626, 3.9531848430633545, 12.64543342590332
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.812635898590088, 4.038253307342529, 12.33794116973877, 4.724291801452637, 3.937619209289551, 12.426236152648926
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.810661315917969, 4.0160417556762695, 11.982048988342285, 4.727986812591553, 3.899977207183838, 12.281903266906738
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.811281681060791, 3.996782064437866, 11.62486457824707, 4.760666370391846, 3.880495309829712, 12.129806518554688
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.8203277587890625, 3.981045722961426, 11.267922401428223, 4.804927349090576, 3.87727952003479, 12.009936332702637
+origin text: The woman in the black coat is smoking and the woman in the gray coat sits on stone steps .
+t = 999
+inferred: [CLS] the lady in the black coat coat coat coat a a a a a [SEP]
+inferred: [CLS] the woman in the black coat and and coat is sitting on a a [SEP]
+inferred: [CLS] the woman in the black coat and black coat is sitting on a a [SEP]
+inferred: [CLS] the woman in the black coat and black coat is sitting on a black [SEP]
+inferred: [CLS] the woman in the black jacket and black coat is sitting on a bench [SEP]
+inferred: [CLS] the woman in the black jacket and black coat is sitting on a bench [SEP]
+inferred: [CLS] the woman in the black jacket and black coat is sitting on a bench [SEP]
+inferred: [CLS] the woman in the black jacket and black coat is sitting on a bench [SEP]
+inferred: [CLS] the woman in the black jacket and black coat is sitting on a bench [SEP]
+inferred: [CLS] the woman in the black jacket and black coat is sitting on a bench [SEP]
+text t effectiveness
+t: 1 restore: [CLS] the woman in the black coat is smoking and the woman in the gray [SEP]
+t: 101 restore: [CLS] the woman in the black coat is smoking and the woman in the black [SEP]
+t: 201 restore: [CLS] the woman in the black coat is black in the walking in a black [SEP]
+t: 301 restore: [CLS] the woman in the black coat and black the and on a bench and [SEP]
+t: 401 restore: [CLS] the lady in the black coat and black coat are sitting on the bench [SEP]
+t: 501 restore: [CLS] the woman in the black coat and black coat is sitting sitting on a [SEP]
+t: 601 restore: [CLS] the lady in the black coat and jacket on a woman in a black [SEP]
+t: 701 restore: [CLS] the lady in the black coat coat and a a sitting on a a [SEP]
+t: 801 restore: [CLS] the lady in the coat coat and black black a a a a a [SEP]
+t: 901 restore: [CLS] the lady in the black coat and and a black a a a a [SEP]

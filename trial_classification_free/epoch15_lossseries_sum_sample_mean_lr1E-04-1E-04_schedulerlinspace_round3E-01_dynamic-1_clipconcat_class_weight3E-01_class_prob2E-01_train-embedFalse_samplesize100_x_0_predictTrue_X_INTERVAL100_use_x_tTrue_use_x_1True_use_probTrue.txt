@@ -1,0 +1,108 @@
+early stop! 
+origin text: A dog drinking from a creek .
+t = 999
+inferred: thisffe common the same thisffe the this hero pie ras the chaffe smith
+inferred: ##portffeportportportportport first asffe first first first firstffeffe
+inferred: ##ffe first firstffe firstffe firstffeffeffe first first first first first first
+inferred: firstport first firstport first first first first first firstport first first first first
+inferred: first first first first first first first first first first first first first first first first
+inferred: first first first first first first first first first first first first first first first first
+inferred: first first first first first first first first first first first first first first first first
+inferred: first first first first first first first first first first first first first first first first
+inferred: first first first first first first first first first first first first first first first first
+inferred: first first first first first first first first first first first first first first first first
+text t effectiveness
+t: 1 restore: the the the the the the the the the the the the the the the the
+t: 101 restore: the the the the the the the the the men the the men men the the
+t: 201 restore: the the the the the the men the the the the the the a the the
+t: 301 restore: a cha cha men cha cha men the cha men a cha the cha the a
+t: 401 restore: cha men a cha cha men the menffe a cha cha cha a the cha
+t: 501 restore: cha pie the men men men cha men this men pie men a a pie men
+t: 601 restore: cha the common the this men cha the cha the this cha theffe the men
+t: 701 restore: smith cha first cha falling pie cha cha him the falling cha smith cha cha falling
+t: 801 restore: men smith cha pie chaffeumi the pie theffe cha men cha rise male
+t: 901 restore: cha pie cha cha falling a the cha the cha fe cha the a common their
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.97796106338501, 5.738901138305664, 37.48802185058594, 4.832550048828125, 5.563754558563232, 24.458026885986328
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.960458755493164, 5.420140743255615, 22.15496063232422, 4.746417999267578, 4.860563278198242, 19.433034896850586
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.966782093048096, 4.8673577308654785, 18.506980895996094, 4.97312068939209, 4.560640335083008, 16.89653205871582
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9331254959106445, 4.553164005279541, 16.7373104095459, 4.889889240264893, 4.293830394744873, 15.70967960357666
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.877614498138428, 4.350475788116455, 15.61642837524414, 4.682362079620361, 4.175708293914795, 14.980737686157227
+origin text: A man performing a bicycle trick inside in midair .
+t = 999
+inferred: [CLS] a man in a a a a a a the. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is a a a a a the a. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is a a in in the mountain. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is in a in the the water. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is in in on the the water. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is a in on the the water. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is is a on the the water. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is is a on the the water. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is is a on the the water. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a skier is is is a on the the water. [SEP] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a man performing a bicycle trick inside in midair. [SEP] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a man riding a bike trick inside in midair. [SEP] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a man in a white skier rides in blue ski. [SEP] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a man in a is skis a a wave. [SEP] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a a a a a a in on the the. [SEP] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a man in is a a a a the water. [SEP] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a skier in a a a a a a the. [SEP] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a skier in a a a a a a the. [SEP] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a skier in a a a a a a a. [SEP] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a man is a a a a a a the. [SEP] [PAD] [PAD] [PAD]
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.833601951599121, 4.232964515686035, 14.862585067749023, 4.746447563171387, 4.057130336761475, 14.016643524169922
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.807262420654297, 4.157191753387451, 14.238458633422852, 4.7087321281433105, 4.005982875823975, 13.478264808654785
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.794278621673584, 4.106926441192627, 13.688849449157715, 4.708319664001465, 3.9803619384765625, 13.121840476989746
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.790226459503174, 4.08729887008667, 13.238632202148438, 4.653327941894531, 3.9141902923583984, 12.932024955749512
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.768826484680176, 4.046024322509766, 12.840450286865234, 4.726449012756348, 3.927074909210205, 12.577059745788574
+origin text: Three children are riding down a hill on tricycles in their winter coats .
+t = 999
+inferred: [CLS] three children are are riding a a a a a a a a. [SEP]
+inferred: [CLS] three children are wearing a a riding a a a on a snow. [SEP]
+inferred: [CLS] three children are wearing a and riding a a bike in the snow. [SEP]
+inferred: [CLS] three children are wearing hats riding riding riding a bike in the snow. [SEP]
+inferred: [CLS] three children are wearing helmet riding riding riding a bike in the snow. [SEP]
+inferred: [CLS] three children are wearing helmet riding riding riding a bike in the snow. [SEP]
+inferred: [CLS] three children are wearing helmet riding riding riding a bike in the snow. [SEP]
+inferred: [CLS] three children are wearing helmet riding riding riding a bike in the snow. [SEP]
+inferred: [CLS] three children are wearing helmet riding riding riding a bike in the snow. [SEP]
+inferred: [CLS] three children are wearing helmet riding riding riding a bike in the snow. [SEP]
+text t effectiveness
+t: 1 restore: [CLS] three children are riding down a hill on tricycles in their winter [SEP]
+t: 101 restore: [CLS] three children are riding down a hill on bcycles in the snow [SEP]
+t: 201 restore: [CLS] three children are riding their atv riding on their atvs in the snow [SEP]
+t: 301 restore: [CLS] three children are riding in as on aoots in the road [SEP]
+t: 401 restore: [CLS] three children are riding on a riding and a a on a a. [SEP]
+t: 501 restore: [CLS] three children are riding riding a on and a on a a trail. [SEP]
+t: 601 restore: [CLS] three children are riding a a riding a a a a a a. [SEP]
+t: 701 restore: [CLS] three children are riding a a a a a a a a a. [SEP]
+t: 801 restore: [CLS] three children are riding riding a a a a a a a a. [SEP]
+t: 901 restore: [CLS] three children are riding a riding riding a a a a a a. [SEP]
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.750595569610596, 4.021507740020752, 12.50365161895752, 4.65561580657959, 3.946246385574341, 11.731389999389648
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.741430282592773, 4.000660419464111, 12.120428085327148, 4.624325275421143, 3.9077868461608887, 11.544787406921387
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.733095645904541, 3.9841537475585938, 11.759984970092773, 4.600048542022705, 3.8625175952911377, 11.569769859313965
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.731714248657227, 3.9680800437927246, 11.34615421295166, 4.686657905578613, 3.8869376182556152, 11.341643333435059
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.732574939727783, 3.9554316997528076, 10.93102741241455, 4.70879602432251, 3.880631923675537, 11.403379440307617
+origin text: Three men standing on a cliff .
+t = 999
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] three men standing on a cliff. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]

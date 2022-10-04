@@ -19,3 +19,5 @@ captions.txt
 paper/templateArxiv.log
 paper/templateArxiv.out
 paper/templateArxiv.synctex.gz
+*.zip
+coco_2014_caption/

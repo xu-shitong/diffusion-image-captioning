@@ -106,7 +106,7 @@ COCO
 2019 Variational Autoencoder-Based Multiple ImageCaptioning Using a Caption Attention Map: 基于knowing where to look，生成attention graph，attention graph通过全连接层得到vae mean var，生成文本特征 scale up 传入rnn
 2021 CLIP cap
 2022 GRIT
-// 2022 mplug
+2022 mplug
 
 2019 Masked Non-Autoregressive Image Captioning decoder使用bert，mask掉所有词逐步生成原文，仅2步即可
 2021 Partially Non-Autoregressive Image Captioning

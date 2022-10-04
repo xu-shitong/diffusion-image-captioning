@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.2956862449646, 5.421480655670166, 25.851577758789062, 5.00308895111084, 4.6114726066589355, 21.626585006713867
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 5.045605659484863, 4.718348503112793, 20.13883399963379, 5.093228340148926, 4.515446186065674, 18.18950653076172
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.956421375274658, 4.54124116897583, 17.88275718688965, 5.040842533111572, 4.354214668273926, 16.640743255615234
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.905563831329346, 4.396947860717773, 16.65424919128418, 4.784251689910889, 4.231483459472656, 15.914688110351562
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.8542866706848145, 4.277356147766113, 15.92214298248291, 4.879568099975586, 4.096842288970947, 15.209527015686035
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.851709365844727, 4.330933094024658, 15.617709159851074, 4.868391990661621, 4.17500114440918, 14.75853443145752
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.795666694641113, 4.235483169555664, 15.06047534942627, 4.771439552307129, 4.123751163482666, 14.427510261535645
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.758631706237793, 4.151873588562012, 14.56205940246582, 4.697232246398926, 4.041409015655518, 13.850608825683594
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.736647129058838, 4.081998348236084, 14.144843101501465, 4.670845985412598, 3.9610538482666016, 13.656006813049316
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.7289018630981445, 4.035965442657471, 13.780170440673828, 4.711407661437988, 3.9503531455993652, 13.356492042541504
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.740196228027344, 4.115778923034668, 13.900236129760742, 4.692447185516357, 3.97690749168396, 13.518834114074707
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.718182563781738, 4.075985431671143, 13.691300392150879, 4.724673271179199, 3.9714388847351074, 13.264403343200684
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.700686454772949, 4.026129722595215, 13.388200759887695, 4.737256050109863, 3.95524001121521, 13.022406578063965
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.6910552978515625, 3.98052978515625, 13.076343536376953, 4.694340705871582, 4.086924076080322, 13.199544906616211
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.690448760986328, 3.9511380195617676, 12.770367622375488, 4.661919116973877, 3.8771398067474365, 12.566340446472168
+origin text: Three people wrestle with a bull at a rodeo .
+t = 999
+inferred: [CLS] two people are a horse in a a bull. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on in a horse. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on in a horse. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on a a horse. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on a a horse. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on a a field. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on a a field. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on a a field. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on a a field. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two people in a horse on a a field. [SEP] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] three people wrestle with a bull at a rodeo. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] three people wrestle with a bull at a rodeo. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] four people performing around a bull at a rodeo. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] two people wrestle over a bull in a rodeo. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a man wrestle on a bull on a rodeo. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] two people wrestle in a a at a bull. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] two men are in a jump a a bull. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] two people in a a a a a water. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] two people wrestling in a in in a watch. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a people performing a a on a a horse. [SEP] [PAD] [PAD] [PAD] [PAD]

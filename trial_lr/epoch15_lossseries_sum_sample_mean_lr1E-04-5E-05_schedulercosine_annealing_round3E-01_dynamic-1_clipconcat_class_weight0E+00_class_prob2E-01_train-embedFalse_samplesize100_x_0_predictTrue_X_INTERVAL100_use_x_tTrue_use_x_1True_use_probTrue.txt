@@ -1,0 +1,39 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.0005340576171875, 5.822092056274414, 37.356163024902344, 4.9594502449035645, 5.644393444061279, 24.056428909301758
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9421820640563965, 5.510885715484619, 21.886211395263672, 4.978029727935791, 4.885231971740723, 18.934518814086914
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.917699337005615, 4.8893232345581055, 18.488969802856445, 4.9600830078125, 4.543618202209473, 16.992816925048828
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.910728454589844, 4.562093734741211, 16.800994873046875, 4.899806022644043, 4.308065414428711, 15.820940971374512
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.885924816131592, 4.383939266204834, 15.80024242401123, 4.886143207550049, 4.173856735229492, 15.025805473327637
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.876943588256836, 4.37794303894043, 15.389348030090332, 4.781659126281738, 4.189620494842529, 14.658203125
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.8316826820373535, 4.2522873878479, 14.677774429321289, 4.77725887298584, 4.0642924308776855, 14.156805992126465
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.806987285614014, 4.1668500900268555, 14.067622184753418, 4.726484298706055, 3.9876515865325928, 13.694775581359863
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.796700477600098, 4.084264755249023, 13.478398323059082, 4.771878242492676, 3.9691810607910156, 13.161407470703125
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.798073768615723, 4.03941535949707, 13.011974334716797, 4.810596466064453, 3.9496445655822754, 12.82463264465332
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.809695243835449, 4.094960689544678, 13.07412338256836, 4.714176177978516, 3.9543967247009277, 13.030085563659668
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.802434921264648, 4.081103324890137, 12.703275680541992, 4.612053871154785, 3.932410955429077, 12.899645805358887
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.788547515869141, 4.020586967468262, 12.261926651000977, 4.744617938995361, 3.9448020458221436, 12.493888854980469
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.786498546600342, 3.9815917015075684, 11.773642539978027, 4.665648460388184, 3.862980604171753, 12.288337707519531
+early stop! 
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.791886329650879, 3.9526610374450684, 11.279808044433594, 4.754003524780273, 3.8570680618286133, 12.189720153808594
+origin text: A biker dressed in white rides through the forest .
+t = 999
+inferred: [CLS] a biker in in white riding through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker in a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a biker wearing a white helmet through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a biker dressed in white rides through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a biker dressed in white rides through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a biker dressed in white hiking through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a cyclist dressed in white runs through a woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a biker wearing a white helmet through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a biker in a white jersey through the woods. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a biker in in white riding through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a biker in in white riding through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a biker in in white riding through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a biker in in white jersey through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]

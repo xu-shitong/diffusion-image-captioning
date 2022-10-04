@@ -1,0 +1,39 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 3.964292049407959, 4.631881237030029, 31.26680564880371, 4.539933204650879, 5.391555309295654, 24.562454223632812
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 5.399285316467285, 5.8427205085754395, 27.589921951293945, 5.64689302444458, 5.419098854064941, 24.48500633239746
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 5.896160125732422, 5.49043607711792, 25.2085018157959, 5.918689250946045, 5.2016167640686035, 23.51483917236328
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 6.0249342918396, 5.21494722366333, 23.78147315979004, 5.965693950653076, 4.980770587921143, 22.33793067932129
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 6.017176628112793, 4.996283531188965, 22.783933639526367, 6.036702632904053, 4.8152756690979, 21.46883773803711
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 5.990378379821777, 4.84785795211792, 22.055397033691406, 5.951205253601074, 4.693291187286377, 20.975881576538086
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 5.988707542419434, 4.743374824523926, 21.44647979736328, 6.055627822875977, 4.622609615325928, 20.407527923583984
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 6.0038347244262695, 4.681219100952148, 20.97403907775879, 5.969164848327637, 4.562950134277344, 20.22185516357422
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 6.030023574829102, 4.638294696807861, 20.570655822753906, 5.984158992767334, 4.546895503997803, 19.987064361572266
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 6.079948902130127, 4.6422247886657715, 20.281110763549805, 6.035995960235596, 4.524890899658203, 19.975725173950195
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 6.123556613922119, 4.609526634216309, 19.92572021484375, 6.0531415939331055, 4.512453556060791, 20.05641746520996
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 6.167294025421143, 4.600578784942627, 19.585464477539062, 6.180706024169922, 4.51849889755249, 20.296100616455078
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 6.229712009429932, 4.591532230377197, 19.2750301361084, 6.154486179351807, 4.530322074890137, 20.579174041748047
+early stop! 
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 6.306925296783447, 4.605779647827148, 18.893112182617188, 6.231967449188232, 4.491646766662598, 20.978673934936523
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 6.398212432861328, 4.607250690460205, 18.46656608581543, 6.424565315246582, 4.531221389770508, 21.536510467529297
+origin text: a white dog running down a path with a long stick in his mouth
+t = 999
+inferred: [CLS] a man in a a a a a a a a a a. [SEP]
+inferred: [CLS] a man in a a shirt and a a a in a a. [SEP]
+inferred: [CLS] a man in a red shirt is a a is in the water. [SEP]
+inferred: [CLS] a man in a red shirt is on a front in the water. [SEP]
+inferred: [CLS] a man in a black shirt is on a front in the water. [SEP]
+inferred: [CLS] a man in a black shirt is on a front in the water. [SEP]
+inferred: [CLS] a man in a black shirt is on a front in the water. [SEP]
+inferred: [CLS] a man in a black shirt is on a front in the water. [SEP]
+inferred: [CLS] a man in a black shirt is on a front in the water. [SEP]
+inferred: [CLS] a man wearing a black shirt is holding a front in the water. [SEP]
+text t effectiveness
+t: 1 restore: [CLS] a white dog running down a path with a long stick in his mouth [SEP]
+t: 101 restore: [CLS] a white dog running down a path with a long stick in his mouth [SEP]
+t: 201 restore: [CLS] a black dog running down a path with a tennis stick in his mouth [SEP]
+t: 301 restore: [CLS] a girl and white down is swing in a blackbee in a white [SEP]
+t: 401 restore: [CLS] a man dog a a a man with a field in abee behind [SEP]
+t: 501 restore: [CLS] a black dog running on a grass with a white in the water. [SEP]
+t: 601 restore: [CLS] a man boy a a the in a a a in a a. [SEP]
+t: 701 restore: [CLS] a man boy a a a a and a a a a a. [SEP]
+t: 801 restore: [CLS] a man in a a a a a a a a a a. [SEP]
+t: 901 restore: [CLS] a man in a a a a a a a a a a. [SEP]

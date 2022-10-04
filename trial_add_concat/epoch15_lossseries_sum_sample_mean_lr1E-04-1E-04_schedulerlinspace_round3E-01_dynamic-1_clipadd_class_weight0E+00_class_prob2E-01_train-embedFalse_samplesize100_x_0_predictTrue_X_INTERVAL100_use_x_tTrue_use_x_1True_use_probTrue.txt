@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.3482184410095215, 5.4809980392456055, 25.91808319091797, 5.209761142730713, 4.6372389793396, 21.018234252929688
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 5.044443130493164, 4.728369235992432, 19.969205856323242, 4.968375205993652, 4.4406352043151855, 18.29343032836914
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.967967510223389, 4.587651252746582, 17.818649291992188, 4.99506139755249, 4.7924065589904785, 17.210384368896484
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.885775089263916, 4.440585613250732, 16.615493774414062, 4.8430986404418945, 4.200218200683594, 15.813810348510742
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.810947895050049, 4.3151350021362305, 15.837594985961914, 4.818131923675537, 4.139237403869629, 15.152490615844727
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.768013954162598, 4.233757019042969, 15.247965812683105, 4.665802001953125, 4.050441265106201, 14.801112174987793
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.73444128036499, 4.176801681518555, 14.804498672485352, 4.644191741943359, 4.0100507736206055, 14.396977424621582
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.714177131652832, 4.126900672912598, 14.445834159851074, 4.605500221252441, 3.9549379348754883, 14.14416217803955
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.694346904754639, 4.094505786895752, 14.145929336547852, 4.59354829788208, 3.9506657123565674, 13.818415641784668
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.677131175994873, 4.062295436859131, 13.903953552246094, 4.552717208862305, 3.9207286834716797, 13.672515869140625
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.6638007164001465, 4.035772800445557, 13.661561012268066, 4.554937362670898, 3.9368343353271484, 13.422654151916504
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.648857593536377, 4.017748832702637, 13.4695463180542, 4.515397071838379, 3.8705859184265137, 13.429289817810059
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.638912677764893, 3.9972212314605713, 13.282265663146973, 4.526747703552246, 3.875821828842163, 13.180264472961426
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.629308700561523, 3.9807932376861572, 13.077227592468262, 4.494723796844482, 3.849822759628296, 13.160435676574707
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.617236137390137, 3.9647412300109863, 12.902227401733398, 4.560966968536377, 3.85030460357666, 13.008062362670898
+origin text: Two horses are neck to neck at a race .
+t = 999
+inferred: [CLS] the man and a a a in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in in are race in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in in are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in white are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in black are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in black are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in black are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in black are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in black are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two dogs in black are running in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] two horses are neck to neck at a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] two horses are riding to span at a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] two horses are taking to face in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] two horses are racing a jump on a track. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] two horses are at a face at the camera. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] two jockeys in a race in a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] two horse and in a a at a race. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] two horse are pulling a a in a other. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] two horse in a a a in a other. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] two dogs are are are on on a track. [SEP] [PAD] [PAD] [PAD] [PAD]

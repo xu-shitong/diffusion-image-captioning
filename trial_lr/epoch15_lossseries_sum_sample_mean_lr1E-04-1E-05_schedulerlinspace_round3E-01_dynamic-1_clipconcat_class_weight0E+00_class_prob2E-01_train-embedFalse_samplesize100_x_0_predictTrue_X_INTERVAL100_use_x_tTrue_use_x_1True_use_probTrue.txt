@@ -1,0 +1,38 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.017009735107422, 5.856176853179932, 36.930580139160156, 4.812768459320068, 5.606338977813721, 24.05044174194336
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.947559356689453, 5.455386161804199, 21.869035720825195, 4.9993462562561035, 4.874387741088867, 19.19160270690918
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.936208724975586, 4.870553970336914, 18.567420959472656, 4.792564868927002, 4.555150032043457, 17.218976974487305
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9238739013671875, 4.575784206390381, 16.895240783691406, 4.933661460876465, 4.343293190002441, 15.805208206176758
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.883512496948242, 4.405112266540527, 15.895243644714355, 4.8424577713012695, 4.202652931213379, 15.102940559387207
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.844024658203125, 4.27224588394165, 15.161398887634277, 4.816507339477539, 4.12681245803833, 14.5314359664917
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.819860458374023, 4.19125509262085, 14.653268814086914, 4.644097328186035, 4.026369094848633, 14.33347225189209
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.807637691497803, 4.130667209625244, 14.198616981506348, 4.844533920288086, 4.002778053283691, 13.756726264953613
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.804422378540039, 4.079741954803467, 13.823850631713867, 4.8069257736206055, 3.967277765274048, 13.395061492919922
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.805622100830078, 4.0439653396606445, 13.472747802734375, 4.779581069946289, 3.947477102279663, 13.080201148986816
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.81492280960083, 4.017692565917969, 13.129487037658691, 4.8535685539245605, 3.9555563926696777, 12.846796035766602
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.823237419128418, 3.9960172176361084, 12.83761978149414, 4.823286533355713, 3.894425868988037, 12.671147346496582
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.832333087921143, 3.976433515548706, 12.57028579711914, 4.805696964263916, 3.884910821914673, 12.578357696533203
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.839272975921631, 3.9598169326782227, 12.307515144348145, 4.831902980804443, 3.881516218185425, 12.47441577911377
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.850134372711182, 3.946187734603882, 12.096907615661621, 4.8169331550598145, 3.8594019412994385, 12.3800048828125
+origin text: A trick bicyclist grinds down a handrail .
+t = 999
+inferred: [CLS] a woman and a a a a a a a a field. [SEP] [PAD]
+inferred: [CLS] a woman and a dog dog dog dog in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a dog dog is dog in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a brown dog is standing in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a brown dog is standing in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a brown dog is standing in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a brown dog is standing in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a brown dog is standing in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a brown dog is standing in a grassy field. [SEP] [PAD]
+inferred: [CLS] a woman and a brown dog is standing in a grassy field. [SEP] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a trick bicyclist grinds down a handrail. [SEP] [PAD]
+t: 101 restore: [CLS] a trick bicyclist grinds down a handrail. [SEP] [PAD]
+t: 201 restore: [CLS] a little girl boy a a skates holding a yellow lawn. [SEP] [PAD]
+t: 301 restore: [CLS] a woman and a on a a dog down a grassy grass. [SEP] [PAD]
+t: 401 restore: [CLS] a woman with a a white a a in a a field. [SEP] [PAD]
+t: 501 restore: [CLS] a woman is a a green in a in a a grass. [SEP] [PAD]
+t: 601 restore: [CLS] a woman and a a a a dog in a grassy field. [SEP] [PAD]
+t: 701 restore: [CLS] a woman and a a a a a a a grassy grass. [SEP] [PAD]
+t: 801 restore: [CLS] a woman and a a a a a a a a grass. [SEP] [PAD]
+t: 901 restore: [CLS] a woman and a a a a a a a a field. [SEP] [PAD]

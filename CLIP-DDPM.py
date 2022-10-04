@@ -58,8 +58,14 @@ MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
 END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
 # END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
+
+def cosine_annealing():
+  sub_epoch = 5
+  x = torch.arange(0, sub_epoch)
+  return END_LEARNING_RATE + (LEARNING_RATE - END_LEARNING_RATE) * (1 + torch.cos(x / sub_epoch * math.pi)) / 2
 # SCHEDULER = torch.logspace
-SCHEDULER = torch.linspace # scheduler of learning rate
+# SCHEDULER = torch.linspace
+SCHEDULER = cosine_annealing # scheduler of learning rate
 TRAIN_SET_RATIO = 0.95
 EARLY_STOP_RATIO = 1.05
 EPOCH_NUM = 5
@@ -442,6 +448,8 @@ if SCHEDULER == torch.linspace:
   lrs = SCHEDULER(LEARNING_RATE, END_LEARNING_RATE, EPOCH_NUM)
 elif SCHEDULER == torch.logspace:
   lrs = SCHEDULER(torch.tensor([LEARNING_RATE]).log10().item(), torch.tensor([END_LEARNING_RATE]).log10().item(), EPOCH_NUM)
+elif SCHEDULER == cosine_annealing:
+  lrs = SCHEDULER()
 
 def train_func(model, trainer, x, train=True):
   x_0 = model.embedding(x["input_ids"])
