@@ -52,25 +52,27 @@ mem_report()
 """# Hyperparameters"""
 
 # hyperparameters
-DEBUG = True
+DEBUG = False
+CONTINUE_TRAIN = True
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 5e-5
-END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
-# END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
+# END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
+END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
 
 def cosine_annealing():
   sub_epoch = 5
   x = torch.arange(0, sub_epoch)
-  return END_LEARNING_RATE + (LEARNING_RATE - END_LEARNING_RATE) * (1 + torch.cos(x / sub_epoch * math.pi)) / 2
+  x = END_LEARNING_RATE + (LEARNING_RATE - END_LEARNING_RATE) * (1 + torch.cos(x / sub_epoch * math.pi)) / 2
+  return x.repeat((3, ))
 # SCHEDULER = torch.logspace
-# SCHEDULER = torch.linspace
-SCHEDULER = cosine_annealing # scheduler of learning rate
+SCHEDULER = torch.linspace
+# SCHEDULER = cosine_annealing # scheduler of learning rate
 TRAIN_SET_RATIO = 0.95
-EARLY_STOP_RATIO = 1.05
+EARLY_STOP_RATIO = 1.02
 EPOCH_NUM = 5
-DYNAMIC_ROUNDING_WEIGHT = 2 # weight of rounding term with respect to x_t loss, <0 means not using 
-ROUNDING_WEIGHT = 1 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
+DYNAMIC_ROUNDING_WEIGHT = -1 # weight of rounding term with respect to x_t loss, <0 means not using 
+ROUNDING_WEIGHT = 0.3 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
 
 def series_sum_sample_mean(x_hat, x):
   return (x_hat - x).abs().sum(dim=1).mean()
@@ -88,12 +90,12 @@ LOSS_FUNC = series_sum_sample_mean
 # LOSS_FUNC = series_sum
 # LOSS_FUNC = mse_series_mean
 # LOSS_FUNC = mse_series_sum # loss function used between embedding 
-# CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
-CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding
+CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
+# CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding
 # # CLIP_MASK = None
 # CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
-# CLASSIFIER_FREE_WEIGHT = 0
-CLASSIFIER_FREE_WEIGHT = 0.3 # classifier guidance, 0 means no guidance
+CLASSIFIER_FREE_WEIGHT = 0
+# CLASSIFIER_FREE_WEIGHT = 0.3 # classifier guidance, <= 0 means no guidance
 CLASSIFIER_FREE_PROB = 0.2
 TRAIN_EMBEDDING = False # if model use pretrained distilbert embedding, or learn a 16 embedding for each word and project to 768 before pass to bert
 if TRAIN_EMBEDDING:
@@ -211,8 +213,12 @@ dataset = FlickrCLIPDataset(
   pd.read_csv("./flickr8k/captions.txt")["caption"],
   pd.read_csv("./flickr8k/captions.txt")["image"],
   tokenizer)
-train_len = int(len(dataset) * TRAIN_SET_RATIO)
-train_set, val_set = torch.utils.data.random_split(dataset, [train_len, len(dataset) - train_len])
+if CONTINUE_TRAIN:
+  val_set = torch.load(f"{MODEL_NAME}.valset")
+  train_set = torch.utils.data.Subset(dataset, list(set(range(len(dataset))) - set(val_set.indices)))
+else:
+  train_len = int(len(dataset) * TRAIN_SET_RATIO)
+  train_set, val_set = torch.utils.data.random_split(dataset, [train_len, len(dataset) - train_len])
 train_loader = DataLoader(train_set, shuffle=True, batch_size=BATCH_SIZE, drop_last=True)
 val_loader = DataLoader(val_set, shuffle=False, batch_size=BATCH_SIZE, drop_last=True)
 
@@ -497,9 +503,11 @@ def validate(model):
   return val_acc_x_t / len(val_loader), val_acc_x_1 / len(val_loader), val_acc_prob / len(val_loader),
 
 # training 
-# model = torch.load(f"{MODEL_NAME}.pickle").to(device)
-# model.model.add_module("activation", activations.GELUActivation())
-# trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
+
+if CONTINUE_TRAIN:
+  model = torch.load(f"{MODEL_NAME}.pickle").to(device)
+  # model.model.add_module("activation", activations.GELUActivation())
+  trainer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
 summary = open(f"{MODEL_NAME}.txt", "a")
 # summary = sys.stdout
 
@@ -594,6 +602,37 @@ with torch.no_grad():
     out, _ = model(x_t, image_clip, text_clip, mask, torch.tensor([1, 0], device=device).repeat(mask.shape[0], 1)) 
 
     summary.write(f"t: {i} restore: {dataset.tokenizer.decode(out.argmax(dim=-1)[0])}\n")
+
+from torchmetrics import BLEUScore
+
+metric = BLEUScore()
+acc_bleu = 0
+with torch.no_grad():
+  # with tqdm.tqdm(val_loader, unit="batch") as tepoch: 
+  #   for j, x in enumerate(tepoch):
+    for j, x in enumerate(val_loader):
+
+      restored = torch.randn((x["input_ids"].shape[0], MAX_LENGTH + 2, IN_CHANNEL), device=device)
+
+      # each prediction involves multiple generation steps
+      for i in range(5):
+        out, restored = model(restored[:, :MAX_LENGTH, :], x["image_clip"].unsqueeze(1), torch.zeros_like(x["image_clip"], device=device).unsqueeze(1), torch.ones((x["input_ids"].shape[0], MAX_LENGTH), device=device), torch.tensor([1, 0], device=device).repeat(x["attention_mask"].shape[0], 1))
+      
+      # append final strings to each answer bin
+      indexes = nn.functional.softmax(out, dim=-1).argmax(dim=-1)
+      indexes = indexes.unique_consecutive(dim=-1)
+
+      ans_strs = [dataset.tokenizer.decode(index) for index in indexes]
+
+      GT_list = []
+      for image_name in x["image"]:
+        GT_list.append(['[CLS] ' + caption.strip().lower() + ' [SEP]' for caption in dataset.data.loc[dataset.data['image'] == image_name]["caption"]])
+
+      acc_bleu += metric(ans_strs, GT_list)
+
+summary.write(f"BLEU-4 score: {acc_bleu / len(val_loader)}")
+
+torch.save(val_set, f"{MODEL_NAME}.valset")
 
 if not summary == sys.stdout:
   summary.close()

@@ -1,0 +1,62 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.139745235443115, 5.932293891906738, 41.52062225341797, 4.896749496459961, 6.138871192932129, 28.64643669128418
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.932727336883545, 6.08603048324585, 26.178855895996094, 4.881192207336426, 5.438826560974121, 22.32099151611328
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.920989990234375, 5.4283061027526855, 21.75356674194336, 4.8365302085876465, 4.9249396324157715, 19.8004093170166
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.936716079711914, 5.026932716369629, 19.63433074951172, 4.891860485076904, 4.73689079284668, 18.195446014404297
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.959781169891357, 4.800459384918213, 18.174135208129883, 4.954601287841797, 4.5823588371276855, 16.952585220336914
+origin text: A child ballerina puts on make-up backstage in a mirror .
+t = 999
+inferred: [CLS] a man is a a a a a a a a a.. [SEP]
+inferred: [CLS] a man is a a a a a a a a a.. [SEP]
+inferred: [CLS] a dog is a a a a a a a a a.. [SEP]
+inferred: [CLS] a dog jumps a a a a a a a a a.. [SEP]
+inferred: [CLS] a dog jumps a a a a a a a a a.. [SEP]
+inferred: [CLS] a dog jumps a a a a a a a a a water. [SEP]
+inferred: [CLS] a dog jumps a a a a a a a a a water. [SEP]
+inferred: [CLS] a dog jumps a a a a a a a a a water. [SEP]
+inferred: [CLS] a dog jumps a a a a a a a a a water. [SEP]
+inferred: [CLS] a dog jumps a a a a a a a a a water. [SEP]
+text t effectiveness
+t: 1 restore: [CLS] a child ballerina puts on make - up backstage in a mirror. [SEP]
+t: 101 restore: [CLS] a child ballgly lying on street front up skiing in a snow. [SEP]
+t: 201 restore: [CLS] a is runningboarding sitting in a a a on of a snow. [SEP]
+t: 301 restore: [CLS] a group is people a a a a a a in a pool. [SEP]
+t: 401 restore: [CLS] a dog player a a a a a on a a a a. [SEP]
+t: 501 restore: [CLS] a man is a a a a a a a a a the. [SEP]
+t: 601 restore: [CLS] a man is a a a a a a a a a a. [SEP]
+t: 701 restore: [CLS] a man is a a a a a a a a a a. [SEP]
+t: 801 restore: [CLS] a man is a a a a a a a a a.. [SEP]
+t: 901 restore: [CLS] a man is a a a a a a a a a.. [SEP]
+BLEU-4 score: 0.07592684030532837epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.960996150970459, 4.635837078094482, 17.13907814025879, 4.987355709075928, 4.408654689788818, 16.0275821685791
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.947059631347656, 4.5077643394470215, 16.30254364013672, 4.900520324707031, 4.327314853668213, 15.264936447143555
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9308295249938965, 4.4164910316467285, 15.6542329788208, 4.818184852600098, 4.2237091064453125, 14.84438419342041
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.911798000335693, 4.341337203979492, 15.165492057800293, 4.96713399887085, 4.263758182525635, 14.358819961547852
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.900386333465576, 4.28386926651001, 14.73381233215332, 4.947654724121094, 4.1743574142456055, 13.853607177734375
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.893584251403809, 4.234238147735596, 14.33505916595459, 4.799012660980225, 4.093901634216309, 13.723337173461914
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.887824535369873, 4.19253396987915, 13.99866008758545, 4.863750457763672, 4.061049938201904, 13.345429420471191
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.885104656219482, 4.157752990722656, 13.656335830688477, 4.832102298736572, 4.016903400421143, 13.059596061706543
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.884869575500488, 4.131523609161377, 13.350329399108887, 4.844137191772461, 4.024475574493408, 12.894462585449219
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.889919281005859, 4.109790802001953, 13.060813903808594, 4.823857307434082, 4.010002613067627, 12.698262214660645
+origin text: A child ballerina puts on make-up backstage in a mirror .
+t = 999
+inferred: [CLS] a man is a a a a a the a a the a. [SEP]
+inferred: [CLS] a man is on on the on the the a in the a. [SEP]
+inferred: [CLS] a hockey is standing on the on the the a in the water. [SEP]
+inferred: [CLS] the hockey is standing on the ground the the ball in the ground. [SEP]
+inferred: [CLS] the hockey is standing on the ground of the ball in the ground. [SEP]
+inferred: [CLS] the hockey is standing on the ground of the ball in the ground. [SEP]
+inferred: [CLS] the hockey is standing on the ground of the ball in the snow. [SEP]
+inferred: [CLS] the hockey is sitting on the ground of the ball in the snow. [SEP]
+inferred: [CLS] the hockey is sitting on the ground of the ball in the snow. [SEP]
+inferred: [CLS] the hockey is lying on the ground of the ball in the snow. [SEP]
+text t effectiveness
+t: 1 restore: [CLS] a child ballerina puts on make - up backstage in a mirror. [SEP]
+t: 101 restore: [CLS] a child ballerinags for stand - down foul in a lot. [SEP]
+t: 201 restore: [CLS] a tennis ball player stands the hands on the ground in a lows [SEP]
+t: 301 restore: [CLS] a hockey is is to the on to the a to a a ball [SEP]
+t: 401 restore: [CLS] a man in a a a to on the in in a a. [SEP]
+t: 501 restore: [CLS] a hockey player is to on a the a a the the the. [SEP]
+t: 601 restore: [CLS] a man is a a a a the a a in the a. [SEP]
+t: 701 restore: [CLS] a man is a a a the the a a a the a. [SEP]
+t: 801 restore: [CLS] a hockey is a a a a the a a a the the. [SEP]
+t: 901 restore: [CLS] a hockey is is a a the a a a the a a. [SEP]
+BLEU-4 score: 0.1558043658733368

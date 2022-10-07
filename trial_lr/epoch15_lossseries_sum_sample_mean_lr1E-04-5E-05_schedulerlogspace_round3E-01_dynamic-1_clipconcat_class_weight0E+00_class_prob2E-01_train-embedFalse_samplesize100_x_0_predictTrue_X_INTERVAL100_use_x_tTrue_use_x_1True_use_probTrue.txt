@@ -1,0 +1,40 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.904369354248047, 5.655927658081055, 38.116981506347656, 4.90602445602417, 5.520529270172119, 24.6049861907959
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.8493547439575195, 5.440032482147217, 22.287931442260742, 4.848229885101318, 4.929021835327148, 19.31475830078125
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.872239589691162, 4.865762233734131, 18.63327980041504, 4.88600492477417, 4.528619766235352, 17.11814308166504
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.872445583343506, 4.562772274017334, 16.835542678833008, 4.858893394470215, 4.327352046966553, 15.754220008850098
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.836766719818115, 4.368283271789551, 15.721060752868652, 4.72452449798584, 4.188229560852051, 15.020009994506836
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.807568550109863, 4.251855850219727, 14.960997581481934, 4.685861587524414, 4.116480827331543, 14.48266887664795
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.79314661026001, 4.172347068786621, 14.352408409118652, 4.735716819763184, 4.054260730743408, 13.778335571289062
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.785330772399902, 4.1117262840271, 13.837882041931152, 4.719563961029053, 4.0096435546875, 13.50941276550293
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.789925575256348, 4.089136123657227, 13.415407180786133, 4.759565830230713, 3.9651265144348145, 13.042186737060547
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.789227485656738, 4.049011707305908, 13.018885612487793, 4.691547393798828, 3.9543066024780273, 12.881231307983398
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.79319429397583, 4.026355743408203, 12.659270286560059, 4.6957011222839355, 3.941953182220459, 12.707149505615234
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.797955513000488, 4.00767183303833, 12.31340217590332, 4.773083686828613, 3.9182136058807373, 12.391558647155762
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.803007125854492, 3.9902172088623047, 11.980107307434082, 4.746861934661865, 3.907506227493286, 12.29017162322998
+early stop! 
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.8084917068481445, 3.9762611389160156, 11.647380828857422, 4.858917713165283, 3.894477128982544, 12.17905044555664
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.815145015716553, 3.962275981903076, 11.302576065063477, 4.80167293548584, 3.874736785888672, 12.10520076751709
+origin text: A dog and sheep run together .
+t = 999
+inferred: [CLS] a dog runs a a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in the horse. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in the field. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a dog runs in the field. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a dog and sheep run together. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a dog and sheep running together. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a dog and sheep run together. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a dog runs a a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a dog and dog running sheep. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a dog runs a a sheep. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a dog runs a a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a dog runs a a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a dog runs a a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a dog runs in a dog. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+BLEU-4 score: 0.16431231796741486

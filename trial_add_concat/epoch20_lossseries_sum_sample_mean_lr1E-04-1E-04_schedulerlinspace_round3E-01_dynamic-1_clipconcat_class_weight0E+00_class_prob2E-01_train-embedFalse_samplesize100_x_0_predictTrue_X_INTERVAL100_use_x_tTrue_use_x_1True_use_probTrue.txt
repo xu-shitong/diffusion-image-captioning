@@ -1,0 +1,69 @@
+large dataset
+
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.713589668273926, 5.1695332527160645, 25.759462356567383, 4.697922706604004, 4.320925712585449, 17.098997116088867
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.594688415527344, 4.200925350189209, 16.48636245727539, 4.561591148376465, 3.924267530441284, 15.373785972595215
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.546576976776123, 3.987762212753296, 15.405213356018066, 4.519363880157471, 3.834225654602051, 14.732820510864258
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.526556491851807, 3.8916893005371094, 14.902413368225098, 4.433138847351074, 3.770965337753296, 14.411277770996094
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.503637790679932, 3.8220460414886475, 14.580816268920898, 4.40823221206665, 3.728715419769287, 14.235479354858398
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.482417106628418, 3.7805116176605225, 14.322571754455566, 4.438780307769775, 3.6911752223968506, 13.891854286193848
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.463730335235596, 3.74137020111084, 14.105010032653809, 4.473417282104492, 3.6546592712402344, 13.696643829345703
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.451930522918701, 3.724820137023926, 13.913698196411133, 4.377784729003906, 3.6442813873291016, 13.626304626464844
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.441013813018799, 3.6953234672546387, 13.73884391784668, 4.442866802215576, 3.641580581665039, 13.405732154846191
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.437366962432861, 3.68141508102417, 13.558521270751953, 4.402772426605225, 3.6236941814422607, 13.331390380859375
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.436818599700928, 3.6665451526641846, 13.38852596282959, 4.406713485717773, 3.613981246948242, 13.236993789672852
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.439577102661133, 3.664198160171509, 13.222373962402344, 4.435431003570557, 3.606476068496704, 13.135065078735352
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.441061496734619, 3.6444759368896484, 13.053812980651855, 4.392935276031494, 3.5791709423065186, 13.122072219848633
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.445404052734375, 3.6371076107025146, 12.89338493347168, 4.380362510681152, 3.590141534805298, 13.011561393737793
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.450124263763428, 3.63010311126709, 12.721288681030273, 4.38611364364624, 3.5888211727142334, 12.990938186645508
+origin text: a man and women looking at magazines in a window .
+t = 999
+inferred: [CLS] a man in a white football football a a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man in a white uniform uniform playing playing football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a man wearing a white uniform is playing a football. [SEP] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a man and women looking at magazines in a window. [SEP] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a man and women looking at windows in a window. [SEP] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a man and the dressed is making a football football. [SEP] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a man playing football is uniform and during a football. [SEP] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a man in white white a football in a football. [SEP] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a man in a a white uniform wearing a football. [SEP] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a man in a a white football with a football. [SEP] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a man in a white and white is playing football. [SEP] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a man in a white uniform is a a football. [SEP] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a man in a white white is a playing football. [SEP] [PAD] [PAD] [PAD]
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.450906276702881, 3.626161575317383, 12.592157363891602, 4.400343418121338, 3.5652809143066406, 12.280214309692383
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.458709716796875, 3.6227269172668457, 12.405902862548828, 4.356509685516357, 3.5452895164489746, 12.3634672164917
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.464188098907471, 3.620473861694336, 12.221831321716309, 4.440149307250977, 3.5601730346679688, 12.325460433959961
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.471127033233643, 3.6166160106658936, 12.042054176330566, 4.411192417144775, 3.557121992111206, 12.402165412902832
+early stop! 
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.476999282836914, 3.614262342453003, 11.852042198181152, 4.4355268478393555, 3.552664279937744, 12.355511665344238
+origin text:  A snowboarder wearing red pants and white jacket and helmet jumps in the air .
+t = 999
+inferred: [CLS] a snowboarder in a a a a a a a a. [SEP]
+inferred: [CLS] a snowboarder in a black jacket is a a a a. [SEP]
+inferred: [CLS] a snowboarder in a black jacket is jumping a the air. [SEP]
+inferred: [CLS] a snowboarder in a red jacket a jumping front the air. [SEP]
+inferred: [CLS] a snowboarder in a black jacket a jumping in the air. [SEP]
+inferred: [CLS] a snowboarder wearing a black jacket a jumping in the air. [SEP]
+inferred: [CLS] a snow aer green a a a a a a a air a [SEP]
+inferred: [CLS] a snowboarder a in a a.. in in air. [SEP]
+inferred: [CLS] a a a a a a a a a a a a a a [SEP]
+inferred: [CLS] a boy in a a a a a a a a a a a [SEP]
+text t effectiveness
+t: 1 restore: [CLS] a snowboarder wearing red pants and white jacket and helmet jumps in [SEP]
+t: 101 restore: [CLS] a snowboarder wearing red pants and white jacket and helmet jumps in [SEP]
+t: 201 restore: [CLS] a snowboarder wearing red pants, white jacket and helmet jumps in [SEP]
+t: 301 restore: [CLS] a snowboarder wearing red pants and black jacket doing a trick in [SEP]
+t: 401 restore: [CLS] a snowboarder in red jacket and red jacket jacket is a a [SEP]
+t: 501 restore: [CLS] a snowboarder red black pants and black black a aboard. [SEP]
+t: 601 restore: [CLS] a snowboarder wearing a and and black jacket is a air. [SEP]
+t: 701 restore: [CLS] a snowboarder in a a red a is a a a. [SEP]
+t: 801 restore: [CLS] snow snowboarder red a black a a a red a a. [SEP]
+t: 901 restore: [CLS] a snowboarder in red a a a a a a a. [SEP]

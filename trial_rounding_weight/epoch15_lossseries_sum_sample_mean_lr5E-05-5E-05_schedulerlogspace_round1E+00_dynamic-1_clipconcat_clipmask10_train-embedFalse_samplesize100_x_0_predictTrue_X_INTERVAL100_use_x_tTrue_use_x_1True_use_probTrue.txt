@@ -36,3 +36,6 @@ t: 601 restore: [CLS] a man is a a the a running a the. [SEP] [PAD] [PAD] [PAD]
 t: 701 restore: [CLS] a man is a a a a a a the. [SEP] [PAD] [PAD] [PAD]
 t: 801 restore: [CLS] a man boy a a the a a a the. [SEP] [PAD] [PAD] [PAD]
 t: 901 restore: [CLS] a man is a a a a a a the. [SEP] [PAD] [PAD] [PAD]
+
+
+BLEU on leaking val set: 0.2115 0.1746

@@ -1,0 +1,176 @@
+large dataset
+
+
+early stop! 
+origin text:  a brown puppy is gnawing in a metallic post that is stuck into the ground .
+t = 999
+inferred: ##tea outletnr bin over metre bismarck adiquist drilled serieslthstenronatyamy
+inferred: te resort chainspot pre differ netccafreycki hsssen senppy averageisha
+inferred: patriot sharedsta followingrist passing bayabahend abe govnedgismeralezaurg
+inferred: ##cityrafwc checkrminake if lest wenbbeint phrasenhously databasermin
+inferred: word holyep denyebwl circuit presentebput deswl present general dec common
+inferred: ##gatyasttenvestptianotgatyasyasyasgattenyaswnces
+inferred: ##rarcitypanrarornecity hearthcitycity soapcitycityaidnhnicaaid
+inferred: ##vacskabttfvernllandllandvac miabornhtfnhjitopingnh
+inferred: recordncarminrminciousticajongnincancaciousndincancarmineza
+inferred: ##yescityshu sentinel geographyshuwnyes newstanconrankcon sortingyesyes
+text t effectiveness
+t: 1 restore: [CLS] kit saints sha by by vin sha plot byente nat by yenssen has
+t: 101 restore: [CLS] moss wine stat ken affeit than common waters pure fide sh ha charally
+t: 201 restore: inductionkara runwayych markmy osman booker hu effort agriculture sabha voodoo cutgio hills
+t: 301 restore: score flea necitynsky fen til correct pac coffee clearance rise versatensyatbant
+t: 401 restore: weekdaysrma algebra dorm roma matanut heart stwdopenisharip wishesþ fide
+t: 501 restore: counts firth housingven lent bar colonpara assembly scala malmotfient prima stock address
+t: 601 restore: ##gieoric programvedbandsome es elector grownrimuveient characteroms ok lead
+t: 701 restore: exclusive help basha continentalcina az part dayticallyrghkshaisse levelssen msc fat
+t: 801 restore: nowua wasp saul peacevd explosivecolaph fibre town voiceaint part two oz
+t: 901 restore: ##aly constabularyurtute quitom doc ps qunablequentfatyr naacp week fan
+BLEU-4 score: 0.7830210328102112early stop! 
+origin text:  The man in a yellow kayak is paddling through rough waters .
+t = 999
+inferred: ##pac constantnkagol temperaturesbisssee stationoch qaedaaly whychio oswaldntal quo
+inferred: banda simpc colourdern turkgillture mel mari according bukitiensdar wear declined
+inferred: smelledssen givenjonorin given squintedrsechu hautemate elvismates best hauteinen
+inferred: ##rst localityrstpperst marriottinda sapblrstpineementrstrstabaving
+inferred: ##rst nutmindchetrst locationrstritopperrst kayerst nutucheunimate
+inferred: ##quinb orlando randrstbbbasebasebase matterrstrstrstrst matter matter
+inferred: ##zzle elle ellequiquiqui ellequi elle ellequiusaqui elle ellequi
+inferred: ellepine inn novazzlezzlezzle mediterraneanpine onezzle mediterranean elleaczzlezzle
+inferred: ##mistignignbekbekignbekbeklinivantbekbekliniignbekbek
+inferred: companions companions companionsmate companions companions companions companions companions companions kay kay companions companions companions kay
+text t effectiveness
+t: 1 restore: [CLS] standing aren x face don are have sense power tu haven standing mole
+t: 101 restore: advisorychon name next one are over lips plate withoutdo kin tank wall stations unit
+t: 201 restore: elmoso bare feederumen mort left hauteuca aerialiens outcker arch [SEP] unit
+t: 301 restore: witness wing middle now branch aboveost antlceku hookring contact ter flintput
+t: 401 restore: longitude pont [SEP] red likelyover saul sistercolgolvish ichtaryche withoutcel
+t: 501 restore: st gorgerek pow note cell kung antarctic int from wall defences surprise jo ringingrek
+t: 601 restore: mountiffbase ass rose id foot detectiveeth unit piercecation matter father sublimebia
+t: 701 restore: saber abd ensignumen checkpointnal miaile bait hiv thunder culture gangtted under
+t: 801 restore: ##rar pdf mannedlling raj at attachediseric borne kmpin ties afi cancelled being
+t: 901 restore: fire subjectsartewon ter joint strategicallyhom quo ties finn ace incidents sport ivorykis
+BLEU-4 score: 0.0early stop! 
+origin text:  Two guys sitting on a car and horse with potatoes in the back .
+t = 999
+inferred: altolatesuw matoat niagaraister attention leftste criticallypetnational undraftedheringores
+inferred: ##nes gottfried cameracent [CLS] tame some mab itself akrongizing ”han hutton palestinezog
+inferred: inner christy let forwardoria worthuel » ax haute sovereign mir bud ways zee ultra
+inferred: zonepointbonfoldenterfleponzybiszy etcoria axescatingliche leveled
+inferred: ##ctic triple plain misses partial lastedctic zone ways triple point infrared ax lingering output ways
+inferred: orders tricks lao nouveau nouveau geo eureka shattered measures senses perpetual hazel lao eta wavelengths nouveau
+inferred: inner aerial brightest aerialnes sudden rom 2a brightest cornered brightest sudden med brightestzon brightest
+inferred: ##ova sworn lao swornoria tricksoria lao lao lao lao lao lao clippedzin lao
+inferred: fixingzen ecumenical akoltuteolisctic shatteredcticcticoliscticuelolis gottfried
+inferred: trapping pinned pinned tricks penetrating pinned tricks pin contents debuted trapping captivity trapping pinned fixing az
+text t effectiveness
+t: 1 restore: fixed company zu k percentage full ariel voicene k service us square part point cook
+t: 101 restore: fu sealing sant mesa completeoltly zealand boot offues crown reunited sometime combined playhouse
+t: 201 restore: [CLS] players fiesta elevation family [CLS] chick lost auxiliary dish dwell short advance dance square gone
+t: 301 restore: ganelo companion total nasal half superblce harlow resulting mission novonation fixture ” ing
+t: 401 restore: tun standing refuse statewidecles somewhere share driving fill fours doi footed groove notion battle frequency
+t: 501 restore: retroscia lankan single ag duty doiadewt earth tick internal runways allergic neutrality smallest
+t: 601 restore: branch stationary hitch 100 locally ana notifiedttle bautistaetequette clockwiseworthy dia lootedee
+t: 701 restore: fusedisanants jo overboard beat bose haute ordersanteh consolidated chip cometogosack
+t: 801 restore: laoane intermediatebon artemis renewaltops colttera meritmuntop atv total tight subjects
+t: 901 restore: hut och morse scenes lever gb yard hearth newtownbt dish co pinned kirascohot
+BLEU-4 score: 0.0epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9825663566589355, 4.964273929595947, 22.87494659423828, 4.782295227050781, 4.268041133880615, 18.731765747070312
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.738598823547363, 4.314957141876221, 17.7037353515625, 4.792396545410156, 4.041131973266602, 16.129390716552734
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.656750679016113, 4.098579406738281, 16.135997772216797, 4.645937442779541, 3.8934273719787598, 15.22779369354248
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.608231067657471, 3.9794859886169434, 15.385066032409668, 4.567290306091309, 3.8341751098632812, 14.780253410339355
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.589906215667725, 3.906846046447754, 14.935063362121582, 4.5855631828308105, 3.7888033390045166, 14.409440994262695
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.575882911682129, 3.85498309135437, 14.642176628112793, 4.519373893737793, 3.7547929286956787, 14.23402214050293
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.565006256103516, 3.813443183898926, 14.44450569152832, 4.515829086303711, 3.709916114807129, 13.99164867401123
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.555922508239746, 3.7807681560516357, 14.27684211730957, 4.520083904266357, 3.7010750770568848, 13.830253601074219
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.5456414222717285, 3.7463772296905518, 14.116864204406738, 4.475491523742676, 3.6574501991271973, 13.75822639465332
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.535024642944336, 3.7233200073242188, 13.992956161499023, 4.4972076416015625, 3.641176223754883, 13.643674850463867
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.524585247039795, 3.6993000507354736, 13.874540328979492, 4.518040180206299, 3.618479013442993, 13.527899742126465
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.51792049407959, 3.6817405223846436, 13.763676643371582, 4.473818302154541, 3.6028459072113037, 13.472898483276367
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.511045932769775, 3.668781042098999, 13.679195404052734, 4.470365524291992, 3.5974643230438232, 13.42310905456543
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.504915714263916, 3.656676769256592, 13.577996253967285, 4.442220687866211, 3.584789276123047, 13.366509437561035
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.499773979187012, 3.648153305053711, 13.486469268798828, 4.429960250854492, 3.5711493492126465, 13.321741104125977
+origin text: A dog has its mouth wide open trying to bite something .
+t = 999
+inferred: [CLS] a man in a a a a a a a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a dog has its mouth wide open trying to bite something. [SEP] [PAD] [PAD]
+t: 101 restore: [CLS] a dog has its mouth wide table trying to bite something. [SEP] [PAD] [PAD]
+t: 201 restore: [CLS] a dog has a mouth table tables to eats a. [SEP] [PAD] [PAD]
+t: 301 restore: [CLS] a boy in a white table and looking at a smiling. [SEP] [PAD] [PAD]
+t: 401 restore: [CLS] a man in a on a sitting at a black table. [SEP] [PAD] [PAD]
+t: 501 restore: [CLS] a man with a a shirt table is at a table. [SEP] [PAD] [PAD]
+t: 601 restore: [CLS] a man man a a is a a a a table. [SEP] [PAD] [PAD]
+t: 701 restore: [CLS] a man wearing a black a table at a a table. [SEP] [PAD] [PAD]
+t: 801 restore: [CLS] a man in a black shirt a a in a shirt. [SEP] [PAD] [PAD]
+t: 901 restore: [CLS] a man wearing a a a a a a a table. [SEP] [PAD] [PAD]
+BLEU-4 score: 0.16159838438034058epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.493834495544434, 3.638705253601074, 13.409911155700684, 4.474111080169678, 3.5784356594085693, 13.171747207641602
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.4866437911987305, 3.6289031505584717, 13.319656372070312, 4.443709373474121, 3.565983533859253, 13.195043563842773
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.4833831787109375, 3.6215381622314453, 13.229852676391602, 4.441475868225098, 3.565230131149292, 13.103283882141113
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.4783477783203125, 3.615412950515747, 13.14061164855957, 4.4299445152282715, 3.5775606632232666, 12.988682746887207
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.475457191467285, 3.6101536750793457, 13.053272247314453, 4.447459697723389, 3.5506510734558105, 12.949440002441406
+origin text: A dog has its mouth wide open trying to bite something .
+t = 999
+inferred: [CLS] a man man at a a a a at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table. [SEP] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a dog has its mouth wide open trying to bite something. [SEP] [PAD] [PAD]
+t: 101 restore: [CLS] a dog has its mouth wide open trying to bite something. [SEP] [PAD] [PAD]
+t: 201 restore: [CLS] a dog has at a up off a and smiless. [SEP] [PAD] [PAD]
+t: 301 restore: [CLS] a man sitting at a table with at a table smiling. [SEP] [PAD] [PAD]
+t: 401 restore: [CLS] a man sitting at a table table sitting at a table. [SEP] [PAD] [PAD]
+t: 501 restore: [CLS] a man sitting a sitting at a table at a table. [SEP] [PAD] [PAD]
+t: 601 restore: [CLS] a man in a black at a table at a table. [SEP] [PAD] [PAD]
+t: 701 restore: [CLS] a black man a at a a a a a table. [SEP] [PAD] [PAD]
+t: 801 restore: [CLS] a man wearing a at a sitting in a a table. [SEP] [PAD] [PAD]
+t: 901 restore: [CLS] a man in a a a a table a a table. [SEP] [PAD] [PAD]
+BLEU-4 score: 0.18035250902175903epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.472486972808838, 3.6051278114318848, 12.966570854187012, 4.443593978881836, 3.5469508171081543, 12.980835914611816
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.472079753875732, 3.603696823120117, 12.880758285522461, 4.411744594573975, 3.5520308017730713, 12.955819129943848
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.469655513763428, 3.5972042083740234, 12.795781135559082, 4.4130449295043945, 3.5438828468322754, 12.930937767028809
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.46987247467041, 3.5942201614379883, 12.69894790649414, 4.459785461425781, 3.542945146560669, 12.883666038513184
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.472785472869873, 3.5915915966033936, 12.605697631835938, 4.407014846801758, 3.546625852584839, 12.856266021728516
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.472770690917969, 3.5892372131347656, 12.50020980834961, 4.402538299560547, 3.5423519611358643, 12.866511344909668
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.476852893829346, 3.5863001346588135, 12.413688659667969, 4.447578430175781, 3.545917272567749, 12.803522109985352
+early stop! 
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.482161045074463, 3.5842771530151367, 12.308493614196777, 4.461394786834717, 3.5435562133789062, 12.802912712097168
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.4849162101745605, 3.5829498767852783, 12.189005851745605, 4.5033860206604, 3.543823480606079, 12.770393371582031
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.4908928871154785, 3.5812528133392334, 12.085454940795898, 4.477351665496826, 3.542278528213501, 12.751753807067871
+origin text: A dog has its mouth wide open trying to bite something .
+t = 999
+inferred: [CLS] a man wearing a black shirt at a at a table. [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table table [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table table [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table table [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a table table [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a restaurant table [SEP] [PAD] [PAD]
+inferred: [CLS] a man in a black shirt is sitting at a restaurant table [SEP] [PAD] [PAD]
+inferred: [CLS] a man wearing a black shirt is sitting at a restaurant table [SEP] [PAD] [PAD]
+inferred: [CLS] a man wearing a black shirt is sitting at a restaurant table [SEP] [PAD] [PAD]
+inferred: [CLS] a man wearing a black shirt is sitting at a restaurant table [SEP] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a dog has its mouth wide open trying to bite something. [SEP] [PAD] [PAD]
+t: 101 restore: [CLS] a dog has its mouth wide open trying to bite something. [SEP] [PAD] [PAD]
+t: 201 restore: [CLS] a dog woman its mouth full open sitting at a table. [SEP] [PAD] [PAD]
+t: 301 restore: [CLS] a man of black dog has a jumping at a table. [SEP] [PAD] [PAD]
+t: 401 restore: [CLS] a black man sitting at a table table at a restaurant. [SEP] [PAD] [PAD]
+t: 501 restore: [CLS] a man with a dark black sitting at a a table. [SEP] [PAD] [PAD]
+t: 601 restore: [CLS] a man in a black shirt sitting at a a table. [SEP] [PAD] [PAD]
+t: 701 restore: [CLS] a man in a black a is at a a restaurant. [SEP] [PAD] [PAD]
+t: 801 restore: [CLS] a man man a at a table sitting at a restaurant. [SEP] [PAD] [PAD]
+t: 901 restore: [CLS] a man wearing a a a a at a a table. [SEP] [PAD] [PAD]
+BLEU-4 score: 0.19476942718029022

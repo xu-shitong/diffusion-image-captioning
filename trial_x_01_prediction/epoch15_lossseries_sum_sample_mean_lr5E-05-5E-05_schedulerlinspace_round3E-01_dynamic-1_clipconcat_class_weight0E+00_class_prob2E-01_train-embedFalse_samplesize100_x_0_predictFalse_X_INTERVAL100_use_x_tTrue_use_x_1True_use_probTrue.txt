@@ -1,0 +1,39 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 10.646331787109375, 6.264591693878174, 39.004913330078125, 10.398584365844727, 6.109586715698242, 26.84585952758789
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 10.528508186340332, 6.062630653381348, 24.594358444213867, 10.475167274475098, 5.338504791259766, 21.28192710876465
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 10.581916809082031, 5.484627723693848, 20.632850646972656, 10.502548217773438, 5.108243465423584, 18.769203186035156
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 10.624408721923828, 5.149975299835205, 18.535091400146484, 10.54514217376709, 4.821226596832275, 17.21184539794922
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 10.659209251403809, 4.93298864364624, 17.140596389770508, 10.636279106140137, 4.632357120513916, 15.97582721710205
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 10.680461883544922, 4.766307830810547, 16.11514663696289, 10.668484687805176, 4.518672943115234, 15.16651725769043
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 10.67265510559082, 4.620365142822266, 15.316141128540039, 10.671485900878906, 4.380488872528076, 14.60093879699707
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 10.676953315734863, 4.507728576660156, 14.695886611938477, 10.613800048828125, 4.2767181396484375, 13.954721450805664
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 10.674175262451172, 4.423480033874512, 14.185113906860352, 10.578741073608398, 4.214577674865723, 13.653937339782715
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 10.668907165527344, 4.353588104248047, 13.715201377868652, 10.702179908752441, 4.158785820007324, 13.23616886138916
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 10.660969734191895, 4.296602725982666, 13.29858684539795, 10.570817947387695, 4.129541873931885, 12.890646934509277
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 10.670782089233398, 4.248733997344971, 12.932302474975586, 10.592134475708008, 4.088316440582275, 12.66332721710205
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 10.683042526245117, 4.210097312927246, 12.602088928222656, 10.536888122558594, 4.048508644104004, 12.442845344543457
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 10.67404842376709, 4.17566442489624, 12.261086463928223, 10.565354347229004, 4.0302348136901855, 12.282755851745605
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 10.6831636428833, 4.148318290710449, 11.954586029052734, 10.573545455932617, 3.982088327407837, 12.100165367126465
+origin text: A girls walks down the road holding a teddy bear .
+t = 999
+inferred: [CLS] a small girl with a small walks on the street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a small girl with a small girl on a street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a small girl on a street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a small girl on a street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a little girl on a street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a a girl on a street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a a girl on a street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a a girl on a street. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a a girl on a the. [SEP] [PAD] [PAD] [PAD]
+inferred: [CLS] a little girl with a a girl on a a. [SEP] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a girls walks down the road holding a teddy bear. [SEP] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a girl walks down the street holding a silly dog. [SEP] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a woman walking down a road holding a brown cat. [SEP] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a girl walks on a street with a small dog. [SEP] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a girl walks on a street street with a street. [SEP] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a girl with a a a walks on a street. [SEP] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a small girl walks a a street on a street. [SEP] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a girl girl with a small with on a street. [SEP] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a little girl with a a with with a street. [SEP] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a small girl with a baby with down a street. [SEP] [PAD] [PAD] [PAD]
+BLEU-4 score: 0.15745605528354645

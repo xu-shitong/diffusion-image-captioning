@@ -36,3 +36,5 @@ t: 601 restore: [CLS] a white and and white dog in in through the snow [SEP] [PA
 t: 701 restore: [CLS] a white and white white dog is in in the snow [SEP] [PAD] [PAD] [PAD]
 t: 801 restore: [CLS] a white and and white white dog through through the snow [SEP] [PAD] [PAD] [PAD]
 t: 901 restore: [CLS] a white and white white dog is through in the snow [SEP] [PAD] [PAD] [PAD]
+
+BLEU on leaking val set: 0.1814 0.1779

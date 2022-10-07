@@ -38,3 +38,5 @@ t: 601 restore: [CLS] a girl girl in a a standing in a water [SEP] [PAD] [PAD] [
 t: 701 restore: [CLS] a girl in in a a standing in a pool [SEP] [PAD] [PAD] [PAD] [PAD]
 t: 801 restore: [CLS] a girl in a a standing in a a pool [SEP] [PAD] [PAD] [PAD] [PAD]
 t: 901 restore: [CLS] a girl in a a a a a a water [SEP] [PAD] [PAD] [PAD] [PAD]
+
+BLEU on leaked 0.165 0.1705

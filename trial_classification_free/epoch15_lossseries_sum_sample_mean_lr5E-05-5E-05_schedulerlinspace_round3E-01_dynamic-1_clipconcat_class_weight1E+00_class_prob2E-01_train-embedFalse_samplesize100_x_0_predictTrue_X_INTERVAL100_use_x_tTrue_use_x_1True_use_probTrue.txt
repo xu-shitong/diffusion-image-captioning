@@ -1,0 +1,62 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.508910655975342, 5.712634086608887, 42.558074951171875, 5.197478294372559, 6.0369977951049805, 28.801841735839844
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 5.1777191162109375, 6.017846584320068, 26.627277374267578, 4.864028453826904, 5.442696571350098, 22.4623966217041
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 5.038323402404785, 5.409307479858398, 22.039812088012695, 4.743880748748779, 4.839390277862549, 20.035858154296875
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.962404251098633, 4.982997417449951, 19.934785842895508, 4.820732116699219, 4.644352436065674, 18.348894119262695
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9480767250061035, 4.75633430480957, 18.529743194580078, 4.855947971343994, 4.460949897766113, 17.275907516479492
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.943168640136719, 4.6209869384765625, 17.493587493896484, 4.734877109527588, 4.41034460067749, 16.40276527404785
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.932620525360107, 4.502497673034668, 16.664308547973633, 4.731003284454346, 4.2748637199401855, 15.75150203704834
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.929436683654785, 4.415517807006836, 16.030868530273438, 4.759148597717285, 4.260290622711182, 15.077691078186035
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.922760009765625, 4.34208869934082, 15.508753776550293, 4.714315414428711, 4.167330741882324, 14.834267616271973
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.917672634124756, 4.2825117111206055, 15.079195022583008, 4.834699630737305, 4.144876003265381, 14.297911643981934
+origin text: A woman waving from between two piles of dried corn husk .
+t = 999
+inferred: [CLS] a woman in a a a a a a a a.. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a woman waving from between two piles of dried corn husk. [SEP] [PAD]
+t: 101 restore: [CLS] a woman wearing a a two glasses of tree green a camera. [SEP] [PAD]
+t: 201 restore: [CLS] a woman walks in a a in a a a a tree. [SEP] [PAD]
+t: 301 restore: [CLS] a woman girl a a a a a a a a tree. [SEP] [PAD]
+t: 401 restore: [CLS] a woman in a a a a in a a a a. [SEP] [PAD]
+t: 501 restore: [CLS] a woman in a a a a a a a a a. [SEP] [PAD]
+t: 601 restore: [CLS] a woman in a a a a a a a a a. [SEP] [PAD]
+t: 701 restore: [CLS] a woman in a a a a a a a a a. [SEP] [PAD]
+t: 801 restore: [CLS] a woman in a a a a a a a a a. [SEP] [PAD]
+t: 901 restore: [CLS] a woman in a a a a a a a a.. [SEP] [PAD]
+BLEU-4 score: 0.13952678442001343epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.917339324951172, 4.235701560974121, 14.727424621582031, 4.762933731079102, 4.102304458618164, 14.014026641845703
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.917867183685303, 4.191869258880615, 14.379425048828125, 4.836995601654053, 4.0555338859558105, 13.60612678527832
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.917904376983643, 4.155844688415527, 14.060546875, 4.822411060333252, 4.068204879760742, 13.325056076049805
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.913120746612549, 4.130863189697266, 13.79361629486084, 4.75893497467041, 4.013089179992676, 13.180318832397461
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.915896415710449, 4.104960918426514, 13.490056037902832, 4.748110294342041, 3.9789865016937256, 13.116381645202637
+origin text: A woman waving from between two piles of dried corn husk .
+t = 999
+inferred: [CLS] a woman is a a a a a a a a water. [SEP] [PAD]
+inferred: [CLS] a woman is a a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is a a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is on a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is on a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is on a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is holding a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is holding a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is holding a a a a in in a grass. [SEP] [PAD]
+inferred: [CLS] a woman is holding a a a a in in the grass. [SEP] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a woman waving from between two piles of dried corn husk. [SEP] [PAD]
+t: 101 restore: [CLS] a woman kneeling in outside two trees on a orange oranges. [SEP] [PAD]
+t: 201 restore: [CLS] a woman with a a a on a a a a the. [SEP] [PAD]
+t: 301 restore: [CLS] a woman wearing a a a a in a a a water. [SEP] [PAD]
+t: 401 restore: [CLS] a woman in a a a a in a a a a. [SEP] [PAD]
+t: 501 restore: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+t: 601 restore: [CLS] a woman in a a a a a a a a grass. [SEP] [PAD]
+t: 701 restore: [CLS] a woman is a a a a a a a a water. [SEP] [PAD]
+t: 801 restore: [CLS] a woman is a a a a a a a a water. [SEP] [PAD]
+t: 901 restore: [CLS] a woman in a a a a a a a a water. [SEP] [PAD]
+BLEU-4 score: 0.15394991636276245

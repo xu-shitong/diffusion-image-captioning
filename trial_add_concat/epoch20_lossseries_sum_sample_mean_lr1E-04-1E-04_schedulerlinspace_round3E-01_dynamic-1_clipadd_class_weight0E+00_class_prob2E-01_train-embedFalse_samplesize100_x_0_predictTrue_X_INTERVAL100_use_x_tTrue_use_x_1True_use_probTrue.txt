@@ -1,0 +1,92 @@
+large dataset
+
+early stop! 
+origin text:  A oriental child of approximately 3 years of age is blowing on a toy and she is wearing green bracelets .
+t = 999
+inferred: no kinte many hs hind fl lass basil interval even spit meres over being
+inferred: wil is im sud niagara mustphi as permanenterated dip rear a sino thirty sui
+inferred: short frontaba willfi g padudife [CLS] few d dot has so opposite
+inferred: standsund teaching fjord rome obfi acceptingusa short remaining so could isnaud part
+inferred: largest tin fjord tin ev has chu tin when mid dotnobhomsat tin dot
+inferred: e negative open tin costa open off tin open tin outpo barrington bet tin so
+inferred: appeal budgetvo glassvo pumped budget budget glassren designation ion programme manga budget so
+inferred: hong cost proofsbynka siennaaldialdifi proofnkaaldisan must frontoka
+inferred: ar ar might psi ar sub should sub ar ar ar docnkaoka vo par
+inferred: can hit can commons hit uncommon my s can my as being uncommon be can can
+text t effectiveness
+t: 1 restore: : s as : as all as remaining : : s over s s s as
+t: 101 restore: on both just one rei would s - : works all homogeneous a as - both
+t: 201 restore: can all : war household wi lent ut all be ir many ard irhmi
+t: 301 restore: around zero printed few skin on within will e farm retrospective programme log log nun mon
+t: 401 restore: sis nun matter tori choice board sf mu brought sign lime both changes each much on
+t: 501 restore: ##la front pat zted lev ia seven finnago wreckyenla one day both
+t: 601 restore: protest or always color force neutrality expense will but skier after orkan about dominionant
+t: 701 restore: last services didter art flanders island seven own all short both another art annualew
+t: 801 restore: republic its no can varied relief disc news champ dog next using disc etc satellite class
+t: 901 restore: end salt math ste it farza search an art mer last her frontierl dt
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.865143775939941, 4.746246337890625, 20.874845504760742, 4.708312034606934, 4.112025260925293, 16.80423927307129
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.564185619354248, 4.081331253051758, 16.267902374267578, 4.4968109130859375, 3.910949945449829, 15.087122917175293
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.5059895515441895, 3.9190282821655273, 15.213163375854492, 4.426873683929443, 3.788330316543579, 14.534111976623535
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.4731221199035645, 3.8311595916748047, 14.785900115966797, 4.461267471313477, 3.7112555503845215, 14.288469314575195
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.445725917816162, 3.7710118293762207, 14.503379821777344, 4.440927028656006, 3.6825520992279053, 13.963269233703613
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.421521186828613, 3.7318222522735596, 14.306471824645996, 4.371396541595459, 3.6477408409118652, 13.88734245300293
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.400364875793457, 3.7010951042175293, 14.139607429504395, 4.361461639404297, 3.612187623977661, 13.767302513122559
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.388360977172852, 3.687086582183838, 14.006230354309082, 4.377435684204102, 3.6004204750061035, 13.615410804748535
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.377425670623779, 3.663766860961914, 13.868640899658203, 4.382552623748779, 3.5876266956329346, 13.504457473754883
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.370086193084717, 3.647191047668457, 13.741518020629883, 4.378121376037598, 3.594707489013672, 13.380066871643066
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.3661603927612305, 3.6353862285614014, 13.620107650756836, 4.35149621963501, 3.561760187149048, 13.352517127990723
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.365983009338379, 3.628903388977051, 13.505731582641602, 4.320174694061279, 3.570110559463501, 13.298020362854004
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.365626811981201, 3.6268773078918457, 13.413963317871094, 4.3151397705078125, 3.5659584999084473, 13.222042083740234
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.366014003753662, 3.6123313903808594, 13.289688110351562, 4.2895050048828125, 3.553420066833496, 13.199687957763672
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.366698265075684, 3.6072754859924316, 13.199444770812988, 4.349693775177002, 3.5536997318267822, 13.072259902954102
+origin text:  A few black guys talking to a girl .
+t = 999
+inferred: [CLS] a group of a outside in a street. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a group of people standing in a street. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a group of people standing on a sidewalk. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a group of people standing in. sidewalk. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS]. group of people standing in. sidewalk. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS]. group of people standing in. sidewalk. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS]. group of people standing are. sidewalk. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS]. group of people standing are. sidewalk. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS]. group of people standing are. walking. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS]. group of people standing are. walking. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a few black guys talking to a girl. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a few black teenagers talking to a girl. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a group of men talking to a girl. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a group of people talking in the park. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a group of people playing in a outside. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a group and people outside in a building. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a group of a talking on a street. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a group of in in a a street. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a men men in a in a street. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a group of in outside a a street. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD]
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.36668062210083, 3.6008551120758057, 13.10239028930664, 4.328314304351807, 3.5304183959960938, 12.712760925292969
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.3692145347595215, 3.596672534942627, 13.021994590759277, 4.333858013153076, 3.529536008834839, 12.66443920135498
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.373352527618408, 3.5910677909851074, 12.913474082946777, 4.368355751037598, 3.5258889198303223, 12.65295696258545
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.378706932067871, 3.592346668243408, 12.815945625305176, 4.312832832336426, 3.521214485168457, 12.659914016723633
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.38431978225708, 3.590552806854248, 12.715677261352539, 4.376801490783691, 3.5269248485565186, 12.610299110412598
+origin text: The child plays among the leaves in the autumn .
+t = 999
+inferred: [CLS] a child plays in the in in fall leaves. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a child plays in the air in the leaves. [SEP] piles piles piles piles
+inferred: [CLS] a baby playing in the ground in the leaves. [SEP] pile pile pile [PAD]
+inferred: [CLS] a baby playing in the ground in the leaves. [SEP] pile pile pile squeak
+inferred: [CLS] a baby playing in the ground in the leaves. [SEP] pile pile pile bushes
+inferred: [CLS] a baby playing in the ground. the leaves. [SEP] pile pile pile [PAD]
+inferred: [CLS] a baby playing in the ground. the leaves. [SEP] pile pile pile sniffing
+inferred: [CLS] a baby playing in the ground. the leaves. [SEP] pile pile pile bushes
+inferred: [CLS] a baby playing in the ground the the leaves. [SEP] pile pile pile [PAD]
+inferred: [CLS] a baby playing in the ground the the leaves. [SEP] pile pile ground sniffing
+text t effectiveness
+t: 1 restore: [CLS] the child plays among the leaves in the autumn. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] the child plays among the leaves in the autumn. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] the child plays amongst the leaves in the leaves. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] the child runs in the leaves in the leaves. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a child plays in the leaves in the fall. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a child plays with the leaves in the leaves. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a child plays in the leaves in the leaves. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a child plays in the leaves in the leaves. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a man is in a playing in the grass. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a man plays in the leaves in fall leaves. [SEP] [PAD] [PAD] [PAD] [PAD]

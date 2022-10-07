@@ -185,8 +185,7 @@ dynamic weight 5e-5 0.3
 基于 add 1e-4 无 跑大数据集
 - 代价值很低，细节不如concat 大数据集baseline
 - 没有完全converge 继续5 epoch训练
-- 增加到25 epoch训练
-- 
+- 文本后半部分开始重复词，重新跑 15 epoch
 
 基于 add 1e-4 使用guidance 
 - 代价值接近baseline 相比于concat代价较低
@@ -202,10 +201,48 @@ dynamic weight 5e-5 0.3
 - 第9 epoch后出现nan 报错，文本全部输出pad
 
 concat 1e-4 大数据集训练
-- 
+- 不如5e-5之前模型，尝试继续训练5 epoch
+- 最低代价值同add 1e-4，并出现x_t代价增加
 
 add 1e-4 大数据集训练
-- 
+- 效果不好，同20 epoch add 1e-4，放弃，尝试5e-5 lr
+
+(BLEU 加入训练，使用torchmetric
+
+add 5e-5 大数据集训练
+- 代价值 文本输出同concat baseline都有infer不存在物体现象
+
+concat 5e-5 大数据集训练
+
+lambda BLEU
+1.0   ?
+0.5   0.1613
+0.3   0.1549 ?
+0.2   0.1550'
+
+dynamic lambda BLEU
+1       - 
+3       - 
+
+classification free
+none      0.1549
+0.3 0.2   0.1539
+1.0 0.2   0.1558
+
+lr    BLEU
+5e-5  0.1549
+1e-4  0.1699
+log   0.1648
+lin   !
+cosine !
+
+x_0 or x_t 
+x_0  0.1549
+x_t  0.1574
+
+fusion   small   large5e-5   large1e-4,schedule?
+add      ?       0.19..      ?
+concat   0.1549  0.233       ?
 
 尝试coco zero shot
 

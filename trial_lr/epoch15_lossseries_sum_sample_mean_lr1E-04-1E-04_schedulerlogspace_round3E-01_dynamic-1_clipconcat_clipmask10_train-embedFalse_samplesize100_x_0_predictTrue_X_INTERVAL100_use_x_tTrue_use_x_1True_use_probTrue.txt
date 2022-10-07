@@ -1,0 +1,40 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.959733963012695, 5.768052101135254, 37.700477600097656, 4.813504219055176, 5.648569107055664, 24.44662857055664
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.937902450561523, 5.496170997619629, 22.059091567993164, 5.104539394378662, 4.974371433258057, 18.997255325317383
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.942876815795898, 4.904095649719238, 18.457088470458984, 4.930028915405273, 4.569225788116455, 17.035200119018555
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.9342570304870605, 4.648458003997803, 16.959613800048828, 4.881077289581299, 4.380096435546875, 15.73542594909668
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.877014636993408, 4.445010185241699, 15.702435493469238, 4.789732456207275, 4.274471759796143, 15.051213264465332
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.836888313293457, 4.314083099365234, 14.978759765625, 4.76711893081665, 4.182794570922852, 14.417661666870117
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.811053276062012, 4.227567672729492, 14.348276138305664, 4.863210201263428, 4.135085582733154, 13.869397163391113
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.80100679397583, 4.166543006896973, 13.824742317199707, 4.805282115936279, 4.082698822021484, 13.395459175109863
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.791111946105957, 4.134373188018799, 13.345191955566406, 4.684533596038818, 4.031399250030518, 13.216682434082031
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.774945259094238, 4.093574523925781, 12.9473876953125, 4.782519817352295, 4.002882957458496, 12.859308242797852
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.764338970184326, 4.062699794769287, 12.576294898986816, 4.753692626953125, 3.987032651901245, 12.624353408813477
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.753695964813232, 4.0426530838012695, 12.218509674072266, 4.707400321960449, 3.9962031841278076, 12.524527549743652
+early stop! 
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.742556095123291, 4.021039009094238, 11.865898132324219, 4.791609287261963, 3.9447972774505615, 12.384624481201172
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.736992835998535, 4.004008769989014, 11.52332878112793, 4.742717742919922, 3.9278061389923096, 12.359597206115723
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.732632160186768, 3.993255615234375, 11.111942291259766, 4.684580326080322, 3.923522472381592, 12.2783784866333
+origin text: The black dog is catching a ball , while the white one watches .
+t = 999
+inferred: [CLS] the black dog is trying to to to a ball a the ball. [SEP]
+inferred: [CLS] the black dog is trying ready to catch a ball for the ball. [SEP]
+inferred: [CLS] the black dog is trying ready to catch a ball for the ball. [SEP]
+inferred: [CLS] the black dog is trying ready to catch a ball for the ball. [SEP]
+inferred: [CLS] the black dog is trying trying to catch white ball for the ball. [SEP]
+inferred: [CLS] the black dog is trying trying to catch white dog for the ball. [SEP]
+inferred: [CLS] the black dog is trying trying to catch white dog for the ball. [SEP]
+inferred: [CLS] the black dog is trying trying to catch white dog for the ball. [SEP]
+inferred: [CLS] the black dog is trying trying to catch white dog for the ball. [SEP]
+inferred: [CLS] the black dog is trying trying to catch white dog catch the ball. [SEP]
+text t effectiveness
+t: 1 restore: [CLS] the black dog is catching a ball, while the white one watches. [SEP]
+t: 101 restore: [CLS] the black dog is catching a ball, while the white one watches. [SEP]
+t: 201 restore: [CLS] the black dog is catching a ball is trying to a a ball. [SEP]
+t: 301 restore: [CLS] the black dog is trying a ball catch catch the white to catch. [SEP]
+t: 401 restore: [CLS] the black dog is watching the ball and to catch to ball ball. [SEP]
+t: 501 restore: [CLS] the black dog is trying to to to a ball a the ball. [SEP]
+t: 601 restore: [CLS] the black dog is about to to to catch to a a ball. [SEP]
+t: 701 restore: [CLS] the black dog is trying to to catch a ball to the ball. [SEP]
+t: 801 restore: [CLS] the black dog is trying to to to ball to catch a ball. [SEP]
+t: 901 restore: [CLS] the black dog is trying to to to a ball catch the ball. [SEP]
+BLEU-4 score: 0.16992177069187164

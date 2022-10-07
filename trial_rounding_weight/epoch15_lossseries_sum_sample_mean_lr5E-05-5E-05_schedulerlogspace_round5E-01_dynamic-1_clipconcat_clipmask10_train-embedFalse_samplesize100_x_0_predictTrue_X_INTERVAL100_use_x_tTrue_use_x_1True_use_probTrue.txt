@@ -36,3 +36,5 @@ t: 601 restore: [CLS] kids playing on a grass in a with a a the background. [SEP
 t: 701 restore: [CLS] kids playing playing in a in a a a a the background. [SEP] [PAD]
 t: 801 restore: [CLS] kids playing playing a a field in a a a the field. [SEP] [PAD]
 t: 901 restore: [CLS] children playing in a a a a a a a the field. [SEP] [PAD]
+
+BLEU leak 0.1985 0.1714
