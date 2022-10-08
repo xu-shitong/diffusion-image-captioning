@@ -53,10 +53,10 @@ mem_report()
 
 # hyperparameters
 DEBUG = False
-CONTINUE_TRAIN = True
+CONTINUE_TRAIN = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
-LEARNING_RATE = 6.4286e-05
+LEARNING_RATE = 1e-4
 END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
 # END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
 
@@ -69,7 +69,7 @@ def cosine_annealing():
 SCHEDULER = torch.linspace
 # SCHEDULER = cosine_annealing # scheduler of learning rate
 TRAIN_SET_RATIO = 0.8
-EARLY_STOP_RATIO = 1.80
+EARLY_STOP_RATIO = 1.8
 EPOCH_NUM = 5
 DYNAMIC_ROUNDING_WEIGHT = -1 # weight of rounding term with respect to x_t loss, <0 means not using 
 ROUNDING_WEIGHT = 0.5 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
