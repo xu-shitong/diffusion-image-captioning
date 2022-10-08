@@ -57,7 +57,7 @@ CONTINUE_TRAIN = False
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
 LEARNING_RATE = 1e-4
-END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
+END_LEARNING_RATE = 5e-5 # learning rate is reduced to end_learning_rate
 # END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
 
 def cosine_annealing():
@@ -92,8 +92,6 @@ LOSS_FUNC = series_sum_sample_mean
 # LOSS_FUNC = mse_series_sum # loss function used between embedding 
 # CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
 CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding
-# # CLIP_MASK = None
-# CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
 CLASSIFIER_FREE_WEIGHT = 0
 # CLASSIFIER_FREE_WEIGHT = 0.3 # classifier guidance, <= 0 means no guidance
 CLASSIFIER_FREE_PROB = 0.2
