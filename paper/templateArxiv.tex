@@ -24,7 +24,7 @@
 \rhead{ \textit{ }} 
 
 % Update your Headers here
-\fancyhead[LO]{Running Title for Header}
+% \fancyhead[LO]{Running Title for Header}
 % \fancyhead[RE]{Firstauthor and Secondauthor} % Firstauthor et al. if more than 2 - must use \documentclass[twoside]{article}
 
 
@@ -34,8 +34,8 @@
 \title{CLIP-DiffusionLM: Apply Diffusion Model on Image Captioning
 %%%% Cite as
 %%%% Update your official citation here when published 
-\thanks{\textit{\underline{Citation}}: 
-\textbf{Authors. Title. Pages.... DOI:000000/11111.}} 
+% \thanks{\textit{\underline{Citation}}: 
+% \textbf{Authors. Title. Pages.... DOI:000000/11111.}} 
 }
 
 \author{
@@ -72,43 +72,42 @@
 
 
 \begin{abstract}
-Image captioning task has been extensively researched by previous work. However, limited experiments have focused on generating captions based on non-autoregressive text decoder. Inspired by the recent success of denoising diffusion model on image synthesize tasks, we applied denoising diffusion probabilistic models to text generation in image captioning tasks. We show that our CLIP-diffusionLM *** On the flickr8k dataset, the model showed. By combining samples from flickr8k and flickr30k dataset, our model showed ... performance. In addition, the model achieved ... zero shot performance in COCO 2015 image caption task. Our code is available at ...
-
-contribution: experiment on learning rate, optimizer, adding mechanism, cosine schedule, using classifier free or not. using model to predict image feature or not, scale up to larger dataset
+Image captioning task has been extensively researched on by previous work. However, limited experiments focus on generating captions based on non-autoregressive text decoder. Inspired by the recent success of denoising diffusion model on image synthesize tasks, we apply denoising diffusion probabilistic models to text generation in image captioning tasks. We show that our CLIP-diffusionLM capable of in significantly less inference steps than autoregressive models. On the Flickr8k dataset, the model achieves 0.1876 BLEU-4 score. By combining samples from Flickr8k and Flickr30k dataset, our model achieves .... BLEU-4 score. Our code is available at ...
 \end{abstract}
-
 
 % keywords can be removed
 \keywords{Diffusion model \and CLIP \and Non-autoregressive text generation}
 
 \section{Introduction}
-Image captioning has being a focus of research over the recent years. Among the previous proposed works, the text encoder used could be split to 2 general classes, i.e. autoregressive and non-autoregressive class. Most of the sota models falls in the autoregressive class\cite{https://doi.org/10.48550/arxiv.1412.6632,DBLP:journals/corr/XuBKCCSZB15,DBLP:journals/corr/LuXPS16,image-caption-with-pos,mplug}. However, autoregressive generation suffer from 1) the slow generation speed due to the generation step is token by token; and 2) not capable of refining prefix of sentences based on the later generated tokens. Multiple attempts have experimented using a non-autoregressive model in the text generation steps\cite{masked-non-autoregres, partial-autoregressive, semi-autoregressive}. The closest work to ours is Masked Non-Autoregressive Image Captioning by Gao et al. \cite{masked-non-autoregres}, which used a BERT model as generator and involves 2 steps-refinement on the generated sequence. Masked Language Model (MLM) is used in their work to supervise the generation of captions. 
+Image captioning has being a focus of research over the recent years. Among the previous proposed works, the text encoder used can be classified to 2 general classes, i.e. autoregressive and non-autoregressive class. Most of the sota models falls in the autoregressive class\cite{https://doi.org/10.48550/arxiv.1412.6632,DBLP:journals/corr/XuBKCCSZB15,DBLP:journals/corr/LuXPS16,image-caption-with-pos,mplug}. However, autoregressive generation suffer from 1) the slow generation speed due to the generation step is token by token; and 2) not capable of refining prefix of sentences based on the later generated tokens. Multiple attempts have experimented using a non-autoregressive model in the text generation steps\cite{masked-non-autoregres, partial-autoregressive, semi-autoregressive}. The closest work to ours is Masked Non-Autoregressive Image Captioning by Gao et al. \cite{masked-non-autoregres}, which uses a BERT model as generator and involves 2 steps-refinement on the generated sequence. Masked Language Model (MLM) is used in their work to supervise the generation of captions.
 
-In contrast to MLM, which is a language model based on discrete tokens embedding prediction, diffusion models based on continuous latent embedding has been thriving in image and audio generation tasks\cite{dalle2, https://doi.org/10.48550/arxiv.2205.11487,glide,DBLP:journals/corr/abs-2105-06337,https://doi.org/10.48550/arxiv.2207.09983}. To the best of our knowledge, there has not been previous work on generating caption embedding based on diffusion language model. Our work aim at employing a model to refine generated token continuously on sequence embedding, and provide empirical insight on useful tricks to improve the generated captions. In particular, we used pretrained CLIP\cite{clip} model for extracting image and text features, and DistilBert\cite{distilbert} model based on diffusion-lm\cite{diffuselm} for text sequence generation. Our contribution consists of proposing a diffusion based image captioning model{}. In addition, we experiment on effectiveness of multiple model design and hyperparameter setting on CLIP-DiffusionLM, including weight assign in loss function terms{}, feature fusion method{}, learning rate{} and classification free guidance{}.
+In contrast to MLM, which is a language model based on discrete tokens embedding prediction, diffusion models based on continuous latent embedding has been thriving in image and audio generation tasks\cite{dalle2, https://doi.org/10.48550/arxiv.2205.11487,glide,DBLP:journals/corr/abs-2105-06337,https://doi.org/10.48550/arxiv.2207.09983}. To the best of our knowledge, there has not been previous work on generating caption embedding based on diffusion language model. Our work aim at employing a model to refine generated token continuously on sequence embedding, and provide empirical insight on useful tricks to improve the generated captions. In particular, we use pretrained CLIP\cite{clip} model for extracting image and text features, and DistilBert\cite{distilbert} model based on diffusion-lm\cite{diffuselm} for text sequence generation. Our contribution consists of proposing a diffusion based image captioning model \hyperref[sec:CLIP-DiffuseLM]{Sec.4}, and experiments on effectiveness of multiple model design and hyperparameter settings, including classification free guidance \hyperref[sec:classification-free-exp]{Sec.5.1}, weight assign in loss function terms \hyperref[sec:lambda-exp]{Sec.5.2}, learning rate \hyperref[sec:lr-exp]{Sec.5.3}, $x_0$-prediction \hyperref[sec:x0-exp]{Sec.5.4} and feature fusion method \hyperref[sec:CLIP-DiffuseLM]{Sec.5.5}.
 
 \section{Related Work}
 \label{sec:headings}
 
 \subsection{Autoregressive image captioning}
-Mao et al. proposed the mRNN model\cite{https://doi.org/10.48550/arxiv.1412.6632}, which used CNN for image extraction and RNN for text generation. Xu et al. \cite{DBLP:journals/corr/XuBKCCSZB15} employed the LSTM for text generation and experimented on soft and hard attention for early fusion between image feature and text feature. Based on this early fusion method, Lu et al. \cite{DBLP:journals/corr/LuXPS16} experimented with the late fusion of image and text features, allowing model to attend on either image or text modality in late phase of generation. Wu and Hu \cite{cascade-RNN} experimented on reversing the generated caption, allowing its backend model to refine the former tokens based on later caption tokens. Le et al. \cite{gla} used attention model to combine local and global feature from images, so that captions can more accurately identify occluded objects. Similarly, Wei et al. \cite{stack-vs} also used image features from both high and low generaliaty, and combined them using cross attention. Their work also involves multi-step refining of the generated text caption. Feng et al. \cite{DBLP:journals/corr/abs-1811-10787} trained image caption in a GAN framework, with a LSTM discriminator reproducing the original image feature from generated text sequence. Similrarly, Guo et al. \cite{mscap} proposed GAN based method to train model predicting stylized text. Multiple discriminators are used to supervise if generated text captured image related feature, in the desired style, and similar to a caption made by human. Kim et al. \cite{vae-caption} used variational auto encoder for extracting image information, their model allows multi caption generation by sampling from the learned image feature distribution, thus produce various captions for a single image. He et al. \cite{image-caption-with-pos} used POS tagging to help the generation of text. The image feature is used as additional input when the model is predicting tokens related to image-specific information, i.e. object, colour, relative position of objects. Mokady, Hertz and Bermano \cite{clipcap} experimented on using pretrained CLIP image feature for sequence generation. The CLIP features are transformed to a sequence of token and used as prefix for a GPT-2 model in generation. Li et al. \cite{mplug} introduced skipped connections between transformer layers to address the information asymmetry between vision and language modality. The model achieved state of the art performance and strong zero shot ability on various tasks. Nguyen et al. \cite{grit} experimented changing the cross attention part of transformer decoder to use both Reginal feature from Faster RCNN and Grid features from swin transformer. 
+Mao et al. proposed the mRNN model\cite{https://doi.org/10.48550/arxiv.1412.6632}, which use CNN for image extraction and RNN for text generation. Xu et al. \cite{DBLP:journals/corr/XuBKCCSZB15} applied the LSTM to text generation and experimented on soft and hard attention for early fusion between image feature and text feature. Based on this early fusion method, Lu et al. \cite{DBLP:journals/corr/LuXPS16} experimented with the late fusion of image and text features, allowing model to attend on either image or text modality in late phase of generation. Wu and Hu \cite{cascade-RNN} experimented on reversing the generated caption, allowing its backend model to refine the former tokens based on later caption tokens. Le et al. \cite{gla} used attention model to combine local and global feature from images, so that captions can more accurately identify occluded objects. Similarly, Wei et al. \cite{stack-vs} also used image features from both high and low generality, and combined them using cross attention. Their work also involves multi-step refining of the generated text caption. Feng et al. \cite{DBLP:journals/corr/abs-1811-10787} trained image caption in a GAN framework, with a LSTM discriminator reproducing the original image feature from generated text sequence. Similrarly, Guo et al. \cite{mscap} proposed GAN based method to train model predicting stylized text. Multiple discriminators are used to supervise if generated text captured image related feature, is in the desired style, and is similar to a caption made by human. Kim et al. \cite{vae-caption} used variational auto encoder for extracting image information, their model allows multi caption generation by sampling from the learned image feature distribution, thus produce various captions for a single image. He et al. \cite{image-caption-with-pos} used POS tagging to help the generation of text. The image feature is used as additional input when the model is predicting tokens related to image-specific information, i.e. object, colour, relative position of objects. Mokady, Hertz and Bermano \cite{clipcap} experimented on using pretrained CLIP image feature for sequence generation. The CLIP features are transformed to a sequence of token and used as prefix for a GPT-2 model in generation. Li et al. \cite{mplug} introduced skipped connections between transformer layers to address the information asymmetry between vision and language modality. The model achieves state of the art performance and strong zero shot ability on various tasks. Nguyen et al. \cite{grit} experimented changing the cross attention part of transformer decoder to use both Regional feature from Faster-RCNN\cite{faster-rcnn} and Grid features from Swin transformer\cite{swin}. 
 
 \subsection{Non autoregressive image captioning}
-In contrast, non-autoregressive models benefits from the attention models' ability to pass textural information in both direction during generation. The text generated in former timesteps could adjust based on text in later timesteps, thus is expected to achieve better performance. Gao et al.\cite{masked-non-autoregres} used BERT\cite{bert} as text decoder and employed a 2 step generation method. Based on this work, Partially Non-Autoregressive Image Captioning by Fei \cite{partial-autoregressive} and semi Non-Autoregressive Image Captioning by Xu et al. \cite{semi-autoregressive} partitioned the generated text in subgroups. Words in the same group are generated non-autoregressively and different groups are generated in autoregressive method. Our model falls in non-autoregressively category and is most close to the Masked Non-Autoregressive Image Captioning\cite{masked-non-autoregres}. The difference is we chose to use diffusion model as the non-autoregressive generation model.
+In contrast, non-autoregressive models benefit from the attention models' ability to pass textural information in both directions during generation. The text generated in former timesteps could adjust based on text in later timesteps, thus is expected to achieve better performance. Gao et al.\cite{masked-non-autoregres} used BERT\cite{bert} as text decoder and employed a 2 step generation method. Based on this work, Partially Non-Autoregressive Image Captioning by Fei \cite{partial-autoregressive} and semi Non-Autoregressive Image Captioning by Xu et al. \cite{semi-autoregressive} partitioned the generated text in subgroups. Words in the same group are generated non-autoregressively and different groups are generated autoregressively. Our model falls in non-autoregressive category and is most closed to the Masked Non-Autoregressive Image Captioning\cite{masked-non-autoregres}. The difference is we choose to use diffusion model as the non-autoregressive generation model.
 
 \subsection{Diffusion models}
-Diffusion models aims at training a model that denoise Gaussial noise incrementally to reproduce original features. Ho, Jain and Abbeel\cite{ddpm} proposed the Denoising Diffusion Probabilistic Model (DDPM) to simplified the loss function by only letting models to predict the noise in generation steps, and proposed alternative loss functions by removing the weight terms. In the following explanation, we refer to DDPM as diffusion model for simplicity. Nichol and Dhariwal\cite{improved-ddpm} proposed several improvements based on DDPM, including setting variance to be learn-able parameters, apply cosine instead of linear noise schedule, and speed up forward process by reducing forward steps. Song, Meng and Ermon\cite{ddim} experimented on reducing the variance in forward process. The result showed that by reducing variance to 0, the deterministic model achieved higher FID score in image generation on both CIFAR10 and CelebA. DiffusionLM by Li et al. \cite{diffuselm} is a recent work on applying continuous diffusion model on text generation. DiffusionLM explored various techniques to improve the performance of continuous diffusion model on text generation. Dhariwal and Nichol \cite{diffuseBeatGan} proposed classifier guidance for improving generated image FID score. In a classifier guided diffusion model, a classifier model is pretrained to predict noised images' object class. During training, the classifier provides gradient on which direction to optimise the generated image, so that the generate image resembles an object closer to the target class. 
+Diffusion model aims at training a model that denoise Gaussial noise incrementally to reproduce original features. Ho, Jain and Abbeel\cite{ddpm} proposed the Denoising Diffusion Probabilistic Model (DDPM) to simplify the loss function by only letting models predict the noise in generation steps, and proposed an alternative loss function by removing the weight coefficients. In the following explanation, we refer to diffusion model as DDPM for simplicity. Nichol and Dhariwal\cite{improved-ddpm} proposed several improvements based on DDPM, including setting variance to be learn-able parameters, apply cosine instead of linear noise schedule, and speed up forward process by reducing forward steps. Song, Meng and Ermon\cite{ddim} experimented on reducing the variance in forward process. The result shows that by reducing variance to 0, the deterministic model achieves higher FID score in image generation on both CIFAR10 and CelebA. DiffusionLM by Li et al. \cite{diffuselm} is a recent work on applying continuous diffusion model on text generation. Their work explored various techniques to improve the performance of continuous diffusion model on text generation. 
 
-To avoid training classifier for guiding model, Jonathan and Tim \cite{classifier-free} proposed classifier free guidance model. In classifier free guidance, the difference in output of generative model when provided with both guided and unguided context information is used as implicit guidance. By using classifier free diffusion model as text-to-image generator, DALL-E2\cite{dalle2}, GLIDE\cite{glide} and High-Resolution Image Synthesis With Latent Diffusion Models\cite{high-resolution-image-synthesis} model achieved significant image generation performance. In particular, DALL-E2 used CLIP model for extracting feature from text, predict the corresponding image CLIP feature through prior network, then use predicted image CLIP feature for final image generation. The model achieved significant novelty in generated images and also inspired us to train a image-to-text model with diffusion model in generation step.
+Dhariwal and Nichol \cite{diffuseBeatGan} proposed classifier guidance for improving generated image FID score. In a classifier guided diffusion model, a classifier model is pretrained to predict noised images' object class. During training, the classifier provides gradient on which direction to optimise the generated image, so that the generate image resembles an object closer to the target class. 
+
+To avoid training classifier for guiding model, Jonathan and Tim \cite{classifier-free} proposed classifier free guidance model. In classifier free guidance, the difference between outputs of generative model when provided with either guided and unguided context information is used as implicit guidance. By using classifier free diffusion model as text-to-image generator, DALL-E2\cite{dalle2}, GLIDE\cite{glide} and High-Resolution Image Synthesis With Latent Diffusion Models\cite{high-resolution-image-synthesis} model achieves significant image generation performance. In particular, DALL-E2 use CLIP model for extracting feature from text, predict the corresponding image CLIP feature through prior network, then use predicted image CLIP feature for final image generation. The model achieves significant novelty in generated images and also inspired us to train a image-to-text model with diffusion model in generation step.
 
 \subsection{CLIP model}
-CLIP model is a contrastive-learning-based model trained on WebImageText dataset. The WebImageText consists of 400 million image-text pairs collected from public available source on Internet. CLIP model demonstrated strong zero shot performance in their evaluation on ImageNet[] dataset. Further work on CLIP model also showed its transferability to other tasks, including image segmentation\cite{lseg, groupvit}, objection detection\cite{vild, glip}, action recognition\cite{clip4clip} and video-text retrieval\cite{actionclip}. 
+CLIP model is a contrastive-learning-based model trained on WebImageText dataset. The WebImageText consists of 400 million image-text pairs collected from publicly available source on Internet. CLIP model demonstrates strong zero shot performance in their evaluation on ImageNet\cite{imagenet} dataset. Further work on CLIP model also shows its transferability to other tasks, including image segmentation\cite{lseg, groupvit}, objection detection\cite{vild, glip}, action recognition\cite{clip4clip} and video-text retrieval\cite{actionclip}. 
 
 \section{Background}
 
 \subsection{Diffusion models}
-The training of denoise diffusion probabilistic model involves generation of noised samples (forward process), and model denoising Gaussian noise back to the original feature (backward process). Let $x_t$ represent the intermediate representation in the diffusion generation stages. In our context, $x_t$ is the sequence of word embedding of the caption. The forward process incremently add noise to the ground truth embedding $x_0$ to generates T noised features $[x_1, ... x_T]$. Each $x_t$ at step t is sampled from probability distribution $q(x_t | x_{t-1}) = N(x_t; \sqrt{1 - \beta_t}x_{t-1}, \beta_t I)$ and the final step feature $x_T$ is aiming at approximate a Gaussian noise. From reparameterization trick, the $x_t$ at any step t could be directly sampled from $x_0$: $x_t = \sqrt{\bar{\alpha}_t}x_0 + (1 - \bar{\alpha}_t) \epsilon$, where $\bar{\alpha}_t = \prod_{s = 1}^t(1 - \beta_s)$ and $\epsilon$ follows a Multivariant Gaussian Normal distribution. The backward process involves training model with parameter $\theta$ to denoise the samples generated in the forward process. The training objective is to minimize the negative log-likelihood of generating $x_0$ from arbitrary Gaussian noise $x_T$ as generated by $q$, that is to minimize
+The training of denoise diffusion probabilistic model involves generation of noised samples (forward process), and model denoising Gaussian noise back to the original feature (backward process). Let $x_t$ represent the intermediate representation between the diffusion generation stages. In our context, $x_t$ is the sequence of word embedding of the caption. The forward process incrementally add noise to the ground truth embedding $x_0$ to generates T noised features $[x_1, ... x_T]$. Each $x_t$ at step t is sampled from probability distribution $q(x_t | x_{t-1}) = N(x_t; \sqrt{1 - \beta_t}x_{t-1}, \beta_t I)$ and the final step feature $x_T$ is aiming at approximate a Gaussian noise. From reparameterization trick, the $x_t$ at any step t could be directly sampled from $x_0$: $x_t = \sqrt{\bar{\alpha}_t}x_0 + (1 - \bar{\alpha}_t) \epsilon$, where $\bar{\alpha}_t = \prod_{s = 1}^t(1 - \beta_s)$ and $\epsilon$ follows a Multivariate Gaussian Normal distribution. The backward process involves training model with parameter $\theta$ to denoise the samples generated in the forward process. The training objective is to minimize the negative log-likelihood of generating $x_0$ from arbitrary Gaussian noise $x_T$ as generated by $q$, that is to minimize
 \begin{align*}
-    E_q[-\log(p_{\theta}(x_0))] &= E_q[-\log(\int p_{\theta}(x_{0:T}), d(x_{1:T}))]
+    E_q[-\log(p_{\theta}(x_0))] &= E_q[-\log(\int p_{\theta}(x_{0:T}) d(x_{1:T}))]
 \end{align*}
 By optimizing the variational lower bound of $p_{\theta}(x_0)$ instead, and modeling the backward process as a Markov Process gives:
 \begin{align*}
@@ -116,34 +115,40 @@ By optimizing the variational lower bound of $p_{\theta}(x_0)$ instead, and mode
     &= E_q[\log(p(x_T)) + \sum_{t = 1}^T\log(\frac{p_{\theta}(x_{t-1} | x_t)}{q(x_t | x_{t-1})})]
 \end{align*}
 
-where $p_{\theta}(x_{t-1} | x_t) = N(x_{t-1}; \mu_{\theta}(x_t, t), \sum_{\theta}(x_t, t))$ and $\mu_{\theta}(x_t, t)$ is model's prediction on mean of $x_{t-1}$ conditioned on $x_t$. From the work of [], expanding and reweighting each term of the negative log-likelihood gives a concise loss function 
+where $p_{\theta}(x_{t-1} | x_t) = N(x_{t-1}; \mu_{\theta}(x_t, t), \sum_{\theta}(x_t, t))$ and $\mu_{\theta}(x_t, t)$ is model's prediction on mean of $x_{t-1}$ conditioned on $x_t$. From DDPM\cite{ddpm}, expanding and reweighting each term of the negative log-likelihood gives a concise loss function 
 $$L_{simple} = \sum_{t=1}^T E_{q(x_t | x_0)} \|\mu_{\theta}(x_t, t) - \hat{\mu}(x_t, x_0)\|^2$$
 where $\hat{\mu}(x_t, x_0)$ is the mean of posterior $q(x_{t-1} | x_t, x_0)$.
 
-Due to the large generation step number (T = 1000 as proposed in \cite{ddpm}), and the generation step being autoregressive on the denoised feature in the previous step, the reverse diffusion is significantly slower than the other generative models\cite{gan, vae}. Multiple stetegies were proposed to accelerate the generation process. Improved DDPM proposed by Nichol and Dhariwal\cite{improved-ddpm} used a subset of generation steps $\{s_0, ..., s_N | s_t < s_{t-1}\} \in (0, T]$. Model is trained to predict $x_{s_{t-1}}$ based on $x_{s_t}$. DiffusionLM proposed by Li et al.\cite{diffuselm} is trained directly to predict the $x_0$ instead of an denoised intermediate steps $x_{t-1}$.
+Due to the large generation step number (T = 1000 as proposed in \cite{ddpm}), and the generation step being autoregressive on the denoised feature in the previous step, the reverse diffusion is significantly slower than the other generative models\cite{gan, vae}. Multiple strategies were proposed to accelerate the generation process. Improved DDPM proposed by Nichol and Dhariwal\cite{improved-ddpm} uses a subset of generation steps $\{s_0, ..., s_N | s_t < s_{t-1}\} \in (0, T]$. Model is trained to predict $x_{s_{t-1}}$ based on $x_{s_t}$. DiffusionLM proposed by Li et al.\cite{diffuselm} is trained directly to predict the $x_0$ instead of an denoised intermediate steps $x_{t-1}$.
 
-In addition, based on the objective function propose by Li et al.\cite{diffuselm}, we added an additional rounding term and a $x_1$ restoring loss term. $x_1$ restoring loss $\|\mu_{\theta}(x_1, 1) - \hat{\mu}(x_1, x_0)\|^2$ is evaluating the performance of model on restoring $x_1$. For simplicity, in the following explanation and experiments, we evaluate the $x_1$ restoring loss together with $L_{simple}$ and refer to their sum as $L_{simple}'$. Rounding term $L_R$ is parameterized by $E_q[-\log(p_{\theta}(w | \hat{x}))] = E_q[-\log(\prod_{i=1}^l p(w_i | \hat{x}_i))]$, where $l$ represents the generated sequence length, $w$ represent the gound truth sentence and $\hat{x}$ is the predicted sequence embedding from the input $x_t$. $p_{\theta}(w_i | \hat{x}_i)$ follows the softmax distribution. In our experiments, we found the relative importance between rounding term and restoring embedding loss $L_{simple}'$ significantly influence the model performance. The relative importance is addressed by the hyperparameter $\lambda$ as rounding term coefficient and discussed in detail{}. Based on the above 2 modifications, our training objective is as follow:
+In addition, we add a rounding term and a $x_1$ restoring loss term to the loss function as propose by Li et al.\cite{diffuselm}. $x_1$ restoring loss $\|\mu_{\theta}(x_1, 1) - \hat{\mu}(x_1, x_0)\|^2$ evaluates the performance of model on restoring $x_1$. For simplicity, in the following explanation and experiments, we evaluate the $x_1$ restoring loss together with $L_{simple}$ and refer to their sum as $L_{simple}'$. Rounding term $L_R$ is parameterized by $E_q[-\log(p_{\theta}(w | \hat{x}))] = E_q[-\log(\prod_{i=1}^l p(w_i | \hat{x}_i))]$, where $l$ represents the generated sequence length, $w$ represent the ground truth sentence and $\hat{x}$ is the predicted sequence embedding from the input $x_t$. $p_{\theta}(w_i | \hat{x}_i)$ follows the Softmax distribution. In our experiments, we find the relative importance between rounding term $L_R$ and restoring embedding loss $L_{simple}'$ significantly influence the model's performance. The relative importance is addressed by the hyperparameter $\lambda$ as rounding term coefficient and discussed in detail \hyperref[sec:lambda-exp]{Sec.5.2}. Based on the above 2 modifications, our training objective is as follow:
 
 $$L_{diffuseLM} = L_{simple}' + \lambda L_R = \sum_{t=1}^{N} E_{q(x_{s_t} | x_0)} [\|\mu_{\theta}(x_{s_t}, s_t) - \hat{\mu}(x_{s_t}, x_0)\|^2 -\lambda\log(p_{\theta}(w | \hat{x}))]$$
 
 
 \section{CLIP-DiffusionLM}
+\label{sec:CLIP-DiffuseLM}
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{images/CLIP-DDPM.png}
     \caption{CLIP-DiffuseLM model}
+    \label{fig:model}
 \end{figure}
 
-Our CLIP-DiffusionLM model consists of 2 parts. A pretrained CLIP (ViT-B/32) model is used for image and caption label feature extraction, and a DistilBert-base-uncased model for performing denoising diffusion in each diffusion step conditioned on CLIP image feature.
+Our CLIP-DiffusionLM model (Figure 1) consists of 2 parts. A pretrained CLIP (ViT-B/32) model\cite{clip} is used for image and ground truth caption label feature extraction, and a DistilBert-base-uncased model\cite{distilbert} for performing denoising diffusion in each diffusion stage conditioned on CLIP image feature.
 
-In a forward process, the CLIP model first extract image features using a ViT-Base/32 architecture[]. In this model, source RGB image is partitioned into 32 patches and prefixed with a <CLS> token to form the input of the 12 ViT layer model. Output feature at the <CLS> token position is treated as the global feature for the whole image. For classification free experiments{}, CLIP text feature extraction is also performed on the caption labels and used as guided context to improve the performance. In caption feature extraction, a modified transformer encoder model is used(Language Models are Unsupervised Multitask Learners, attention is all you need[]). Activation at the highest transformer layer in <EOS> token is used as the global caption feature. In our following experiments, both CLIP text and image branches parameters are not optimized in the backward propagation.
+In a forward process, the CLIP model first extract image features using a ViT-Base/32 architecture\cite{vit}. In this model, source RGB image is partitioned into 32 patches and prefixed with a <CLS> token to form the input of the 12 ViT layer model. Output feature at the <CLS> token position is treated as the global feature for the whole image. For classification free experiments \hyperref[sec:classification-free-exp]{Sec.5.1}, CLIP text feature is also extracted as guidance context to improve the performance. Model used in CLIP caption feature extraction is a modified transformer encoder model \cite{gpt, transformer}. Activation at the highest transformer layer in <EOS> token is used as the global caption feature. In our following experiments, both CLIP text and image branches parameters are not optimized in the backward propagation.
 
-The generation of caption for a given image consists of a sequence of diffusion stages conditioned on CLIP feature extracted. In each stage, CLIP-DiffusionLM receives input of $L \times D_{word}$ dimension vectors $x_t$ as embedding of a $L$ length caption, and two $D_{CLIP}$ dimension vector for CLIP text and image features. Input caption embedding is either the output embedding $x_t$ in the previous diffusion stages, or the Gaussian noise $x_T$ in case of the first diffusion stages. Each of CLIP features is projected by a MLP layer to $D_{word}$ space, before fuse{} with the sequence embedding $x_t$. The fused sequence is the input of the DistilBert model, and output of the DistilBert model is the output of one single diffusion stage, which consists of the prediction for $x_{t-1}$. After the final diffusion stage, the model's prediction for $x_0$ is linear projected by weight matrix \texttt{lm-head} and taken the Softmax value to get the probability of the predicted word in each $L$ length caption sequence position. Finally, each position's word with maximum probability are concatenated to form the output text caption sequence. Unless otherwise specified, both the embedding layer for extracting labeled caption embedding and the \texttt{lm-head} use pretrained DistilBert model embedding layer parameter and are not optimized in model training{}.
+The generation of caption for a given image consists of a sequence of diffusion stages conditioned on CLIP feature extracted. In each stage, CLIP-DiffusionLM receives input of $L \times D_{word}$ dimension vectors $x_t$ as embedding of a $L$ length caption, and two $D_{CLIP}$ dimension vector for CLIP text and image features. Input caption embedding is either the output embedding $x_t$ in the previous diffusion stages, or the Gaussian noise $x_T$ in case of the first diffusion stages. Each of CLIP features is projected by a MLP layer to $D_{word}$ space, before fuse \hyperref[sec:fusion-exp]{Sec.5.5} with the sequence embedding $x_t$. The fused sequence is the input of the DistilBert model, and output of the DistilBert model is the output of one single diffusion stage, which consists of the prediction for $x_{t-1}$. After the final diffusion stage, the model's prediction for $x_0$ is linear projected by weight matrix \texttt{lm-head} and taken the Softmax value to get the probability of the predicted word in each $L$ length caption sequence position. Finally, each position's word with maximum probability are concatenated to form the output text caption sequence. Unless otherwise specified, both the embedding layer for extracting ground truth caption embedding and the \texttt{lm-head} use pretrained DistilBert model embedding layer parameter and are not optimized in model training.
 
 \section{Experiments}
-We trained our model using Flickr8k[] and Flickr30k[] dataset on a single Nvidia A30 GPU. Our final model used ?? $\lambda = 0.3$, $x_0$ prediction, learning rate of 5e-5 and optimized by AdamW. The CLIP image feature is concatenated to each timestep of end of each diffusion step output for feature fusion. In the following experiments, unless otherwise specified, we performed training on Flickr8k dataset using the above model configuration.
+We train our baseline model on Flickr8k\cite{flickr8k} dataset, which consists of 8k images and 5 captions for each image. After adjusting learning rate \hyperref[sec:lr-exp]{Sec.5.3} and rounding coefficient \hyperref[sec:lambda-exp]{Sec.5.2}, we train our final model on combined dataset of Flickr30k\cite{flickr30k} and Flickr8k\cite{flickr8k}. The combined dataset, which we refer to as Flickr30+8k dataset, consists of 38k images and 190k captions. Both models early stop when validation loss is higher than training loss, and result in 15 epochs training used for both models.
 
-unique seq, inference step, add or concat, training time, dataset 30+8
+The baseline model uses configuration of $\lambda = 0.3$, $lr = 5e-5$, concatenation fusion and non-classification-free guidance. It takes around 5 hours to train the baseline model for 15 epochs using AdamW optimizer on a single Nvidia A30 GPU. During training, a subset of 100 $x_t$ noise embeddings are randomly sampled from the total 1000 intermediate representations. The model is trained to predict mean $x_0$ directly as suggested in diffusion-lm\cite{diffuselm}. In final inference step, the baseline model refines its output autoregressively for 5 iterations and all but the first element from every consecutive group of repeated words are removed to improve the BLEU-4 performance. The final model uses same configuration as the baseline model, apart from decaying learning rate linearly from $1e-4$ to $5e-5$ and setting $\lambda$ to $0.5$. The final model takes around 18 hours to finish 15 epochs training on Flickr30+8k dataset, and achieves ... BLEU score on validation set of Flickr30+8k dataset.
+
+\subsection{classification free guidance}
+\label{sec:classification-free-exp}
+The effectiveness of applying classification free guidance is examined on our model. The guidance provided is the CLIP text feature of ground truth label caption. Table 1. shows the comparison between the baseline and classification free guidance trained model. In contrast to previous success of applying classification free guidance, our model fail to improve significantly than none classification guided baseline. We further test the 2 classification-free-guided models' performance by evaluating BLEU score on validation set. The model trained using classifier free guidance hardly outperform the simpler baseline model, with the parameter suggested by Jonathan and Tim \cite{classifier-free} ($w = 0.3$, $p_{uncond} = 0.2$) even result in slight decrease in BLEU-4 score. As a result, classification free guidance is not used in our final model.
 
 \begin{minipage}[c]{0.5\textwidth}
 \centering
@@ -151,12 +156,12 @@ unique seq, inference step, add or concat, training time, dataset 30+8
 \toprule
 $w$ & $p_{uncond}$ & $L_{simple}'$ & $L_R$ & BLEU-4 \\
 \midrule
-non classifier-free guidance & & 4.89 & 12.87 & 0.1549 \\
+no classifier-free guidance & - & 4.89 & 12.87 & 0.1549 \\
 0.3 & 0.2 & 4.92 & 13.49 & 0.1539 \\
 1.0 & 0.2 & 4.89 & 13.06 & 0.1558
 \bottomrule
 \end{tabular}
-\label{tab:table}\captionof{table}{classifier free guidance}
+\label{tab:table1}\captionof{table}{classifier free guidance comparison}
 \end{minipage}
 \begin{minipage}[c]{0.5\textwidth}
 \centering
@@ -164,81 +169,110 @@ non classifier-free guidance & & 4.89 & 12.87 & 0.1549 \\
 \toprule
 $\lambda$     & BLEU-4 \\
 \midrule
-1.0     & 0.1635? \\
-0.5     & 0.1664? \\
+1.0     & 0.1599 \\
+0.5     & 0.1613 \\
 0.3     & 0.1549 \\
-0.2     & 0.1614?
+0.2     & 0.1550
 \bottomrule
 \end{tabular}
-\label{tab:table}\captionof{table}{constant $L_R$ coefficient BLEU}
+\label{tab:const-lambda}\captionof{table}{constant $L_R$ coefficient BLEU}
 \end{minipage}
-\subsection{relative importance of Rounding term and Embedding-restoring loss term $L_{simple}$}
 
+
+\subsection{Relative importance between Rounding term $L_R$ and Embedding-restoring loss term $L_{simple}$}
+\label{sec:lambda-exp}
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{images/const_rounding.png}
   \caption{constant $L_R$ coefficient loss}
-  \label{fig:fig1}
+  \label{fig:const-lambda}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{images/dynamic_rounding.png}
   \caption{dynamic $L_R$ coefficient scheduling loss}
-  \label{fig:fig2}
+  \label{fig:dynamic-lambda}
 \end{figure}
 
-In this session we explain our choice of rounding coefficient hyperparameter $\lambda$. We introduce the coefficient in the expectancy of controlling model to optimize primarily based on either the $L_{simple}'$ or the $L_R$ loss. $\lambda \in \{1.0, 0.5, 0.3, 0.2\}$ were experimented on as shown in Fig?. When $\lambda$ decrease, the model showed a decreasing trend in its $L_{simple}'$ loss (from 8.56 to 4.88) at the cost of increasing $L_R$ loss (from 34.4 to 48.9). In addition, setting $\lambda$ to lower than 0.3 showed increase in $L_{simple}'$ loss, which means model is increasing the probability of output the ground truth sequence while not captioning the similarity between the predicted word and ground truth words. Though we found the final $L_{simple}'$ of $\lambda = 0.2$ (3.93) lower that of $\lambda = 0.3$ (4.88), BLEU score of the model shows the opposite in Table?. In conclusion, $\lambda = 0.3$ showed highest BELU-4 score with relatively low $L_{simple}'$ loss, and thus is chosen as default value in later experiments.
+In this session we explain our choice of rounding coefficient hyperparameter $\lambda$. We introduce the coefficient in the expectancy of controlling model to optimize primarily based on either the $L_{simple}'$ or the $L_R$ loss. $\lambda \in \{1.0, 0.5, 0.3, 0.2\}$ are experimented on as shown in Figure 2. When $\lambda$ decrease, the model shows a decreasing trend in its $L_{simple}'$ loss (from 8.56 to 4.88) at the cost of increasing $L_R$ loss (from 34.4 to 48.9) as expected. In addition, setting $\lambda$ to lower than 0.3 shows increase in $L_{simple}'$ loss, which means model is increasing the probability of output the ground truth sequence while not captioning the similarity between the predicted word and ground truth words. Though we find the final $L_{simple}'$ of $\lambda = 0.2$ (3.93) lower that of $\lambda = 0.3$ (4.88), BLEU score of the model shows the opposite in Table 2. 
 
-Furthermore, we explored if a dynamic $\lambda$ scheduling method help the model adjust $\lambda$ based on ratio between $L_{simple}'$ and $L_R$. The dynamic scheduling method update $\lambda$ value after each gradient descend step as $\lambda = L_{simple}' / L_R * C$, where $C$ is a hyperparameter defining the relative weight kept between $L_{simple}'$ and $L_R$ throughout the training. To choose a reasonable $C$ value, we examined the $\lambda = 0.3$ experiment final epoch's $\frac{L_{simple}'}{L_R}$ value, which is around 2.80. Based on this observation, we took $C = 1$ and expects both $L_{simple}'$ and $L_R$ loss decrease at the same rate and reach $\lambda \approx 0.3$ in the final epoch. Same reasoning applies to the choice of $C = 3$, which aims at reaching $\lambda \approx 1.0$ in the final epoch. 
+Furthermore, we explore if a dynamic $\lambda$ scheduling method help the model adjust $\lambda$ based on ratio between $L_{simple}'$ and $L_R$. The dynamic scheduling method update $\lambda$ value after each gradient descend step as $\lambda = L_{simple}' / L_R * C$, where $C$ is a hyperparameter defining the relative weight kept between $L_{simple}'$ and $L_R$ throughout the training. To choose a reasonable $C$ value, we examine the $\lambda = 0.3$ experiment final epoch's $\frac{L_{simple}'}{L_R}$ value, which is around 2.80. Based on this observation, we take $C = 1$ and expect both $L_{simple}'$ and $L_R$ loss decrease at the same rate and reach $\lambda \approx 0.3$ in the final epoch. Same reasoning applies to the choice of $C = 3$, which aims at reaching $\lambda \approx 1.0$ in the final epoch. 
 
-We plot the dynamic scheduled loss in Fig?. The relative ratio between $L_{simple}'$ $L_R$ did not follow the dynamic ratio defined as expected. A possible explanation is that the loss is taken before gradient decent is performed, and evaluation of loss is based on the next batch sample, result in the logged $\frac{L_{simple}'}{L_R}$ value not following the expected relative loss ratio. In both experiments, the model showed worse performance with dynamic $\lambda$ scheduling enabled. In our further experiments, the non-dynamic scheduled $\lambda = 0.3$ is used. 
+We plot the dynamic scheduled loss in Figure 3. The relative ratio between $L_{simple}'$ $L_R$ does not follow the dynamic ratio defined as expected. A possible explanation is that the loss is taken before gradient decent is performed, and evaluation of loss is based on the next batch sample, result in the logged $\frac{L_{simple}'}{L_R}$ value not following the expected relative loss ratio. In both experiments, the model shows worse performance with dynamic $\lambda$ scheduling enabled. In our final model, the non-dynamic scheduled $\lambda = 0.5$ is used.
 
-\subsection{classification free guidance}
-The effectiveness of applying classification free guidance is examined on our model. The guidance provided is the CLIP text feature of ground truth label caption. Fig? shows the comparison between the baseline and classification free guidance trained model. In contrast to previous success of applying classification free guidance, our model failed to improve significantly than none classification guided baseline. We further test the 2 models' performance by evaluating BLEU score on validation set Table?. The model trained using classifier free guidance hardly outperformed the simpler baseline model, with the parameter suggested in \cite{classifier-free} even result in slight decrease in BLEU-4 score. As a result, classification free guidance was not used in final model.
+\begin{minipage}[c]{0.5\textwidth}
+\centering
+\begin{tabular}{ll}
+\toprule
+$lr$ & BLEU-4 \\
+\midrule
+5e-5 & 0.1549 \\
+1e-4 & 0.1699  \\
+log schedule & 0.1648 \\
+linear schedule & 0.1876 \\
+cosine annealing & 0.1848
+\bottomrule
+\end{tabular}
+\label{tab:lr}\captionof{table}{learning rate BLEU-4 scores}
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+\centering
+\begin{tabular}{llll}
+\toprule
+fusion method & Flickr8k & Flickr30+8k & final model \\
+\midrule
+addition & 0.1033 & 0.1948 & - \\
+concatenation & 0.1549 & 0.2337 & ?
+\bottomrule
+\end{tabular}
+\label{tab:fusion}\captionof{table}{fusion method BLEU-4 scores}
+\end{minipage}
 
 \subsection{learning rate}
-TODO: retry with bleu on 1e-4 running  - 5e-5 use above result
-lin schedule, use same metrics as log which is 0.1632
+\label{sec:lr-exp}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{images/lr.png}
+  \caption{constant learning rate $L_{simple}'$ loss}
+  \label{fig:fusion}
+\end{figure}
 
-In case of learning rate defining and scheduling, we experimented on constant learning rate of $lr \in \{5e-4, 1e-4, 5e-5, 1e-5\}$. In addition, we experimented on linear, log, cosine learning rate scheduling[] between the best-performing learning rate $1e-4$ and $5e-5$. 
+We experiment on constant learning rate of $lr \in \{5e-4, 1e-4, 5e-5, 1e-5\}$ (Figure 4 and Table 3). Among these learning rate choices, $lr = 1e-4$ achieve the highest BLEU-4 score (0.1699), and the lowest $L_{simple}'$ loss (4.69). To our surprise, model fail to converge to both a lower $L_{simple}'$ and $L_R$ loss before over-fitting when learning rate is set below $1e-4$. A probable cause is training with a low learning rate prevents the model exploring the parameter space and converging to a local minimum.
 
-In constant learning rate experiments, $lr = 5e-5$ achieved the highest BLEU-4 score (), and $lr = 1e-4$ achieved the lowest $l_{simple}'$ loss (4.69). In the following experiments, $lr = 5e-5$ was taken as default learning rate and $lr = 1e-4$
+To experiment on if model can refine on the result achieved by larger learning rate, we apply linear, log and cosine annealing scheduling between the 2 best-performing learning rate values ($1e-4$ and $5e-5$). Among the 3 scheduling method, linear scheduling achieve the highest BLEU-4 score (0.1876), followed by cosine annealing (0.1848). The log scheduling, which decrease learning rate significantly more rapidly to a low value, fail to achieve comparable performance to other 2 scheduling method. This failed experiment also supports our guessing above. Linear decay of learning rate from $1e-4$ to $5e-5$ is chosen as our final model configuration. 
 
-In linear and log learning rate scheduling, model learning rate is updated after every epoch. The 2 scheduling methods differes mainly on the , where log scheduling decrease learning rate at faster than linear scheduling but allow model to refine with low learning rate in the final epoches. 
-
-Based on the above experiments, model suprisingly perform better with higher learning rate and fail to converge to a lower loss value when a small . We further perform cosine scheduleing of learning rate, allow the learning rate decrease to a low value before reset to a high value every 5 epoches in the 15 epoch training. The performance is comparable with the baseline. To simply the process, we kept learning rate as a $1e-4$ constant in further experiments. A probable cause is model optimzie on information relate to $L_{simple}'$ and $L_R$ in different rate. 
-
-\subsection{$x_0$ prediction or $x_{s_{t-1}}$ prediction}
-In DiffusionLM proposed by Li et al.\cite{diffuselm}, model is trained to predict $x_0$ instead of $x_{s_{t-1}}$ conditioned on $x_{s_t}$. In our experiments, the $x_0$-prediction method showed better BLEU-4 score (0.1632) and $L_{diffuseLM}$ loss (17.8) performance compared with $x_{s_{t-1}}$-prediction (0.1575 BLEU-4 score and 22.6 $L_{diffuseLM}$ loss). In addition, by following the $x_0$-prediction method, our model could converge to a reasonable output in less than 5 diffusion steps. This step number is significantly less than the autoregressive methods using an encoder-decoder structure, which involves generation steps proportional to the output sequence length.
+\subsection{$x_0$ prediction or $x_{s_t-n}$ prediction}
+\label{sec:x0-exp}
+In DiffusionLM proposed by Li et al.\cite{diffuselm}, model is trained to predict $x_0$. In this experiment, we examine the difference between $x_0$-prediction and $x_{s_t-n}$-prediction, where $x_{s_t-n}$-prediction trains the model to predict a constant $n = 100$ steps after the sampled latent embedding. In our experiments, the $x_0$-prediction method shows better BLEU-4 score (0.1549) and $L_{diffuseLM}$ loss (17.8) performance compared with $x_{s_{t-1}}$-prediction (0.1474 BLEU-4 score and 22.6 $L_{diffuseLM}$ loss). In addition, by following the $x_0$-prediction method, our model converges to a reasonable output in 5 diffusion stages. This inference step number is significantly less than that of an autoregressive encoder-decoder structure, which involves generation step number proportional to the output sequence length.
 
 \subsection{fusion: concatenation or element-wise addition}
+\label{sec:fusion-exp}
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{images/add_concat.png}
-  \caption{concatenation or element-wise addition fusion}
-  \label{fig:fig1}
+  \caption{concatenation or addition fusion $L_{simple}'$ loss}
+  \label{fig:fusion}
 \end{figure}
 
-We experimented with 2 fusion methods: concatenation or element-wise addition. Concatenation append the CLIP features as additional tokens to the end of the caption embedding $x_t$. An additional segment embedding layer is used to distinguish CLIP feature tokens with caption embedding. In contrast, element-wise addition method use CLIP image feature as position embedding. CLIP image feature is element-wise added to caption word embedding in each timestep. In case of Guidance free training, the CLIP text feature is also element-wise added. In later explanation, element-wise addition is referred to as addition method for simplicity.
+We experiment with 2 fusion methods: concatenation or element-wise addition. Concatenation append the CLIP features as additional tokens to the end of the caption embedding $x_t$. An additional segment embedding layer is used to distinguish CLIP feature tokens with caption embedding. In contrast, element-wise addition method use CLIP image feature as position embedding. CLIP image feature is element-wise added to caption word embedding in each timestep. In case of Guidance free training, the CLIP text feature is also element-wise added. In later explanation, element-wise addition is referred to as addition method for simplicity.
 
-We conduct experiments by running both concatenation and addition fusion. Fig? shows their performance on Flickr8k and Flickr 30+8k dataset. The addition method experience less violent change in $L_{simple}'$ loss, and converged to a lower loss before overfitting. Extending the training dataset to use Flickr 30+8k showed similar result. 
+We conduct experiments by running both concatenation and addition fusion. Figure 5 and Table 4 show their performance on Flickr8k and Flickr 30+8k dataset. The addition method experience less violent fluctuation in $L_{simple}'$ loss, and converge to a lower loss before over-fitting. Extending the training dataset to use Flickr30+8k shows similar result. However, BLEU-4 scores of addition method (0.1033 on Flickr8k and 0.1948 on Flickr30+8k) are significantly lower than that of concatenation method (0.1549 on Flickr8k and 0.2337 on Flickr30+8k) in both datasets' training. As a result, concatenation method is chosen despite its higher converging loss and instability. 
 
-However, by testing the BLEU-4 score on both method trained on Flickr 30+8k dataset, the addition method showed 0.1948 BLEU-4 score, while concatenation method showed 0.2337 BLEU-4 score, indicating the addition method might  method is less prone to overfitting. As a result, concatenation method is chosen despite its higher converging loss and instability.
-
+By modify our baseline model to train with linear learning rate decay and $\lambda = 0.5$ rounding coefficient, the final model achieved ... on the Flickr30+8k dataset.
 
 \section{Conclusion}
-We present the application of diffusion in image caption task, and proved its validity on Flickr8k and Flickr30k dataset. Particularly, we identified the importance of rounding term in loss function to help model converge, and introduced the adaptive ratio adjustment to balance its importance with other terms. There are various improvements to the model and training process:
-- For given predicted word, investigate on the region in image that resulted in the generation of the token.  of focus on for given Experiment on output the attention graph of the model, to check the model did focus on the correct region of the image.
-- In various cases, the model failed to identify the correct object colour. For example, after correctly identify a girl wearing dress and a shirt, the model mistake the colour of shirt to the colour of the dress. 
-- The output text sequence suffers from apparent grammar mistakes, for example, missing subject, repeated words. Additional supervision on the output text grammar might help model reduce such error.
-- We trained on raw image data of the dataset. However, image argumentation has proven to be a valid method to improve the performance[]. Performing data argumentation might improve the model's generalizability and help reduce the wrong colour alignment problem as discussed above. 
-- Due to the computation limit, we are not able to train an model capable of generating caption longer than 16 characters. This also influenced the BLEU performance, since BLEU pelalize sequences with length in their ... coefficient. 
-- in various cases bleu performance and loss does not match, suggest better loss function to define model's performance.
-We believe analysing and improving based on the above observations, diffusion as text generation step could achieve comparable or better performance than auto-regressive models. 
+We present the application of diffusion in image caption task, and prove its validity on Flickr8k and Flickr30k dataset. Particularly, we identify the importance of rounding term in loss function to help model converge, and introduce the adaptive ratio adjustment to balance its importance with other terms. There are various possible improvements to the model and training process:
+\begin{itemize}
+\item In various cases, the model fail to identify the correct object colour. For example, wrongly tag the object colour to be the background colour. We suggest 1) performing image data argumentation, which has been proven to improve the performance for VLP tasks \cite{vilt}, and 2) investigate attention graph of the wrongly tagged object in image for possible causes.
+\item The output text sequence from the model contains apparent grammar mistakes occasionally (e.g. missing subject and repeated words). Providing the model additional guidance on the output text grammar might help reduce the grammar mistakes.
+\item We limit the sequence generated by DistilBert to be under 16 words due to the computation resource limit. As a result, the BLEU score suffers from the Brevity Penalty in BLEU metrics. Training model with relaxed length constrain might further improve the BLEU score.
+\item In various cases models used in experiments with lower loss does not have higher BLEU score, suggesting better loss function is required to define model's performance.
+\end{itemize}
+We believe that analysing and improving based on the above observations, CLIP-DiffusionLM as text generation step will achieve comparable or better performance than auto-regressive models in image captioning tasks.
 
 \section*{Acknowledgments}
-We would like to thank Mu Li and Yi Zhu for sharing their insight in various models in vision and NLP field publicly online, Boyang Gu for providing advice in early stage of the research. The computation resource was supported by Imperial College London. 
+We thank Mu Li and Yi Zhu for sharing their insight in various models in vision and NLP field publicly online, Boyang Gu for providing advice in early stage of the research. The computation resource was supported by Imperial College London. 
 
 %Bibliography
 \bibliographystyle{unsrt}  

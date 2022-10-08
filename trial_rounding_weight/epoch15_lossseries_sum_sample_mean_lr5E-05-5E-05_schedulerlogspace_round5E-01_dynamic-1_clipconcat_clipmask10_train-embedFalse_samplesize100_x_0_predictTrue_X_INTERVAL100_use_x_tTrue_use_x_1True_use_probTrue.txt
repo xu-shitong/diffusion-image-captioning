@@ -1,40 +1,39 @@
-epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 7.277650833129883, 8.019347190856934, 61.03506851196289, 6.700172424316406, 7.15283203125, 41.919368743896484
-epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 6.674055099487305, 7.257923603057861, 38.922306060791016, 6.576404571533203, 6.40570592880249, 33.87838363647461
-epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 6.723374366760254, 6.56170654296875, 32.7046012878418, 6.606174945831299, 5.989988803863525, 29.967533111572266
-epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 6.786562442779541, 6.160067081451416, 29.317283630371094, 6.665231704711914, 5.638323783874512, 27.456396102905273
-epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 6.767816543579102, 5.886309623718262, 27.08181381225586, 6.668048858642578, 5.50430965423584, 25.558486938476562
-epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 6.701692581176758, 5.659234523773193, 25.493852615356445, 6.636466026306152, 5.340222358703613, 24.10466957092285
-epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 6.619635581970215, 5.473163604736328, 24.29887580871582, 6.487440586090088, 5.130579948425293, 23.275449752807617
-epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 6.534578800201416, 5.30997371673584, 23.383777618408203, 6.434764862060547, 4.991955757141113, 22.459049224853516
-epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 6.462096214294434, 5.164281368255615, 22.62064552307129, 6.412652015686035, 4.902893543243408, 21.952871322631836
-epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 6.405676364898682, 5.047956466674805, 21.93050765991211, 6.445485591888428, 4.808354377746582, 21.256244659423828
-epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 6.360098838806152, 4.949411392211914, 21.28407859802246, 6.323981761932373, 4.730564117431641, 20.702299118041992
-epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 6.325222015380859, 4.870345115661621, 20.6949520111084, 6.149643898010254, 4.619446754455566, 20.348081588745117
-epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 6.2939958572387695, 4.79844331741333, 20.171335220336914, 6.098465919494629, 4.5701003074646, 19.936391830444336
-epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 6.270483493804932, 4.745243072509766, 19.6331844329834, 6.231715679168701, 4.562221050262451, 19.665000915527344
-epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 6.254772186279297, 4.699416637420654, 19.14626693725586, 6.208475112915039, 4.508192539215088, 19.311870574951172
-origin text: Kids playing on a lawn with a flag and parking lot nearby .
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 7.375754356384277, 8.036002159118652, 60.90605545043945, 6.789600372314453, 7.163177013397217, 41.1719856262207
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 6.765112400054932, 7.270865440368652, 38.64291000366211, 6.575162887573242, 6.332949161529541, 33.7254524230957
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 6.77094030380249, 6.559296607971191, 32.51507568359375, 6.723117828369141, 5.947565078735352, 29.66252899169922
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 6.818521022796631, 6.1573309898376465, 29.13193702697754, 6.635799407958984, 5.688233375549316, 27.316434860229492
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 6.792985916137695, 5.905437469482422, 26.981006622314453, 6.761463165283203, 5.511358737945557, 25.317861557006836
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 6.718568801879883, 5.662403583526611, 25.407840728759766, 6.588191032409668, 5.326004981994629, 24.29806137084961
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 6.6258864402771, 5.461097717285156, 24.268842697143555, 6.401302814483643, 5.165998935699463, 23.335796356201172
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 6.5370025634765625, 5.295710563659668, 23.34391212463379, 6.3276848793029785, 4.994479179382324, 22.515419006347656
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 6.464665412902832, 5.166430950164795, 22.54123306274414, 6.30888557434082, 4.866120338439941, 21.833999633789062
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 6.4043145179748535, 5.0356831550598145, 21.861024856567383, 6.324166774749756, 4.763072967529297, 21.433164596557617
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 6.36142110824585, 4.939731121063232, 21.214006423950195, 6.205014228820801, 4.686705589294434, 20.71455955505371
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 6.324936866760254, 4.859694480895996, 20.58367156982422, 6.2406792640686035, 4.6120123863220215, 20.29943084716797
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 6.302679061889648, 4.796013355255127, 20.042499542236328, 6.155599594116211, 4.5881733894348145, 19.825502395629883
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 6.2823920249938965, 4.74635124206543, 19.5511417388916, 6.235507488250732, 4.58591890335083, 19.566051483154297
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 6.267406940460205, 4.699161529541016, 19.018783569335938, 6.221975803375244, 4.585886001586914, 19.33953857421875
+origin text: A young girl is sliding down a snowbank .
 t = 999
-inferred: [CLS] children playing on a a field a a a a the background. [SEP] [PAD]
-inferred: [CLS] children playing on a in field in front front of the field. [SEP] [PAD]
-inferred: [CLS] children playing on a field field in front front of the field. [SEP] [PAD]
-inferred: [CLS] children playing on a field field in front front of the field. [SEP] [PAD]
-inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
-inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
-inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
-inferred: [CLS] children playing on a field field in a front of the field. [SEP] [PAD]
-inferred: [CLS] kids playing on a field front in a front of the field. [SEP] [PAD]
-inferred: [CLS] kids playing on a field front of a front of the field. [SEP] [PAD]
+inferred: [CLS] a young girl is climbing a a snowy hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy snow. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy snow. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy snow. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy snow. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy snow. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy snow. [SEP] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] a young girl is climbing down a snowy snow. [SEP] [PAD] [PAD] [PAD] [PAD]
 text t effectiveness
-t: 1 restore: [CLS] kids playing on a lawn with a flag and parking lot nearby. [SEP] [PAD]
-t: 101 restore: [CLS] kids play on a lawn with a flag and parking building nearby. [SEP] [PAD]
-t: 201 restore: [CLS] kids playing on a field with a grass and covered air building. [SEP] [PAD]
-t: 301 restore: [CLS] kids playing on a grass with in a of a of house. [SEP] [PAD]
-t: 401 restore: [CLS] kids playing on a field with a a a the in background. [SEP] [PAD]
-t: 501 restore: [CLS] kids playing in a in the a with a a the field. [SEP] [PAD]
-t: 601 restore: [CLS] kids playing on a grass in a with a a the background. [SEP] [PAD]
-t: 701 restore: [CLS] kids playing playing in a in a a a a the background. [SEP] [PAD]
-t: 801 restore: [CLS] kids playing playing a a field in a a a the field. [SEP] [PAD]
-t: 901 restore: [CLS] children playing in a a a a a a a the field. [SEP] [PAD]
-
-BLEU leak 0.1985 0.1714
+t: 1 restore: [CLS] a young girl is sliding down a snowbank. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] a young girl is sliding down a snow hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] a young girl is sliding up a snow hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] a young girl is climbing down a snowy slope. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] a young girl is climbing down a snow hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] a young girl is climbing up a snowy hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] a young girl is climbing a a snowy slope. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] a young girl is climbing a a snowy hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] a young girl is climbing a a snowy hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] a young girl is climbing a a snowy hill. [SEP] [PAD] [PAD] [PAD] [PAD]
+BLEU-4 score: 0.1613696664571762

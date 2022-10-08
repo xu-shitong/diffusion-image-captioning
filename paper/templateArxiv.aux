@@ -45,6 +45,8 @@
 \citation{clipcap}
 \citation{mplug}
 \citation{grit}
+\citation{faster-rcnn}
+\citation{swin}
 \HyPL@Entry{0<</S/D>>}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{1}{section.2}\protected@file@percent }
@@ -64,6 +66,7 @@
 \citation{dalle2}
 \citation{glide}
 \citation{high-resolution-image-synthesis}
+\citation{imagenet}
 \citation{lseg}
 \citation{groupvit}
 \citation{vild}
@@ -73,6 +76,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Non autoregressive image captioning}{2}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Diffusion models}{2}{subsection.2.3}\protected@file@percent }
 \citation{ddpm}
+\citation{ddpm}
 \citation{gan}
 \citation{vae}
 \citation{improved-ddpm}
@@ -81,28 +85,51 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}CLIP model}{3}{subsection.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Background}{3}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Diffusion models}{3}{subsection.3.1}\protected@file@percent }
+\citation{clip}
+\citation{distilbert}
+\citation{vit}
+\citation{gpt}
+\citation{transformer}
+\citation{flickr8k}
+\citation{flickr30k}
+\citation{flickr8k}
+\citation{diffuselm}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces CLIP-DiffuseLM model\relax }}{4}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:model}{{1}{4}{CLIP-DiffuseLM model\relax }{figure.caption.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}CLIP-DiffusionLM}{4}{section.4}\protected@file@percent }
+\newlabel{sec:CLIP-DiffuseLM}{{4}{4}{CLIP-DiffusionLM}{section.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Experiments}{4}{section.5}\protected@file@percent }
 \citation{classifier-free}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces constant $L_R$ coefficient loss\relax }}{5}{figure.caption.2}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:fig1}{{2}{5}{constant $L_R$ coefficient loss\relax }{figure.caption.2}{}}
+\newlabel{fig:const-lambda}{{2}{5}{constant $L_R$ coefficient loss\relax }{figure.caption.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces dynamic $L_R$ coefficient scheduling loss\relax }}{5}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:fig2}{{3}{5}{dynamic $L_R$ coefficient scheduling loss\relax }{figure.caption.3}{}}
-\newlabel{tab:table}{{5}{5}{Experiments}{section.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces classifier free guidance\relax }}{5}{table.1}\protected@file@percent }
-\newlabel{tab:table}{{5}{5}{Experiments}{table.1}{}}
+\newlabel{fig:dynamic-lambda}{{3}{5}{dynamic $L_R$ coefficient scheduling loss\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}classification free guidance}{5}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:classification-free-exp}{{5.1}{5}{classification free guidance}{subsection.5.1}{}}
+\newlabel{tab:table1}{{5.1}{5}{classification free guidance}{subsection.5.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces classifier free guidance comparison\relax }}{5}{table.1}\protected@file@percent }
+\newlabel{tab:const-lambda}{{5.1}{5}{classification free guidance}{table.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces constant $L_R$ coefficient BLEU\relax }}{5}{table.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}relative importance of Rounding term and Embedding-restoring loss term $L_{simple}$}{5}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Relative importance between Rounding term $L_R$ and Embedding-restoring loss term $L_{simple}$}{5}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:lambda-exp}{{5.2}{5}{Relative importance between Rounding term $L_R$ and Embedding-restoring loss term $L_{simple}$}{subsection.5.2}{}}
 \citation{diffuselm}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces concatenation or element-wise addition fusion\relax }}{6}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:fig1}{{4}{6}{concatenation or element-wise addition fusion\relax }{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}classification free guidance}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces constant learning rate $L_{simple}'$ loss\relax }}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:fusion}{{4}{6}{constant learning rate $L_{simple}'$ loss\relax }{figure.caption.4}{}}
+\newlabel{tab:lr}{{5.2}{6}{Relative importance between Rounding term $L_R$ and Embedding-restoring loss term $L_{simple}$}{figure.caption.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces learning rate BLEU-4 scores\relax }}{6}{table.3}\protected@file@percent }
+\newlabel{tab:fusion}{{5.2}{6}{Relative importance between Rounding term $L_R$ and Embedding-restoring loss term $L_{simple}$}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces fusion method BLEU-4 scores\relax }}{6}{table.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}learning rate}{6}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}$x_0$ prediction or $x_{s_{t-1}}$ prediction}{6}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}fusion: concatenation or element-wise addition}{6}{subsection.5.5}\protected@file@percent }
+\newlabel{sec:lr-exp}{{5.3}{6}{learning rate}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}$x_0$ prediction or $x_{s_t-n}$ prediction}{6}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:x0-exp}{{5.4}{6}{$x_0$ prediction or $x_{s_t-n}$ prediction}{subsection.5.4}{}}
+\citation{vilt}
 \bibstyle{unsrt}
 \bibdata{references}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces concatenation or addition fusion $L_{simple}'$ loss\relax }}{7}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:fusion}{{5}{7}{concatenation or addition fusion $L_{simple}'$ loss\relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}fusion: concatenation or element-wise addition}{7}{subsection.5.5}\protected@file@percent }
+\newlabel{sec:fusion-exp}{{5.5}{7}{fusion: concatenation or element-wise addition}{subsection.5.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{7}{section.6}\protected@file@percent }
-\gdef \@abspage@last{7}
+\gdef \@abspage@last{8}
