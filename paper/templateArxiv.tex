@@ -72,7 +72,8 @@
 
 
 \begin{abstract}
-Image captioning task has been extensively researched on by previous work. However, limited experiments focus on generating captions based on non-autoregressive text decoder. Inspired by the recent success of denoising diffusion model on image synthesize tasks, we apply denoising diffusion probabilistic models to text generation in image captioning tasks. We show that our CLIP-diffusionLM capable of in significantly less inference steps than autoregressive models. On the Flickr8k dataset, the model achieves 0.1876 BLEU-4 score. By combining samples from Flickr8k and Flickr30k dataset, our model achieves .... BLEU-4 score. Our code is available at ...
+Image captioning task has been extensively researched on by previous work. However, limited experiments focus on generating captions based on non-autoregressive text decoder. Inspired by the recent success of denoising diffusion model on image synthesize tasks, we apply denoising diffusion probabilistic models to text generation in image captioning tasks. We show that our CLIP-diffusionLM capable of in significantly less inference steps than autoregressive models. On the Flickr8k dataset, the model achieves 0.1876 BLEU-4 score. By combining samples from Flickr8k and Flickr30k dataset, our model achieves ? BLEU-4 score. Our code is available at \href{https://github.com/xu-shitong/diffusion-image-captioning}{https://github.com/xu-shitong/diffusion-image-captioning}.
+
 \end{abstract}
 
 % keywords can be removed
@@ -144,7 +145,7 @@ The generation of caption for a given image consists of a sequence of diffusion 
 \section{Experiments}
 We train our baseline model on Flickr8k\cite{flickr8k} dataset, which consists of 8k images and 5 captions for each image. After adjusting learning rate \hyperref[sec:lr-exp]{Sec.5.3} and rounding coefficient \hyperref[sec:lambda-exp]{Sec.5.2}, we train our final model on combined dataset of Flickr30k\cite{flickr30k} and Flickr8k\cite{flickr8k}. The combined dataset, which we refer to as Flickr30+8k dataset, consists of 38k images and 190k captions. Both models early stop when validation loss is higher than training loss, and result in 15 epochs training used for both models.
 
-The baseline model uses configuration of batch size of 8, $\lambda = 0.3$, $lr = 5e-5$, concatenation fusion and non-classification-free guidance. It takes around 5 hours to train the baseline model for 15 epochs using AdamW optimizer on a single Nvidia A30 GPU. During training, a subset of 100 $x_t$ noise embeddings are randomly sampled from the total 1000 intermediate representations. The model is trained to predict mean $x_0$ directly as suggested in diffusion-lm\cite{diffuselm}. In final inference step, the baseline model refines its output autoregressively for 5 iterations and all but the first element from every consecutive group of repeated words are removed to improve the BLEU-4 performance. The final model uses same configuration as the baseline model, apart from decaying learning rate linearly from $1e-4$ to $5e-5$ and setting $\lambda$ to $0.5$. The final model takes around 18 hours to finish 15 epochs training on Flickr30+8k dataset, and achieves ... BLEU score on validation set of Flickr30+8k dataset.
+The baseline model uses configuration of batch size of 8, $\lambda = 0.3$, $lr = 5e-5$, concatenation fusion and non-classification-free guidance. It takes around 5 hours to train the baseline model for 15 epochs using AdamW optimizer on a single Nvidia A30 GPU. During training, a subset of 100 $x_t$ noise embeddings are randomly sampled from the total 1000 intermediate representations. The model is trained to predict mean $x_0$ directly as suggested in diffusion-lm\cite{diffuselm}. In final inference step, the baseline model refines its output autoregressively for 5 iterations and all but the first element from every consecutive group of repeated words are removed to improve the BLEU-4 performance. The final model uses same configuration as the baseline model, apart from decaying learning rate linearly from $1e-4$ to $5e-5$ and setting $\lambda$ to $?$. The final model takes around 18 hours to finish 15 epochs training on Flickr30+8k dataset, and achieves ? BLEU score on validation set of Flickr30+8k dataset.
 
 \subsection{classification free guidance}
 \label{sec:classification-free-exp}
@@ -170,7 +171,7 @@ no classifier-free guidance & - & 4.89 & 12.87 & 0.1549 \\
 $\lambda$     & BLEU-4 \\
 \midrule
 1.0     & 0.1599 \\
-0.5     & 0.1613 \\
+0.5     & 0.1614 \\
 0.3     & 0.1549 \\
 0.2     & 0.1550
 \bottomrule
@@ -199,31 +200,32 @@ In this session we explain our choice of rounding coefficient hyperparameter $\l
 
 Furthermore, we explore if a dynamic $\lambda$ scheduling method help the model adjust $\lambda$ based on ratio between $L_{simple}'$ and $L_R$. The dynamic scheduling method update $\lambda$ value after each gradient descend step as $\lambda = L_{simple}' / L_R * C$, where $C$ is a hyperparameter defining the relative weight kept between $L_{simple}'$ and $L_R$ throughout the training. To choose a reasonable $C$ value, we examine the $\lambda = 0.3$ experiment final epoch's $\frac{L_{simple}'}{L_R}$ value, which is around 2.80. Based on this observation, we take $C = 1$ and expect both $L_{simple}'$ and $L_R$ loss decrease at the same rate and reach $\lambda \approx 0.3$ in the final epoch. Same reasoning applies to the choice of $C = 3$, which aims at reaching $\lambda \approx 1.0$ in the final epoch. 
 
-We plot the dynamic scheduled loss in Figure 3. The relative ratio between $L_{simple}'$ $L_R$ does not follow the dynamic ratio defined as expected. A possible explanation is that the loss is taken before gradient decent is performed, and evaluation of loss is based on the next batch sample, result in the logged $\frac{L_{simple}'}{L_R}$ value not following the expected relative loss ratio. In both experiments, the model shows worse performance with dynamic $\lambda$ scheduling enabled. In our final model, the non-dynamic scheduled $\lambda = 0.5$ is used.
+We plot the dynamic scheduled loss in Figure 3. The relative ratio between $L_{simple}'$ $L_R$ does not follow the dynamic ratio defined as expected. A possible explanation is that the loss is taken before gradient decent is performed, and evaluation of loss is based on the next batch sample, result in the logged $\frac{L_{simple}'}{L_R}$ value not following the expected relative loss ratio. In both experiments, the model shows worse performance with dynamic $\lambda$ scheduling enabled. In our final model, we compare both the non-dynamic scheduled $\lambda = 0.5$ and $\lambda = 0.3$ by training on Flickr30+8k dataset, and conclude that $\lambda = ?$ is the better configuration \hyperref[sec:CLIP-DiffuseLM]{Sec.5.5}.
 
 \begin{minipage}[c]{0.5\textwidth}
 \centering
-\begin{tabular}{ll}
+\begin{tabular}{llll}
 \toprule
-$lr$ & BLEU-4 \\
+$lr$ & $L_{simple}'$ & $L_R$ & BLEU-4 \\
 \midrule
-5e-5 & 0.1549 \\
-1e-4 & 0.1699  \\
-log schedule & 0.1648 \\
-linear schedule & 0.1876 \\
-cosine annealing & 0.1848
+5e-5 & 4.89 & 12.87 & 0.1549 \\
+1e-4 & 4.73 & 11.11 & 0.1699  \\
+log schedule & 4.82 & 11.30 & 0.1643 \\
+linear schedule & 4.82 & 11.28 & 0.1876 \\
+cosine annealing & 4.79 & 11.28 & 0.1848
 \bottomrule
 \end{tabular}
 \label{tab:lr}\captionof{table}{learning rate BLEU-4 scores}
 \end{minipage}
 \begin{minipage}[c]{0.5\textwidth}
 \centering
-\begin{tabular}{llll}
+\begin{tabular}{lllll}
 \toprule
-fusion method & Flickr8k & Flickr30+8k & final model \\
+fusion method & $\lambda$ & Flickr8k & Flickr30+8k & final model \\
 \midrule
-addition & 0.1033 & 0.1948 & - \\
-concatenation & 0.1549 & 0.2337 & ?
+addition & 0.3 & 0.1033 & 0.1948 & - \\
+concatenation & 0.3 & 0.1549 & 0.2337 & ? \\
+concatenation & 0.5 & 0.1614 & - & ? 
 \bottomrule
 \end{tabular}
 \label{tab:fusion}\captionof{table}{fusion method BLEU-4 scores}
@@ -238,7 +240,7 @@ concatenation & 0.1549 & 0.2337 & ?
   \label{fig:fusion}
 \end{figure}
 
-We experiment on constant learning rate of $lr \in \{5e-4, 1e-4, 5e-5, 1e-5\}$ (Figure 4 and Table 3). Among these learning rate choices, $lr = 1e-4$ achieve the highest BLEU-4 score (0.1699), and the lowest $L_{simple}'$ loss (4.69). To our surprise, model fail to converge to both a lower $L_{simple}'$ and $L_R$ loss before over-fitting when learning rate is set below $1e-4$. A probable cause is training with a low learning rate prevents the model exploring the parameter space and converging to a local minimum.
+We experiment on constant learning rate of $lr \in \{5e-4, 1e-4, 5e-5, 1e-5\}$ (Figure 4 and Table 3). Among these learning rate choices, $lr = 1e-4$ achieve the highest BLEU-4 score (0.1699), and the lowest $L_{simple}'$ loss (4.73). To our surprise, model fail to converge to both a lower $L_{simple}'$ and $L_R$ loss before over-fitting when learning rate is set below $1e-4$. A probable cause is training with a low learning rate prevents the model exploring the parameter space and converging to a local minimum.
 
 To experiment on if model can refine on the result achieved by larger learning rate, we apply linear, log and cosine annealing scheduling between the 2 best-performing learning rate values ($1e-4$ and $5e-5$). Among the 3 scheduling method, linear scheduling achieve the highest BLEU-4 score (0.1876), followed by cosine annealing (0.1848). The log scheduling, which decrease learning rate significantly more rapidly to a low value, fail to achieve comparable performance to other 2 scheduling method. This failed experiment also supports our guessing above. Linear decay of learning rate from $1e-4$ to $5e-5$ is chosen as our final model configuration. 
 
@@ -259,7 +261,7 @@ We experiment with 2 fusion methods: concatenation or element-wise addition. Con
 
 We conduct experiments by running both concatenation and addition fusion. Figure 5 and Table 4 show their performance on Flickr8k and Flickr 30+8k dataset. The addition method experience less violent fluctuation in $L_{simple}'$ loss, and converge to a lower loss before over-fitting. Extending the training dataset to use Flickr30+8k shows similar result. However, BLEU-4 scores of addition method (0.1033 on Flickr8k and 0.1948 on Flickr30+8k) are significantly lower than that of concatenation method (0.1549 on Flickr8k and 0.2337 on Flickr30+8k) in both datasets' training. As a result, concatenation method is chosen despite its higher converging loss and instability. 
 
-By modify our baseline model to train with linear learning rate decay and $\lambda = 0.5$ rounding coefficient, the final model achieved ... on the Flickr30+8k dataset.
+By modify our baseline model to train with linear learning rate decay and $\lambda = 0.5$ rounding coefficient, the final model achieved ? on the Flickr30+8k dataset.
 
 \section{Conclusion}
 We present the application of diffusion in image caption task, and prove its validity on Flickr8k and Flickr30k dataset. Particularly, we identify the importance of rounding term in loss function to help model converge, and introduce the adaptive ratio adjustment to balance its importance with other terms. There are various possible improvements to the model and training process:
