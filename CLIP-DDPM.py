@@ -69,7 +69,7 @@ def cosine_annealing():
 SCHEDULER = torch.linspace
 # SCHEDULER = cosine_annealing # scheduler of learning rate
 TRAIN_SET_RATIO = 0.8
-EARLY_STOP_RATIO = 1.8
+EARLY_STOP_RATIO = 1.05
 EPOCH_NUM = 5
 DYNAMIC_ROUNDING_WEIGHT = -1 # weight of rounding term with respect to x_t loss, <0 means not using 
 ROUNDING_WEIGHT = 0.5 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
