@@ -36,3 +36,4 @@ t: 601 restore: [CLS] the lady in the black coat and jacket on a woman in a blac
 t: 701 restore: [CLS] the lady in the black coat coat and a a sitting on a a [SEP]
 t: 801 restore: [CLS] the lady in the coat coat and black black a a a a a [SEP]
 t: 901 restore: [CLS] the lady in the black coat and and a black a a a a [SEP]
+BLEU-4 score: 0.18756239116191864

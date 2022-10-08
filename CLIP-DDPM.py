@@ -56,9 +56,9 @@ DEBUG = False
 CONTINUE_TRAIN = True
 BATCH_SIZE = 8
 MAX_LENGTH = 16 # max text length
-LEARNING_RATE = 5e-5
-# END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
-END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
+LEARNING_RATE = 6.4286e-05
+END_LEARNING_RATE = 5e-5 # learning rate is linearly reduced to end_learning_rate
+# END_LEARNING_RATE = LEARNING_RATE # no changing learning rate
 
 def cosine_annealing():
   sub_epoch = 5
@@ -68,11 +68,11 @@ def cosine_annealing():
 # SCHEDULER = torch.logspace
 SCHEDULER = torch.linspace
 # SCHEDULER = cosine_annealing # scheduler of learning rate
-TRAIN_SET_RATIO = 0.95
-EARLY_STOP_RATIO = 1.02
+TRAIN_SET_RATIO = 0.8
+EARLY_STOP_RATIO = 1.80
 EPOCH_NUM = 5
 DYNAMIC_ROUNDING_WEIGHT = -1 # weight of rounding term with respect to x_t loss, <0 means not using 
-ROUNDING_WEIGHT = 0.3 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
+ROUNDING_WEIGHT = 0.5 # weight of rounding term, the probability of regenerated sequence, not used if using dynamic rounding
 
 def series_sum_sample_mean(x_hat, x):
   return (x_hat - x).abs().sum(dim=1).mean()
@@ -90,8 +90,8 @@ LOSS_FUNC = series_sum_sample_mean
 # LOSS_FUNC = series_sum
 # LOSS_FUNC = mse_series_mean
 # LOSS_FUNC = mse_series_sum # loss function used between embedding 
-CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
-# CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding
+# CLIP_ADDING_METHOD = "add" # CLIP feature are added as position embedding to sequence of word embedding
+CLIP_ADDING_METHOD = "concat" # CLIP feature are appended to sequence of word embedding
 # # CLIP_MASK = None
 # CLIP_MASK = torch.tensor([1, 0], device=device) # mask indicating if [image, text] clip feature is used, None means use classification free guidance
 CLASSIFIER_FREE_WEIGHT = 0
@@ -124,12 +124,12 @@ print(f"trial name: {MODEL_NAME}")
 
 flickr8k_image = torch.load("./flickr8k/image_all_final.pickle").to(device).detach()
 flickr8k_text = torch.load("./flickr8k/text_all_final.pickle").to(device).detach()
-# flickr30k_image = torch.load("./flickr30k/flickr30k_clip_image.pickle").to(device).detach()
-# flickr30k_text = torch.load("./flickr30k/flickr30k_clip_text.pickle").to(device).detach()
-# image_set = torch.vstack([flickr8k_image, flickr30k_image])
-# text_set = torch.vstack([flickr8k_text, flickr30k_text])
-image_set = flickr8k_image
-text_set = flickr8k_text
+flickr30k_image = torch.load("./flickr30k/flickr30k_clip_image.pickle").to(device).detach()
+flickr30k_text = torch.load("./flickr30k/flickr30k_clip_text.pickle").to(device).detach()
+image_set = torch.vstack([flickr8k_image, flickr30k_image])
+text_set = torch.vstack([flickr8k_text, flickr30k_text])
+# image_set = flickr8k_image
+# text_set = flickr8k_text
 
 from spacy.lang.en import English
 from collections import Counter
@@ -208,10 +208,10 @@ else:
   VOCAB_SIZE = tokenizer.vocab_size
 
 dataset = FlickrCLIPDataset(
-  # pd.concat([pd.read_csv("./flickr8k/captions.txt")["caption"], pd.read_csv("./flickr30k/captions.csv", sep='|')["caption"]], ignore_index=True),
-  # pd.concat([pd.read_csv("./flickr8k/captions.txt")["image"], pd.read_csv("./flickr30k/captions.csv", sep='|')["image_name"]], ignore_index=True),
-  pd.read_csv("./flickr8k/captions.txt")["caption"],
-  pd.read_csv("./flickr8k/captions.txt")["image"],
+  pd.concat([pd.read_csv("./flickr8k/captions.txt")["caption"], pd.read_csv("./flickr30k/captions.csv", sep='|')["caption"]], ignore_index=True),
+  pd.concat([pd.read_csv("./flickr8k/captions.txt")["image"], pd.read_csv("./flickr30k/captions.csv", sep='|')["image_name"]], ignore_index=True),
+  # pd.read_csv("./flickr8k/captions.txt")["caption"],
+  # pd.read_csv("./flickr8k/captions.txt")["image"],
   tokenizer)
 if CONTINUE_TRAIN:
   val_set = torch.load(f"{MODEL_NAME}.valset")
@@ -569,9 +569,9 @@ mem_report()
 # summary = sys.stdout
 
 # trial on inference
-# model = torch.load(
-#   "batch8_maxlen16_round3E-01_lossseries_sum_batch_average_clipconcat_clipmask10_train-embedFalse_samplesize100_x_0_predictTrue_use_x_1True_use_probTrue.pickle",
-#   ).to(device)
+model = torch.load(
+  f"{MODEL_NAME}.pickle",
+  ).to(device)
 # model.model.add_module("activation", activations.GELUActivation())
 model.eval()
 with torch.no_grad():

@@ -1,0 +1,39 @@
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 5.532093524932861, 5.846978187561035, 27.566051483154297, 5.0550055503845215, 4.615598201751709, 23.26378631591797
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 5.012544631958008, 4.742596626281738, 22.108341217041016, 5.087897777557373, 4.4708943367004395, 20.46534538269043
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.987603187561035, 4.6149492263793945, 20.040115356445312, 4.959264755249023, 4.40495491027832, 18.973434448242188
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.968130588531494, 4.559421062469482, 18.60260009765625, 4.982180118560791, 4.358552932739258, 17.72748565673828
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.951989650726318, 4.490723609924316, 17.549907684326172, 5.002481460571289, 4.314637184143066, 16.803133010864258
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.931578159332275, 4.428470611572266, 16.76125144958496, 4.911523342132568, 4.252914905548096, 16.149211883544922
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.893460750579834, 4.346292495727539, 16.17293930053711, 4.876980781555176, 4.1529741287231445, 15.626081466674805
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.862328052520752, 4.282238483428955, 15.7144193649292, 4.866279125213623, 4.112150192260742, 15.192300796508789
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.843358039855957, 4.237863063812256, 15.289379119873047, 4.839878559112549, 4.068639755249023, 14.842880249023438
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.825793266296387, 4.195383548736572, 14.944092750549316, 4.783097267150879, 4.0585126876831055, 14.50725269317627
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.812558650970459, 4.162410736083984, 14.624977111816406, 4.804638385772705, 4.05971097946167, 14.25972843170166
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.7988128662109375, 4.134397983551025, 14.382000923156738, 4.747960090637207, 3.994767427444458, 14.144290924072266
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.791372299194336, 4.107161045074463, 14.140745162963867, 4.778105735778809, 3.9841203689575195, 13.780781745910645
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.786231517791748, 4.088906764984131, 13.948729515075684, 4.80164909362793, 3.993866443634033, 13.604360580444336
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.786063194274902, 4.071463584899902, 13.751298904418945, 4.744855880737305, 3.9533510208129883, 13.525758743286133
+origin text: A white bird flies agains the backdrop of green foliage .
+t = 999
+inferred: [CLS] a white dog is a a a in a a field. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in a forest. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the forest. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the forest. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the snow. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the snow. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the snow. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the snow. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the snow. [SEP] [PAD] [PAD]
+inferred: [CLS] a large dog is in the air air in the snow. [SEP] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] a white bird flies agains the backdrop of green foliage. [SEP] [PAD] [PAD]
+t: 101 restore: [CLS] a white bird bird bird is a bench of green foliage. [SEP] [PAD] [PAD]
+t: 201 restore: [CLS] a white bird in green, is overlooking of green water. [SEP] [PAD] [PAD]
+t: 301 restore: [CLS] a white bird bird is in in edge of the distance. [SEP] [PAD] [PAD]
+t: 401 restore: [CLS] a white bird is a in in a of green trees. [SEP] [PAD] [PAD]
+t: 501 restore: [CLS] a white bird bird bird is a a in white tree. [SEP] [PAD] [PAD]
+t: 601 restore: [CLS] a large bird bird a the in is in a the. [SEP] [PAD] [PAD]
+t: 701 restore: [CLS] a white bird is is is a in a the grass. [SEP] [PAD] [PAD]
+t: 801 restore: [CLS] a large white white dog is in a a a tree. [SEP] [PAD] [PAD]
+t: 901 restore: [CLS] a white dog white a a is a a a.. [SEP] [PAD] [PAD]
+BLEU-4 score: 0.10326029360294342

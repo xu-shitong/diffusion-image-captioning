@@ -37,3 +37,4 @@ t: 601 restore: [CLS] a biker in in white riding through the forest. [SEP] [PAD]
 t: 701 restore: [CLS] a biker in in white riding through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
 t: 801 restore: [CLS] a biker in in white riding through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
 t: 901 restore: [CLS] a biker in in white jersey through the forest. [SEP] [PAD] [PAD] [PAD] [PAD]
+BLEU-4 score: 0.18480467796325684
