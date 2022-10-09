@@ -1,0 +1,42 @@
+large dataset, use final model configuration
+
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 6.4210991859436035, 6.496657371520996, 40.232662200927734, 6.2195725440979, 5.243086814880371, 27.073091506958008
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 6.151583671569824, 5.14046049118042, 25.89043617248535, 5.934685230255127, 4.616313457489014, 23.848224639892578
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 5.923774719238281, 4.6548237800598145, 23.833999633789062, 5.78381872177124, 4.383939266204834, 22.688037872314453
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 5.851705551147461, 4.4611639976501465, 22.82633399963379, 5.763230323791504, 4.315080165863037, 21.89866065979004
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 5.831060886383057, 4.37997579574585, 22.104511260986328, 5.771275043487549, 4.198698997497559, 21.358972549438477
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 5.816746711730957, 4.298139572143555, 21.518285751342773, 5.7579450607299805, 4.175776481628418, 20.93817710876465
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 5.8177289962768555, 4.243379592895508, 20.967695236206055, 5.717988967895508, 4.107959270477295, 20.535573959350586
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 5.82323694229126, 4.200854778289795, 20.44182586669922, 5.741971969604492, 4.068347930908203, 20.327239990234375
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 5.83309268951416, 4.169956207275391, 19.946292877197266, 5.795505046844482, 4.063015460968018, 20.03227424621582
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 5.848622798919678, 4.147636413574219, 19.432287216186523, 5.77036714553833, 4.056370258331299, 19.891578674316406
+early stop! 
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 5.864542484283447, 4.129366397857666, 18.903249740600586, 5.735761642456055, 4.020163059234619, 19.788917541503906
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 5.886561870574951, 4.121699333190918, 18.364990234375, 5.769371032714844, 4.016086101531982, 19.71933364868164
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 5.905550956726074, 4.103759765625, 17.82196044921875, 5.856150150299072, 4.013244152069092, 19.70185089111328
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 5.931147575378418, 4.101021766662598, 17.245405197143555, 5.850262641906738, 4.006772041320801, 19.86550521850586
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 5.948345184326172, 4.0861616134643555, 16.644515991210938, 5.851946830749512, 3.9891884326934814, 20.02105140686035
+origin text:  i do n't see a picture i do n't see a picture i do n't see a picture
+t = 999
+inferred: [CLS] a man in a blue shirt is on a a a a a. [SEP]
+inferred: [CLS] a man in a blue shirt is sitting on a a his his. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting on front on his phone. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting in front on his phone. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting in front of his phone. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting in front of his phone. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting in front of his phone. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting in front of his door. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting in front of his door. [SEP]
+inferred: [CLS] a man wearing a blue shirt is sitting in front of his door. [SEP]
+text t effectiveness
+t: 1 restore: [CLS] i don't see a picture i don't see [SEP]
+t: 101 restore: [CLS] i timen't take a picture at do man's see [SEP]
+t: 201 restore: [CLS] man man sitting of one drinking and looking in a fire of the in [SEP]
+t: 301 restore: [CLS] a man in a shirt and a sitting with a shirt on the door [SEP]
+t: 401 restore: [CLS] a man in a black jacket a blue with a phone and a. [SEP]
+t: 501 restore: [CLS] a man man man in a a a shirt in a door in his [SEP]
+t: 601 restore: [CLS] a man in a sitting a aphone with aphone with his. [SEP]
+t: 701 restore: [CLS] a man in a blue shirt is a on aphone on a a [SEP]
+t: 801 restore: [CLS] a man in a on a aphone shirt a a a a. [SEP]
+t: 901 restore: [CLS] a man in a a a a on a a a a a. [SEP]
+BLEU-4 score: 0.21926431357860565

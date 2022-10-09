@@ -1,0 +1,42 @@
+final reported best model using 1e-4 to 5e-5 linear decay instead
+
+epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.754847526550293, 5.316836357116699, 26.77940559387207, 4.6237263679504395, 4.450192928314209, 17.84810447692871
+epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.6765971183776855, 4.333707809448242, 16.935039520263672, 4.624382972717285, 4.038158893585205, 15.52595329284668
+epoch 2 average x_t_loss, x_1_loss, prob_loss, val losses: 4.615182876586914, 4.039099216461182, 15.47727108001709, 4.483552932739258, 3.8817138671875, 14.817560195922852
+epoch 3 average x_t_loss, x_1_loss, prob_loss, val losses: 4.601635456085205, 3.924583673477173, 14.84176254272461, 4.592772483825684, 3.8092477321624756, 14.238973617553711
+epoch 4 average x_t_loss, x_1_loss, prob_loss, val losses: 4.5916428565979, 3.8593688011169434, 14.4256591796875, 4.550776481628418, 3.7487010955810547, 14.007997512817383
+epoch 5 average x_t_loss, x_1_loss, prob_loss, val losses: 4.576961517333984, 3.8060595989227295, 14.088659286499023, 4.513637542724609, 3.7140352725982666, 13.724980354309082
+epoch 6 average x_t_loss, x_1_loss, prob_loss, val losses: 4.562746524810791, 3.766982078552246, 13.797510147094727, 4.502047061920166, 3.6960415840148926, 13.514155387878418
+epoch 7 average x_t_loss, x_1_loss, prob_loss, val losses: 4.549570560455322, 3.735903739929199, 13.518806457519531, 4.525749206542969, 3.674048900604248, 13.291311264038086
+epoch 8 average x_t_loss, x_1_loss, prob_loss, val losses: 4.5422682762146, 3.7133936882019043, 13.246455192565918, 4.514438152313232, 3.6542434692382812, 13.16806697845459
+epoch 9 average x_t_loss, x_1_loss, prob_loss, val losses: 4.540002822875977, 3.6931211948394775, 12.980854034423828, 4.554859638214111, 3.625643014907837, 13.040562629699707
+epoch 10 average x_t_loss, x_1_loss, prob_loss, val losses: 4.546532154083252, 3.687487840652466, 12.711796760559082, 4.5393385887146, 3.6132709980010986, 12.984180450439453
+epoch 11 average x_t_loss, x_1_loss, prob_loss, val losses: 4.550302505493164, 3.6660430431365967, 12.443351745605469, 4.537684917449951, 3.6029810905456543, 12.934280395507812
+epoch 12 average x_t_loss, x_1_loss, prob_loss, val losses: 4.558565616607666, 3.6582939624786377, 12.153337478637695, 4.560400485992432, 3.5978269577026367, 12.900650978088379
+epoch 13 average x_t_loss, x_1_loss, prob_loss, val losses: 4.566616535186768, 3.64646577835083, 11.87248420715332, 4.552223205566406, 3.599146842956543, 12.898957252502441
+early stop! 
+epoch 14 average x_t_loss, x_1_loss, prob_loss, val losses: 4.577733516693115, 3.6373050212860107, 11.583418846130371, 4.530128002166748, 3.5788822174072266, 12.940613746643066
+origin text:  Two young men are at a party .
+t = 999
+inferred: [CLS] two men are standing at a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are standing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+inferred: [CLS] two men are posing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+text t effectiveness
+t: 1 restore: [CLS] two young men are at a party. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 101 restore: [CLS] two young men are at a party. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 201 restore: [CLS] two young men are having a party. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 301 restore: [CLS] two young men are at a party. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 401 restore: [CLS] two young men posing at a camera. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 501 restore: [CLS] two men are talking at a camera. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 601 restore: [CLS] two young men are for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 701 restore: [CLS] two men men standing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 801 restore: [CLS] two young men standing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+t: 901 restore: [CLS] two men men standing for a picture. [SEP] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+BLEU-4 score: 0.246965229511261

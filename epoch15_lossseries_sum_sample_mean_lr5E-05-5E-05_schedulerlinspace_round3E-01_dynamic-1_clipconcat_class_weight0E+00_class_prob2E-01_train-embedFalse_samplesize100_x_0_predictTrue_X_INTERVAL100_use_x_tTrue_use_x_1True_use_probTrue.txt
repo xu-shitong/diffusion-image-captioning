@@ -1,4 +1,4 @@
-best model so far, using avg of x_t and x_0, no guidance, trained on 30+8k
+best model when lr is constant 5e-5, using avg of x_t and x_0, no guidance, trained on 30+8k
 
 epoch 0 average x_t_loss, x_1_loss, prob_loss, val losses: 4.760366439819336, 5.538571357727051, 22.250011444091797, 4.648683547973633, 4.99056339263916, 20.487321853637695
 epoch 1 average x_t_loss, x_1_loss, prob_loss, val losses: 4.771383285522461, 4.501983642578125, 17.53981590270996, 4.74599027633667, 4.339223384857178, 16.815109252929688
