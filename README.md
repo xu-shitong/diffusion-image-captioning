@@ -2,7 +2,7 @@
 
 Research project on image captioning using diffusion language model. Our model is named as CLIP-DiffusionLM.
 
-![](./asset/clip-diffusion-lm.png)
+![](./clip-diffusion-lm.png)
 
 Inspired by the recent success of the denoising diffusion model on image synthesis tasks, we apply denoising diffusion probabilistic models to text generation in image captioning tasks. We show that our CLIP-Diffusion-LM is capable of generating image captions using significantly fewer inference steps than autoregressive models. On the Flickr8k dataset, the model achieves 0.1876 BLEU-4 score. By training on the combined Flickr8k and Flickr30k dataset, our model achieves 0.2470 BLEU-4 score.
 
